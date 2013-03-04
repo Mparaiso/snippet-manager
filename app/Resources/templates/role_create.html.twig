@@ -1,0 +1,4 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+{% include "crud/resource_create.html.twig" with {form:form,resourceName:"Role"}  only %}
+{% endblock %}

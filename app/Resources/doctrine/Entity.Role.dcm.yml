@@ -1,0 +1,14 @@
+# Entity.Role.dcm.yml
+Entity\Role:
+  type: entity
+  table: snippetmanager_roles
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 50
+      unique: true

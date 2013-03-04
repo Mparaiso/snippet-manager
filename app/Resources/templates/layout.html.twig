@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title title|default("Snippet manager") %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ app.request.baseUrl }}/assets/bootstrap/css/bootstrap.min.css"/>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    {% block head %}
+        <h1>Snippet Manager</h1>
+    {% endblock %}
+    {% block flash %}
+        {% include 'common/flash.html.twig' %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block scripts %}
+        <script src="{{ app.request.baseUrl }}/assets/bootstrap/js/bootstrap.min.js"></script>
+    {% endblock %}
+</div>
+</body>
+</html>

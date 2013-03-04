@@ -1,0 +1,23 @@
+# Entity.Category.dcm.yml
+Entity\Category:
+  type: entity
+  table: snippetmanager_categories
+  repositoryClass: Repository\Category
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string
+      length: 255
+      unique: TRUE
+    description:
+      type: string
+      length: 255
+  oneToMany:
+    snippets:
+      targetEntity: \Entity\Snippet
+      mappedBy: category
+      cascade: [all]

@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+{% if snippets|length <= 0 %}
+<h3>No snippets yet , please create a new snippet </h3>
+{%  endif %}
+{% for snippet in snippets %}
+ <h3>{{ snippet.title }}</h3>
+ <div>{{ snippet.description }}</div>
+{% endfor %}
+{% endblock %}

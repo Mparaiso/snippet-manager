@@ -1,0 +1,5 @@
+{% extends 'layout.html.twig'%}
+{% block content %}
+    {% include 'crud/resource_read.html.twig'
+    with {resource:snippet,resourceName:'snippet',properties:["title","category","description","content"]} only %}
+{% endblock %}

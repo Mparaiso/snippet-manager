@@ -1,0 +1,5 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+{% include "crud/resource_index.html.twig"
+    with {resources:roleCollection ,resourceName:"role",property:"name"} only %}
+{% endblock %}

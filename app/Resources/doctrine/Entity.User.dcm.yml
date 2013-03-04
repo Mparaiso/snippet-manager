@@ -1,0 +1,38 @@
+# Entity.User.dcm.yml
+Entity\User:
+    type: entity
+    table: snippetmanager_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 255
+            unique: true    
+        password:
+            type: string
+            length: 255
+        salt:
+            type: string
+            length: 255  
+    oneToOne:
+        account:
+            targetEntity: Entity\Account
+            cascade: [all]
+    manyToMany:
+        roles:
+          targetEntity: Entity\Role
+          joinTable:
+            name: snippetmanager_users_roles
+            joinColumns:
+              role_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              user_id:
+                referencedColumnName: id
+                
+    lifecycleCallbacks:
+        prePersist: [ eraseCredentials ]
