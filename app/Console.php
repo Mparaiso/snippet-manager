@@ -1,5 +1,6 @@
 <?php
 use Command\ListServicesCommand;
+use Command\InitAclCommand;
 use Helper\ApplicationHelper;
 
 /**
@@ -27,6 +28,7 @@ class Console extends Application {
 				)
 		));
 		ConsoleRunner::addCommands($this);
-		$this->addCommands(array(new ListServicesCommand));
+		$this->addCommands(array(new ListServicesCommand,new InitAclCommand()));
+
 	}
 }

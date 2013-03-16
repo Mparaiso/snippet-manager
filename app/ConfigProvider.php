@@ -1,6 +1,7 @@
 <?php
 
 use Silex\Provider\ServiceControllerServiceProvider;
+use Silex\Provider\DoctrineServiceProvider;
 use Mparaiso\Provider\CrudGeneratorServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
@@ -9,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
 use Helper\PimpleConstraintValidatorFactory;
 use Helper\EntityManagerRegistry;
 use Service\CategoryService;
+use ServiceProvider\AclServiceProvider;
 use Service\UserService;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Silex\Provider\SessionServiceProvider;
@@ -42,6 +44,15 @@ class ConfigProvider implements ServiceProviderInterface
                     return array(__DIR__ . "/Resources/templates/")   ;
             })
         ));
+
+        $app->register(new DoctrineServiceProvider(),array(
+            "db.options"=> array(
+                "dbname"   => getenv("SNIPPETMANAGER_DBNAME"),
+                "user"     => getenv("SNIPPETMANAGER_USER"),
+                "password" => getenv("SNIPPETMANAGER_PASSWORD"),
+                "host"     => getenv("SNIPPETMANAGER_HOST"),
+                "driver"   => "pdo_mysql",
+        )));
         #@note @silex configuration DoctrineORMServiceProvider
         $app->register(new DoctrineORMServiceProvider, array(
             "em.registry"    => $app->share(function ($app) {
@@ -54,14 +65,8 @@ class ConfigProvider implements ServiceProviderInterface
             "em.logger"      => $app->share(function ($app) {
                 return new MonologSQLLogger($app["logger"]);
             }),
-            "em.options"     => array(
-                "dbname"   => getenv("SNIPPETMANAGER_DBNAME"),
-                "user"     => getenv("SNIPPETMANAGER_USER"),
-                "password" => getenv("SNIPPETMANAGER_PASSWORD"),
-                "host"     => getenv("SNIPPETMANAGER_HOST"),
-                "driver"   => "pdo_mysql",
-            ),
             "em.metadata"    => array("type" => "yaml", "path" => array(__DIR__ . "/Resources/doctrine/"))));
+        $app->register(new AclServiceProvider);
         $app->register(new FormServiceProvider);
         $app->register(new SessionServiceProvider);
         $app->register(new ValidatorServiceProvider, array(
