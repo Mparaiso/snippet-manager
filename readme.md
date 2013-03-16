@@ -1,7 +1,7 @@
 SNIPPET MANAGER
 ===============
 
-author : M.Paraiso , contact mparaiso@online.frs
+author : M.Paraiso , contact mparaiso@online.fr
 
 snippet manager help developpers write code snippets , 
 with snippet managers developpers no longer have to search between several places to find how to code , 

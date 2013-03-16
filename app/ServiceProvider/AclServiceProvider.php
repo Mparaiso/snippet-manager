@@ -40,7 +40,9 @@ class AclServiceProvider implements ServiceProviderInterface
         });
         $app["security.acl.permission_granting_strategy"] = $app->share(function ($app) {
             $service = new PermissionGrantingStrategy();
-            $service->setAuditLogger($app["security.acl.audit_logger"]);
+            if(isset($app["security.acl.audit_logger"])){
+                $service->setAuditLogger($app["security.acl.audit_logger"]);
+            }
             return $service;
         });
         $app["security.acl.permission.map"] = $app->share(function ($app) {
@@ -51,7 +53,7 @@ class AclServiceProvider implements ServiceProviderInterface
             return $app["db"];
         });
         $app["security.acl.dbal.provider"]  = $app->share(function ($app) {
-            return new AclProvider($app["security.acl.dbal.connection"], $app["security.acl.permission_granting_strategy"], $app["security.acl.dbal.provider.options"], $app["security.acl.cache"]);
+            return new AclProvider($app["security.acl.dbal.connection"], $app["security.acl.permission_granting_strategy"], $app["security.acl.dbal.provider.options"], (isset($app["security.acl.cache"]) ? $app["security.acl.cache"] : null));
         });
         $app['security.acl.dbal.schema']  = $app->share(function ($app) {
             return new Schema($app["security.acl.dbal.provider.options"], $app["security.acl.dbal.connection"]);

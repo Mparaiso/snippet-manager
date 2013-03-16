@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Entity\Role;
 
 class RoleService{
-	function __construct(EntityManager $em,$entityClass="\Entity\Role"){
+	function __construct(EntityManager $em,$entityClass='\Entity\Role'){
         $this->em = $em;
         $this->entityClass=$entityClass;
     }

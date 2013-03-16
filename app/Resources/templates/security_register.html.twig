@@ -1,0 +1,9 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <h3>Sign up, it's free!</h3>
+    <form method="POST">
+        {{ form_widget(form) }}
+        <input type="submit" value="Register">
+        <input type="reset" value="Reset">
+    </form>
+{% endblock %}

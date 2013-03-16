@@ -108,7 +108,7 @@ class ConfigProvider implements ServiceProviderInterface
             return new \Service\RoleService($app['em']);
         });
         $app["snippet_service"]  = $app->share(function ($app) {
-            return new SnippetService($app["em"],'\Entity\Snippet');
+            return new SnippetService($app["em"],'\Entity\Snippet',$app["security.acl.provider"],$app["security"]);
         });
         $app["category_service"] = $app->share(function ($app) {
             return new CategoryService($app["em"]);
@@ -124,7 +124,7 @@ class ConfigProvider implements ServiceProviderInterface
                 }
             ));
         $app["user_provider"]    = $app->share(function ($app) {
-            return new EntityUserProvider($app["em.registry"], "\Entity\User", "email");
+            return new EntityUserProvider($app["em.registry"], '\Entity\User', "email");
         });
     }
 

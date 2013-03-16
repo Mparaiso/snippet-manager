@@ -22,7 +22,7 @@ class RegistrationType extends AbstractType{
 					"label"=>"password"),
 				"second_options"=>array(
 					"label"=>"confirm password"
-					),"property_path"=>"passwordHash"
+					),"property_path"=>"plain_password"
 				))
 			->add("terms_of_service","checkbox",array("mapped"=>false));
 	}

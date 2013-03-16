@@ -1,5 +1,6 @@
 <?php
 use Silex\ServiceProviderInterface;
+use Controller\SecurityController;
 use Controller\SnippetController;
 use Controller\CategoryController;
 use Controller\RoleController;
@@ -17,6 +18,7 @@ class RouteProvider implements ServiceProviderInterface
             "profiler.cache_dir" => __DIR__ . "/../temp/profiler",
         ));
         $app->mount("/_profiler",$p);
+        $app->mount("/account/",new SecurityController);
         $app->mount("/admin/",new RoleController);
         $app->mount("/admin",new CategoryController);
         $app->mount("/admin",new SnippetController);
