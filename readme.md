@@ -10,10 +10,10 @@ snippet manager is written with the Symfony Framework.
 
 
 API
-/ latest snippets
-/?&orderby={favorites|latest}
-/snippet/{id} GET|POST|PUT|DELETE , format : html,json
-/snippet/{slug} GET , format: html,json
-/category/{id} GET , format: html,json
-/category/{slug} GET , format: html,json
-/user/{id} get user snippets , format: html,json
+    / latest snippets
+    /?&orderby={favorites|latest}
+    /snippet/{id} GET|POST|PUT|DELETE , format : html,json
+    /snippet/{slug} GET , format: html,json
+    /category/{id} GET , format: html,json
+    /category/{slug} GET , format: html,json
+    /user/{id} get user snippets , format: html,json
