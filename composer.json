@@ -1,0 +1,8 @@
+{
+    "require":{
+        "symonfony/symfony":"2.2.*",
+        "silex":"1.*@dev",
+        "monolog/monolog":"*",
+        "doctrine/orm":"2.*"
+    }
+}
