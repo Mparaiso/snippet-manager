@@ -1,6 +1,7 @@
 <?php
 use Silex\ServiceProviderInterface;
-use Controller\SecurityController;
+use Controller\DefaultController;
+use Controller\AccountController;
 use Controller\SnippetController;
 use Controller\CategoryController;
 use Controller\RoleController;
@@ -13,15 +14,15 @@ class RouteProvider implements ServiceProviderInterface
 
     public function register(Application $app)
     {
-        $app->match("/",'\Controller\DefaultController::index');
-        $app->register($p = new WebProfilerServiceProvider, array(
-            "profiler.cache_dir" => __DIR__ . "/../temp/profiler",
-        ));
-        $app->mount("/_profiler",$p);
-        $app->mount("/account/",new SecurityController);
-        $app->mount("/admin/",new RoleController);
+//        $app->register($p = new WebProfilerServiceProvider, array(
+//            "profiler.cache_dir" => __DIR__ . "/../temp/profiler",
+//        ));
+//        $app->mount("/_profiler",$p);
+        $app->mount("/",new DefaultController);
+        $app->mount("/account",new AccountController);
+        $app->mount("/account",new SnippetController);
+        $app->mount("/admin",new RoleController);
         $app->mount("/admin",new CategoryController);
-        $app->mount("/admin",new SnippetController);
 
     }
 

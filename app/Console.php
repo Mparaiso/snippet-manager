@@ -1,5 +1,7 @@
 <?php
 use Command\ListServicesCommand;
+use Command\CreateRoleCommand;
+use Command\CreateUserCommand;
 use Command\InitAclCommand;
 use Helper\ApplicationHelper;
 
@@ -15,7 +17,7 @@ use Symfony\Component\Console\Helper\HelperSet;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 
 use Symfony\Component\Console\Application;
-//@note @symfony cr�er une application console , en lighe de commandes
+//@note @symfony créer une application console , en lighe de commandes
 class Console extends Application {
 	function __construct(\Silex\Application $app){
 		$this->app = $app;
@@ -27,8 +29,10 @@ class Console extends Application {
 				"db"=>new ConnectionHelper($this->app["em"]->getConnection()),
 				)
 		));
-		ConsoleRunner::addCommands($this);
-		$this->addCommands(array(new ListServicesCommand,new InitAclCommand()));
+        $this->addCommands(
+            array(new ListServicesCommand,new InitAclCommand,new CreateUserCommand,new CreateRoleCommand)
+        );
+        ConsoleRunner::addCommands($this);
 
 	}
 }

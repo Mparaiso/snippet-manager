@@ -3,11 +3,12 @@
 namespace Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
  * Role
  */
-class Role
+class Role implements RoleInterface
 {
     /**
      * @var integer
@@ -51,5 +52,24 @@ class Role
     public function getName()
     {
         return $this->name;
+    }
+
+    function toString(){
+        return $this->getName();
+    }
+
+    /**
+     * Returns the role.
+     *
+     * This method returns a string representation whenever possible.
+     *
+     * When the role cannot be represented with sufficient precision by a
+     * string, it should return null.
+     *
+     * @return string|null A string representation of the role, or null
+     */
+    function getRole()
+    {
+       return $this->name;
     }
 }

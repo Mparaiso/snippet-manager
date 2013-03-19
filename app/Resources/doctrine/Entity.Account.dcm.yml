@@ -1,7 +1,7 @@
 # Entity.Account.dcm.yml
 Entity\Account:
     type: entity
-    table: snippetmanager_accounts
+    table: accounts
     id:
         id:
             type: integer
@@ -31,10 +31,8 @@ Entity\Account:
     oneToOne:
         user:
            targetEntity: Entity\User
-           joinColumn:
-               name: user_id
-               referencedColumnName: id
-    oneToMany:
-        snippets:
-            mappedBy: user
-            targetEntity: Entity\Snippet
+#           joinColumn:
+#               name: user_id
+#               referencedColumnName: id
+#           cascade: [all]
+

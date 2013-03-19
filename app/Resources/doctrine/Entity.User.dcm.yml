@@ -1,7 +1,7 @@
 # Entity.User.dcm.yml
 Entity\User:
     type: entity
-    table: snippetmanager_user
+    table: users
     id:
         id:
             type: integer
@@ -17,16 +17,24 @@ Entity\User:
             length: 255
         salt:
             type: string
-            length: 255  
+            length: 255
+
+    oneToMany:
+        snippets:
+            mappedBy: user
+            targetEntity: Entity\Snippet
     oneToOne:
         account:
             targetEntity: Entity\Account
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
             cascade: [all]
     manyToMany:
         roles:
           targetEntity: Entity\Role
           joinTable:
-            name: snippetmanager_users_roles
+            name: users_roles
             joinColumns:
               role_id:
                 referencedColumnName: id
@@ -36,3 +44,4 @@ Entity\User:
                 
     lifecycleCallbacks:
         prePersist: [ eraseCredentials ]
+

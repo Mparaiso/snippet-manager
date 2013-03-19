@@ -69,7 +69,51 @@ Entity\User:
             - NotNull: ~
             - Length:
                 min: 6      
-                              
+
+# validation d'une entité Account lors de sa création
+# l'username et l'email doivent etre uniques.
+Entity\Account:
+
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [username]
+            service: validator.unique_entity
+
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [email]
+            service: validator.unique_entity
+
+    properties:
+        username:
+            - NotNull: ~
+            - Length:
+                min: 5
+                max: 40
+
+        email:
+            - NotNull: ~
+            - Email: ~
+            - Length:
+                min: 5
+                max: 200
+
+        plain_password:
+            - NotNull: ~
+            - Length:
+                min: 6
+
+Entity\Role:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [name]
+            service: validator.unique_entity
+    properties:
+        name:
+            - NotNull: ~
+            - Length:
+                min: 6
+                max: 100
+
 #Model\Registration:
 #
 #    properties:

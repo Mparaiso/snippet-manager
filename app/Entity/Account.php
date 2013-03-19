@@ -54,17 +54,12 @@ class Account
      */
     private $user;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $snippets;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->snippets = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -261,36 +256,4 @@ class Account
         return $this->user;
     }
 
-    /**
-     * Add snippets
-     *
-     * @param \Entity\Snippet $snippets
-     * @return Account
-     */
-    public function addSnippet(\Entity\Snippet $snippets)
-    {
-        $this->snippets[] = $snippets;
-    
-        return $this;
-    }
-
-    /**
-     * Remove snippets
-     *
-     * @param \Entity\Snippet $snippets
-     */
-    public function removeSnippet(\Entity\Snippet $snippets)
-    {
-        $this->snippets->removeElement($snippets);
-    }
-
-    /**
-     * Get snippets
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSnippets()
-    {
-        return $this->snippets;
-    }
 }

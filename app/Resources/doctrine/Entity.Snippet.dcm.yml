@@ -1,7 +1,7 @@
 # Entity.Snippet.dcm.yml
 Entity\Snippet:
   type: entity
-  table: snippetmanager_snippets
+  table: snippets
   #@note @doctrine d�clarer un repository dans un fichier de configuration yaml
   repositoryClass: Repository\Snippet
   id:
@@ -31,7 +31,7 @@ Entity\Snippet:
   manyToOne:
     category:
       targetEntity: \Entity\Category
-      invertedBy: snippets
-    account:
-      targetEntity: \Entity\Account
-      invertedBy: snippets
+      inversedBy: snippets
+    user:
+      targetEntity: \Entity\User
+      inversedBy: snippets

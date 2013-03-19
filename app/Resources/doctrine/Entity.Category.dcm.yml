@@ -1,7 +1,7 @@
 # Entity.Category.dcm.yml
 Entity\Category:
   type: entity
-  table: snippetmanager_categories
+  table: categories
   repositoryClass: Repository\Category
   id:
     id:

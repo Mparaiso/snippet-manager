@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Silex\ControllerProviderInterface;
+use Silex\Application;
 use Mparaiso\CodeGeneration\Controller\AbstractCRUD;
 
 class CategoryController extends AbstractCRUD
@@ -11,4 +12,12 @@ class CategoryController extends AbstractCRUD
     var $entityClass = '\Entity\Category';
     var $formClass = '\Form\CategoryType';
     var $serviceName = "category_service";
+
+    function connect(Application $app)
+    {
+        $controllers = parent::connect($app);
+        return $controllers;
+    }
+
+
 }

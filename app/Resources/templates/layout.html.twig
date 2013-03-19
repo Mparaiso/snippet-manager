@@ -5,19 +5,76 @@
     <title>{% block title title|default("Snippet manager") %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ app.request.baseUrl }}/assets/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="{{ app.request.baseUrl }}/assets/css/style.css">
     {% endblock %}
 </head>
 <body>
 <div class="container">
     {% block head %}
-        <h1>Snippet Manager</h1>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <a class="brand" href="#">Snippet Manager</a>
+                    <ul class="nav pull-right">
+                        <li><a class="active" href="{{ path("home") }}">Home</a></li>
+                        <li><a href="{{ path("home") }}">Snippets</a></li>
+                        <li class="btn-group">
+                            <button class="btn">Categories</button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                {% for category in app.category_service.findAll({},{"title":"DESC"}) %}
+                                    <li>
+                                        <a href="{{ path("home",{category:category.title}) }}">{{ category.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li><a><b><i>Welcome back {{ app.security.token.user.account.getUsername() }}</i></b></a>
+                            </li>
+                            <li><a href="{{ path('account_logout') }}">Sign out</a></li>
+                            <li class="btn-group">
+                                <button class="btn btn-info">Administration</button>
+                                <button class="btn dropdown-toggle btn-info" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path("account_index") }}">Account</a></li>
+                                    <li><a href="{{ path("snippet_index") }}">Snippet Management</a></li>
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <li><a href="{{ path('category_index') }}">Categoriy Management</a></li>
+                                        <li><a>Switch user</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ path("account_login") }}">Sign In</a></li>
+                            <li><a href="{{ path("account_register") }}">Sign Up</a></li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
     {% endblock %}
     {% block flash %}
         {% include 'common/flash.html.twig' %}
     {% endblock %}
+    <div class="row main">
     {% block content %}
     {% endblock %}
+    </div>
+    <div class="row">
+    {% block footer %}
+        &copy; 2013 M.Paraiso , contact mparaiso@online.fr
+    {% endblock %}
+    </div>
     {% block scripts %}
+        <script src="{{ app.request.baseUrl }}/assets/js/jquery.min.js"></script>
         <script src="{{ app.request.baseUrl }}/assets/bootstrap/js/bootstrap.min.js"></script>
     {% endblock %}
 </div>

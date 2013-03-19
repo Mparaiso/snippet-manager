@@ -55,9 +55,9 @@ class Snippet
     private $category;
 
     /**
-     * @var \Entity\Account
+     * @var \Entity\User
      */
-    private $account;
+    private $user;
 
 
     /**
@@ -255,25 +255,25 @@ class Snippet
     }
 
     /**
-     * Set account
+     * Set user
      *
-     * @param \Entity\Account $account
+     * @param \Entity\User $user
      * @return Snippet
      */
-    public function setAccount(\Entity\Account $account = null)
+    public function setUser(\Entity\User $user = null)
     {
-        $this->account = $account;
+        $this->user = $user;
     
         return $this;
     }
 
     /**
-     * Get account
+     * Get user
      *
-     * @return \Entity\Account 
+     * @return \Entity\User
      */
-    public function getAccount()
+    public function getUser()
     {
-        return $this->account;
+        return $this->user;
     }
 }

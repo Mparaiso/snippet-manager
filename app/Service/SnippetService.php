@@ -23,9 +23,9 @@ class SnippetService extends EntityService{
      * @param $entityClass
      * @param \Symfony\Component\Security\Acl\Dbal\AclProvider $aclProvider
      */
-    function __construct(EntityManager $em, $entityClass,AclProvider $aclProvider,SecurityContext $securityContext){
+    function __construct(EntityManager $em, $entityClass/*,AclProvider $aclProvider*/,SecurityContext $securityContext){
         parent::__construct($em,$entityClass);
-        $this->aclProvider = $aclProvider;
+//        $this->aclProvider = $aclProvider;
         $this->securityContext = $securityContext;
     }
     /**
@@ -38,14 +38,15 @@ class SnippetService extends EntityService{
         if(NULL===$entity->getCreatedAt())
             $entity->setCreatedAt(new \DateTime);
         $entity->setUpdatedAt(new \DateTime);
+        $entity->setUser($this->securityContext->getToken()->getUser());
         $this->em->persist($entity);
         $this->em->flush();
-        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+        /*$objectIdentity = ObjectIdentity::fromDomainObject($entity);
         $acl = $this->aclProvider->createAcl($objectIdentity);
         $user = $this->securityContext->getToken()->getUser();
         $securityIdentity = UserSecurityIdentity::fromAccoun($user);
         $acl->insertObjectAce($securityIdentity,MaskBuilder::MASK_OWNER);
-        $this->aclProvider->updateAcl($acl);
+        $this->aclProvider->updateAcl($acl);*/
         return $entity;
     }
 

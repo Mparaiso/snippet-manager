@@ -1,7 +1,7 @@
 # Entity.Role.dcm.yml
 Entity\Role:
   type: entity
-  table: snippetmanager_roles
+  table: roles
   id:
     id:
       type: integer
@@ -12,3 +12,7 @@ Entity\Role:
       type: string
       length: 50
       unique: true
+#    role:
+#      type: string
+#      length: 100
+#      unique: true

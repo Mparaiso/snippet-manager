@@ -3,6 +3,7 @@
 namespace Service;
 
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
+use Entity\Account;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -27,22 +28,9 @@ class UserService{
 		return $this->em->find($this->entityClass,$id);
 	}
 
-	function register(User $user,$role=RoleService::USER){
-		$user->setActive(true);
-		$user->setCreatedAt(new \DateTime);
-		$user->setUpdatedAt(new \DateTime);
-		$user->setRole(array($role));
-		$user->setSalt(md5(date("Y-m-d H:i:s")));
-		$password = $this->encoder->getEncoder(new \Model\User($user))->encodePassword($user->getPasswordHash(), $user->getSalt());
-		$user->setPasswordHash($password);
+	function save(User $user){
 		$this->em->persist($user);
 		$this->em->flush();
 		return $user;
-	}
-
-	function save(User $user){
-		if(NULL===$user->getCreatedAt())
-			$user->setCreatedAt(new \DateTime);
-		$user->setUpdatedAt(new \DateTime);
 	}
 }

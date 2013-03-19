@@ -11,4 +11,14 @@ class SnippetManager extends Silex\Application
         $this->register(new ConfigProvider);
         $this->register(new RouteProvider);
     }
+    function getSecurity(){
+        return $this["security"];
+    }
+    function getEncoder(){
+        return $this["security.encoder_factory"];
+    }
+
+    function getEntityManager(){
+        return $this["em"];
+    }
 }

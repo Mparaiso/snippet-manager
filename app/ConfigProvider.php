@@ -1,6 +1,7 @@
 <?php
 
 use Silex\Provider\ServiceControllerServiceProvider;
+use Service\AccountService;
 use Silex\Provider\DoctrineServiceProvider;
 use Mparaiso\Provider\CrudGeneratorServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
@@ -37,15 +38,14 @@ class ConfigProvider implements ServiceProviderInterface
 {
     function register(Application $app)
     {
+        $app["debug"]=true;
         define("TEMP_DIR", __DIR__ . "/../temp/");
-        $app->register(new TwigServiceProvider(), array(
-            "twig.options" => array("cache" => TEMP_DIR),
-            "twig.path"    => $app->share(function($app){
-                    return array(__DIR__ . "/Resources/templates/")   ;
-            })
+        $app->register(new TwigServiceProvider, array(
+            "twig.options" => array("cache" => TEMP_DIR."/twig/",),
+            "twig.path"    => array(__DIR__ . "/Resources/templates/",)
         ));
-
-        $app->register(new DoctrineServiceProvider(),array(
+        $app->register(new MonologServiceProvider, array("monolog.logfile" =>TEMP_DIR . date('Y-m-d') . ".txt"));
+        $app->register(new DoctrineServiceProvider,array(
             "db.options"=> array(
                 "dbname"   => getenv("SNIPPETMANAGER_DBNAME"),
                 "user"     => getenv("SNIPPETMANAGER_USER"),
@@ -63,7 +63,7 @@ class ConfigProvider implements ServiceProviderInterface
                 return $app["debug"];
             }),
             "em.logger"      => $app->share(function ($app) {
-                return new MonologSQLLogger($app["logger"]);
+                return new MonologSQLLogger($app["monolog"]);
             }),
             "em.metadata"    => array("type" => "yaml", "path" => array(__DIR__ . "/Resources/doctrine/"))));
         $app->register(new AclServiceProvider);
@@ -85,22 +85,35 @@ class ConfigProvider implements ServiceProviderInterface
                 })
         );
         $app->register(new SecurityServiceProvider, array(
-            "security.firewalls" => array(
-                "site" => array(
-                    "pattern"   => "^/",
-                    "anonymous" => array() /* FR : autorise les utilisateurs anonymes ,EN : allow anonymous users */
-                )
+            "security.firewalls" => $app->share(function($app){
+                    return array(
+                        "secure" => array(
+                            "users"=>$app->share(function ($app) {
+                                return $app["user_provider"];
+                            }),
+                            "logout"=>array("logout_path"=>"/account/logout"),
+                            "pattern"   => "^/",
+                            "anonymous" => true, /* FR : autorise les utilisateurs anonymes ,EN : allow anonymous users */
+                            "form"=>array(
+                                "login_path"=>$app["url_generator"]->generate("account_login"),
+                                "check_path"=>$app["url_generator"]->generate("account_check"),
+                                'username_parameter'=>'signin[email]',
+                                'password_parameter'=>'signin[password]',
+                                'csrf_parameter'=>'signin[_token]',
+                            ),
+                        ),
+            );}),
+            "security.access_rules"=>array(
+                array("^/account/login","IS_AUTHENTICATED_ANONYMOUSLY"),
+                array("^/account/register","IS_AUTHENTICATED_ANONYMOUSLY"),
+                array("^/account/snippet-category","IS_AUTHENTICATED_ANONYMOUSLY"),
+                array("^/account","ROLE_USER"),
+                array("^/admin","ROLE_ADMIN"),
             ),
-            "providers"          => array(
-                "main" => $app->share(function ($app) {
-                    return $app["user_provider"];
-                })
-            )
         ));
         $app->register(new ServiceControllerServiceProvider);
         $app->register(new UrlGeneratorServiceProvider);
         $app->register(new TranslationServiceProvider);
-        $app->register(new MonologServiceProvider, array("monolog.logfile" =>TEMP_DIR . date('Y-m-d') . ".txt"));
         $app->register(new HttpCacheServiceProvider, array("http_cache.cache_dir" =>TEMP_DIR));
         $app->register(new CrudGeneratorServiceProvider);
 
@@ -108,13 +121,16 @@ class ConfigProvider implements ServiceProviderInterface
             return new \Service\RoleService($app['em']);
         });
         $app["snippet_service"]  = $app->share(function ($app) {
-            return new SnippetService($app["em"],'\Entity\Snippet',$app["security.acl.provider"],$app["security"]);
+            return new SnippetService($app["em"],'\Entity\Snippet'/*,$app["security.acl.provider"]*/,$app["security"]);
         });
         $app["category_service"] = $app->share(function ($app) {
             return new CategoryService($app["em"]);
         });
         $app["user_service"]     = $app->share(function ($app) {
             return new UserService($app["em"], $app["security.encoder_factory"]);
+        });
+        $app["account_service"]  =$app->share(function($app){
+            return new AccountService($app["em"],$app["security.encoder_factory"]);
         });
         $app["form.extensions"]  = $app->share(
         #@note @silex utiliser les extensions de formulaire de doctrine
@@ -123,8 +139,8 @@ class ConfigProvider implements ServiceProviderInterface
                     return $extensions;
                 }
             ));
-        $app["user_provider"]    = $app->share(function ($app) {
-            return new EntityUserProvider($app["em.registry"], '\Entity\User', "email");
+        $app["user_provider"] = $app->share(function ($app) {
+            return new EntityUserProvider($app["em.registry"], '\Entity\User', "username");
         });
     }
 
