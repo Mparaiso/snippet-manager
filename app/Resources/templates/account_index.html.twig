@@ -1,12 +1,12 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-<div class="row">
+<div>
     <img src="https://gravatar.com/avatar/{{ gravatarUrl }}" alt="gravatar">
 </div>
-<div class="row">
+<h4>
     Username: {{ user.account.username }}
-</div>
-<div class="row">
+</h4>
+<h4>
     Email: {{ user.account.email }}
-</div>
+</h4>
 {% endblock %}

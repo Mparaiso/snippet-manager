@@ -57,8 +57,8 @@ class CreateUserCommand extends Command
         $app["account_service"]->register($account);
         $user   = $account->getUser();
         if ($input->getOption("role")) {
-            $role = $app["role_service"]->findOne(array("name" => $input->getOption("role")));
-            if ($role) {
+            $role = $app["role_service"]->findOneBy(array("name" => $input->getOption("role")));
+            if ($role!==null) {
                 $user->addRole($role);
                 $app["user_service"]->save($user);
             } else {

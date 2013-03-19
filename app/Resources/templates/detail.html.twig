@@ -1,6 +1,16 @@
 {% extends 'layout.html.twig' %}
 {% block content %}
-<h3>{{ snippet.title }}</h3>
-<p>{{ snippet.description }}</p>
-{% endfor %}
+{% if snippet is defined %}
+<h4>{{ snippet.title }}</h4>
+<div><a href="#">{{ snippet.user.account.username|default("anonymous") }}</a></div>
+<div><a href="{{path("home",{category:snippet.category.title})  }}">{{ snippet.category.title }}</a></div>
+<div>{{ snippet.description }}</div>
+<pre>
+<code>
+{{ snippet.content }}
+</code>
+</pre>
+{% else %}
+<h3>Snippet  {{ query }} not found</h3>
+{%  endif %}
 {% endblock %}

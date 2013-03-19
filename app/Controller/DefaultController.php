@@ -7,19 +7,35 @@ use Silex\ControllerProviderInterface;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController implements ControllerProviderInterface{
-	function index(Request $req,Application $app,$category=null,$format="html"){
-	    $criteria = array("private"=>FALSE);
-	    if($req->get("category")){
-	        $criteria["category"]=$app["category_service"]->findOneBy(array("title"=>$req->get("category")));
-	    }
+class DefaultController implements ControllerProviderInterface
+{
+    function index(Request $req, Application $app, $category = NULL, $format = "html")
+    {
+	        $orderBy = $req->query->get("orderBy");
+			$limit  = 20;
+		    $offset = (int)$req->query->get("offset",0)*$limit;
+	    $criteria = array("private" => FALSE);
+	    if ($req->get("category")) {
+            $criteria["category"] = $app["category_service"]->findOneBy(array("title" => $req->get("category")));
+        }
 		$snippets = $app["snippet_service"]
-			->findAll($criteria,
-			        $req->query->get("orderBy"),
-					$req->query->get("limit"),
-					$req->query->get("offset"));
-		return $app["twig"]->render("index.$format.twig",array("snippets"=>$snippets));
+            ->findAll($criteria,
+            $req->query->get("orderBy"),
+            $limit,
+           $offset);
+           $resource_count = count($snippets);
+           $resource_limit = $limit;
+           $resource_offset = $req->query->get("offset");
+		return $app["twig"]->render("index.$format.twig",
+		 array("snippets" => $snippets,"resource_limit"=>$resource_limit,
+		 "resource_offset"=>$resource_offset,"resource_count"=>$resource_count));
 	}
+
+    function snippet(Request $req, Application $app, $title)
+    {
+        $snippet = $app["snippet_service"]->findOneBy(array("title" => urldecode($title)));
+        return $app["twig"]->render("detail.html.twig", array("snippet" => $snippet, "query" => $title));
+    }
 
     /**
      * Returns routes to connect to the given application.
@@ -30,12 +46,16 @@ class DefaultController implements ControllerProviderInterface{
      */
     public function connect(Application $app)
     {
+        /* @var $controllers \Silex\ControllerCollection */
         $controllers = $app["controllers_factory"];
-        $controllers->match("/{category}.{format}",array($this,"index"))
-            ->value("category","")
-            ->value("format","html")
+        $controllers->match("/snippet/{title}.{format}", array($this, "snippet"))
+            ->value("format", "html")
+            ->bind("snippet");
+        $controllers->match("/{category}.{format}", array($this, "index"))
+            ->value("category", "")
+        //->asset("category",'\S+')
+            ->value("format", "html")
             ->bind("home");
-
 
 
         return $controllers;

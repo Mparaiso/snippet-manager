@@ -15,7 +15,7 @@
         <div class="row">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <a class="brand" href="#">Snippet Manager</a>
+                    <a class="brand serif bold" href="{{ path("home")}}">Snippet Manager</a>
                     <ul class="nav pull-right">
                         <li><a class="active" href="{{ path("home") }}">Home</a></li>
                         <li><a href="{{ path("home") }}">Snippets</a></li>
@@ -24,12 +24,14 @@
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                {% for category in app.category_service.findAll({},{"title":"DESC"}) %}
-                                    <li>
-                                        <a href="{{ path("home",{category:category.title}) }}">{{ category.title }}</a>
-                                    </li>
-                                {% endfor %}
+                            <ul class="dropdown-menu span6">
+                                <li>
+                                    {% for category in app.category_service.findAll({},{"title":"ASC"}) %}
+                                        <a class="span2" style="float:left;clear:none;" href="{{ path("home",{category:category.title}) }}">{{ category.title }}</a>
+                                    {% endfor %}
+                                </li>
+
+
                             </ul>
                         </li>
 
@@ -44,6 +46,8 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ path("account_index") }}">Account</a></li>
+                                    <li><a href="">Site Configuration</a></li>
+                                    <li><a href="">User Management</a></li>
                                     <li><a href="{{ path("snippet_index") }}">Snippet Management</a></li>
                                     {% if is_granted("ROLE_ADMIN") %}
                                         <li><a href="{{ path('category_index') }}">Categoriy Management</a></li>
@@ -61,9 +65,11 @@
             </div>
         </div>
     {% endblock %}
+    <div class="row">
     {% block flash %}
         {% include 'common/flash.html.twig' %}
     {% endblock %}
+    </div>
     <div class="row main">
     {% block content %}
     {% endblock %}
