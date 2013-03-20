@@ -13,11 +13,4 @@ class CategoryController extends AbstractCRUD
     var $formClass = '\Form\CategoryType';
     var $serviceName = "category_service";
 
-    function connect(Application $app)
-    {
-        $controllers = parent::connect($app);
-        return $controllers;
-    }
-
-
 }

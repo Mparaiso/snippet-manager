@@ -1,6 +1,10 @@
 <?php
 
 use Controller\RoleController;
+use Controller\SnippetController;
+use Controller\CategoryController;
+use Controller\AccountController;
+use Controller\DefaultController;
 use Silex\Application;
 
 class SnippetManager extends Silex\Application
@@ -9,16 +13,11 @@ class SnippetManager extends Silex\Application
     {
         parent::__construct($values);
         $this->register(new ConfigProvider);
-        $this->register(new RouteProvider);
-    }
-    function getSecurity(){
-        return $this["security"];
-    }
-    function getEncoder(){
-        return $this["security.encoder_factory"];
+        $this->mount("/", new DefaultController);
+        $this->mount("/account", new AccountController);
+        $this->mount("/account", new SnippetController);
+        $this->mount("/admin", new RoleController);
+        $this->mount("/admin", new CategoryController);
     }
 
-    function getEntityManager(){
-        return $this["em"];
-    }
 }

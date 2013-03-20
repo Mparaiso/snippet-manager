@@ -1,8 +1,11 @@
 {
     "require":{
-        "symonfony/symfony":"2.2.*",
-        "silex":"1.*@dev",
         "monolog/monolog":"*",
-        "doctrine/orm":"2.*"
+        "twig/twig":"*",
+        "doctrine/orm":"2.3.*",
+        "symfony/symfony":"2.2.*",
+        "silex/silex":"*@dev",
+        "doctrine/migrations":"*@dev",
+        "silex/web-profiler":"*@dev"
     }
 }

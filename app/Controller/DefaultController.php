@@ -7,8 +7,21 @@ use Silex\ControllerProviderInterface;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @author M.PARAISO
+ * EN : Home controller
+ * FR : Controleur racine du site
+ */
 class DefaultController implements ControllerProviderInterface
 {
+    /**
+     * FR : affiche une liset de snippets <br/>
+     * @param \Symfony\Component\HttpFoundation\Request $req
+     * @param \Silex\Application $app
+     * @param null $category
+     * @param string $format
+     * @return mixed
+     */
     function index(Request $req, Application $app, $category = NULL, $format = "html")
     {
 	        $orderBy = $req->query->get("orderBy");
@@ -31,6 +44,13 @@ class DefaultController implements ControllerProviderInterface
 		 "resource_offset"=>$resource_offset,"resource_count"=>$resource_count));
 	}
 
+    /**
+     * FR : affiche le contenu d'un snippet <br/>
+     * @param \Symfony\Component\HttpFoundation\Request $req
+     * @param \Silex\Application $app
+     * @param $title
+     * @return mixed
+     */
     function snippet(Request $req, Application $app, $title)
     {
         $snippet = $app["snippet_service"]->findOneBy(array("title" => urldecode($title)));

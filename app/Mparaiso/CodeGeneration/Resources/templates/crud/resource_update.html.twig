@@ -1,0 +1,11 @@
+<h3>Update {{ resourceName|default('resource') }}</h3>
+<div>
+    <form method="POST" >
+        <div class="controls span12">
+        {{ form_widget(form,{"class":"input-block-level"}) }}
+        </div>
+        <input class='btn'  type="submit" value="Update">
+        <input  class='btn' type="reset" value="Reset">
+    </form>
+</div>
+
