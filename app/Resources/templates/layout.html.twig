@@ -46,7 +46,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ path("account_index") }}">Account</a></li>
-                                    <li><a href="">Site Configuration</a></li>
+                                    <li><a href="{{ path("admin_index") }}">Site Configuration</a></li>
                                     <li><a href="">User Management</a></li>
                                     <li><a href="{{ path("snippet_index") }}">Snippet Management</a></li>
                                     {% if is_granted("ROLE_ADMIN") %}
