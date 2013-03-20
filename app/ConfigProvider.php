@@ -38,7 +38,7 @@ class ConfigProvider implements ServiceProviderInterface
 {
     function register(Application $app)
     {
-        $app["debug"]=true;
+        $app["debug"]=getenv("SNIPPETMANAGER_ENV")=="development"?true:false;
         define("TEMP_DIR", __DIR__ . "/../temp/");
         $app->register(new TwigServiceProvider, array(
             "twig.options" => array("cache" => TEMP_DIR."/twig/",),
