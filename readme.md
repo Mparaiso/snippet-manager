@@ -3,7 +3,7 @@ SNIPPET MANAGER
 
 author : M.Paraiso , contact mparaiso@online.fr
 
-status : WORK IN PROGRESS
+status : **WORK IN PROGRESS**
 
 license: GPL
 
@@ -31,6 +31,7 @@ tools and tech:
 
 todo :
 
++ write all the tests
 + fix bugs
 + write docs
 + clean up code
