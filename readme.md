@@ -34,3 +34,21 @@ todo :
 + fix bugs
 + write docs
 + clean up code
+
+### INSTALLATION
+
+requirements :
+
++ a web server ( apache , ... )
++ PHP >= 5.3
++ Composer http://getcomposer.org/
++ a database ( MYSQL , ... )
+
+Server variables :
+Define these variables at the system level ( use SETX on windows for instance )
+
++ SNIPPETMANAGER_DBNAME : the name of the database
++ SNIPPETMANAGER_ENV : development (to enable debug mode ) or anything
++ SNIPPETMANAGER_HOST : database host server ( ex : localhost )
++ SNIPPETMANAGER_PASSWORD : database password
++ SNIPPETMANAGER_USER : database username
