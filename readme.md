@@ -14,7 +14,23 @@ snippet manager is written with the Symfony Framework.
 
 ### LIVE DEMO : http://silex-dsnippet.herokuapp.com/
 
+Why ?
+
++ Helps learn Silex
++ Helps learn Doctrine ORM
++ Helps learn Symfony
++ Helps learn how to integrate Symfony project libs with Silex
+
+tools and tech:
+
++ Symfony
++ Silex
++ Doctrine ORM
++ Mysql
++ Apache Server
+
 todo :
+
 + fix bugs
 + write docs
 + clean up code
