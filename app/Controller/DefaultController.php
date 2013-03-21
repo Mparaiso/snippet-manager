@@ -15,7 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController implements ControllerProviderInterface
 {
     /**
-     * FR : affiche une liset de snippets <br/>
+     * FR : affiche une liste de snippets <br/>
+     * EN : display homepage , snippet list , etc ...
      * @param \Symfony\Component\HttpFoundation\Request $req
      * @param \Silex\Application $app
      * @param null $category
