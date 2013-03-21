@@ -23,10 +23,8 @@ class SnippetManager extends Silex\Application
         $this->mount("/admin", new RoleController);
         $this->mount("/admin", new CategoryController);
         if($this["debug"]==FALSE){
-//            $this->before(function(Request $req,Application $app){
-//
-//            });
-            $this->after(function(Response $resp,Application $app){
+            // force HTTPS on heroku
+            $this->after(function(Request $req,Response $resp,Application $app){
                 $resp->headers->add(array("Strict-Transport-Security: max-age=31536000; includeSubDomains"));
                 return $resp;
             });
