@@ -1,7 +1,6 @@
 .idea/*
 .settings/*
 temp/*
-tmp/*
 .buildpath
 .project
 vendor/*
