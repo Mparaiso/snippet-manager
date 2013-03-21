@@ -28,6 +28,7 @@ class SnippetManager extends Silex\Application
 //            });
             $this->after(function(Response $resp,Application $app){
                 $resp->headers->add(array("Strict-Transport-Security: max-age=31536000; includeSubDomains"));
+                return $resp;
             });
         }
 
