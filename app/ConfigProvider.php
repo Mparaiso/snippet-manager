@@ -39,6 +39,7 @@ class ConfigProvider implements ServiceProviderInterface
     function register(Application $app)
     {
         $app["debug"]=getenv("SNIPPETMANAGER_ENV")=="development"?true:false;
+        $app['secure_protocol'] = $app["debug"]==true?"http":"https";
         //FR: choisit entre http et https selon le debug mode
         //EN: switch between http (dev) and https (production)
         define("TEMP_DIR", __DIR__ . "/../temp/");
@@ -106,7 +107,7 @@ class ConfigProvider implements ServiceProviderInterface
                         ),
             );}),
             "security.access_rules"=>array(
-                array("^/account/login","IS_AUTHENTICATED_ANONYMOUSLY"),
+                array("^/account/login","IS_AUTHENTICATED_ANONYMOUSLY",$app['secure_protocol']),
                 array("^/account/register","IS_AUTHENTICATED_ANONYMOUSLY"),
                 array("^/account","ROLE_USER"),
                 array("^/admin","ROLE_ADMIN"),
