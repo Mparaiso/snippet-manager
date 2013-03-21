@@ -25,7 +25,7 @@ class SnippetManager extends Silex\Application
         if($this["debug"]==FALSE){
             // force HTTPS on heroku
             $this->after(function(Request $req,Response $resp){
-                $resp->headers->add(array("Strict-Transport-Security: max-age=31536000; includeSubDomains"));
+                $resp->headers->add(array("Strict-Transport-Security"=>"max-age=31536000; includeSubDomains"));
                 return $resp;
             });
         }
