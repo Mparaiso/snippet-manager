@@ -20,7 +20,7 @@ class SnippetManager extends Silex\Application
         $this->mount("/admin",new AdminController);
         $this->mount("/admin", new RoleController);
         $this->mount("/admin", new CategoryController);
-        if($this["debug"]===false){
+        if($this["debug"]==false){
             $this["controllers"]->requireHttps();
         }
 
