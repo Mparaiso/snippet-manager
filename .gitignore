@@ -1,6 +1,7 @@
 .idea/*
 .settings/*
 temp/*
+doctrine-migrations/*
 .buildpath
 .project
 vendor/*

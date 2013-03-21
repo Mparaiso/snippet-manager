@@ -1,5 +1,12 @@
 <?php
 use Command\ListServicesCommand;
+use Symfony\Component\Console\Helper\DialogHelper;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\GenerateCommand;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand;
+use Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand;
 use Command\CreateRoleCommand;
 use Command\CreateUserCommand;
 use Command\InitAclCommand;
@@ -27,10 +34,21 @@ class Console extends Application {
 				"app"=>new ApplicationHelper($this->app),
 				"em"=> new EntityManagerHelper($this->app["em"]),
 				"db"=>new ConnectionHelper($this->app["em"]->getConnection()),
+				"dialog"=>new DialogHelper,
 				)
 		));
         $this->addCommands(
-            array(new ListServicesCommand,new InitAclCommand,new CreateUserCommand,new CreateRoleCommand)
+            array(new ListServicesCommand,
+            new InitAclCommand,
+            new CreateUserCommand,
+            new CreateRoleCommand,
+            new DiffCommand,
+            new ExecuteCommand,
+            new GenerateCommand,
+            new MigrateCommand,
+            new StatusCommand,
+            new VersionCommand,
+            )
         );
         ConsoleRunner::addCommands($this);
 
