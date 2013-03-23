@@ -36,7 +36,7 @@ class SnippetAdapter implements IItemAdapter
                     "title"       => $snippet->getTitle(),
                     "description" => $snippet->getDescription(),
                     "pubDate"     => $snippet->getCreatedAt(),
-                    "guid"        => $this->generator->generate("snippet", array('title' => urlencode($snippet->getTitle())), TRUE),
+                    "link"        => $this->generator->generate("snippet", array('title' => urlencode($snippet->getTitle())), TRUE),
                 );
             }
             /* trie les snippet dans l'ordre de date décroissant */
@@ -56,7 +56,7 @@ class SnippetAdapter implements IItemAdapter
                     "title"       => $snippet->getTitle(),
                     "description" => $snippet->getDescription(),
                     "pubDate"     => $snippet->getCreatedAt(),
-                    "guid"        => $this->generator->generate("snippet", array('title' => urlencode($snippet->getTitle())), TRUE),
+                    "link"        => $this->generator->generate("snippet", array('title' => urlencode($snippet->getTitle())), TRUE),
 
                 );
             }

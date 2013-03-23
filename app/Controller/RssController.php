@@ -38,7 +38,9 @@ class RssController implements ControllerProviderInterface
             ->bind("rss")
             ->after(function(Request $req,Response $res,Application $app){
                 $res->headers->add(
-                    array("Content-type"=>"application/rss+xml"));
+                    array("Content-type"=>"application/rss+xml",
+                        "Cache-Control"=>"s-maxage=30",
+                    ));
                 return $res;
             });
 
