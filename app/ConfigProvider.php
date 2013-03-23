@@ -149,7 +149,7 @@ class ConfigProvider implements ServiceProviderInterface
         });
         $app["rss_service"]=$app->share(function($app){
             $rss= new SimpleRss(array());
-            $rss->set(new SnippetAdapter($app["url_generator"]));
+            $rss->setChannelAdapter(new SnippetAdapter($app["url_generator"]));
             return new RssService($app["snippet_service"],$app["category_service"],$rss);
         });
     }

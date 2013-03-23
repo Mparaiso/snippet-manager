@@ -2,11 +2,11 @@
 
 namespace Helper;
 
-use Mparaiso\Rss\Adapter\IItemAdapter;
+use Mparaiso\Rss\Adapter\IChannelAdapter;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Exception;
 
-class SnippetAdapter implements IItemAdapter
+class SnippetAdapter implements IChannelAdapter
 {
 
     protected $generator;
