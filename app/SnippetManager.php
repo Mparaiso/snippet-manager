@@ -1,6 +1,7 @@
 <?php
 
 use Controller\RoleController;
+use Controller\RssController;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,16 +17,17 @@ class SnippetManager extends Silex\Application
     {
         parent::__construct($values);
         $this->register(new ConfigProvider);
+        $this->mount("/", new RssController);
         $this->mount("/", new DefaultController);
         $this->mount("/account", new AccountController);
         $this->mount("/account", new SnippetController);
-        $this->mount("/admin",new AdminController);
+        $this->mount("/admin", new AdminController);
         $this->mount("/admin", new RoleController);
         $this->mount("/admin", new CategoryController);
-        if($this["debug"]==FALSE){
+        if ($this["debug"] == FALSE) {
             // force HTTPS on heroku
-            $this->after(function(Request $req,Response $resp){
-                $resp->headers->add(array("Strict-Transport-Security"=>"max-age=31536000; includeSubDomains"));
+            $this->after(function (Request $req, Response $resp) {
+                $resp->headers->add(array("Strict-Transport-Security" => "max-age=31536000; includeSubDomains"));
                 return $resp;
             });
         }

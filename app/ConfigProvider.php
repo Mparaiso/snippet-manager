@@ -1,6 +1,9 @@
 <?php
 
 use Silex\Provider\ServiceControllerServiceProvider;
+use Helper\SnippetAdapter;
+use Mparaiso\Rss\SimpleRss;
+use Service\RssService;
 use Service\AccountService;
 use Silex\Provider\DoctrineServiceProvider;
 use Mparaiso\Provider\CrudGeneratorServiceProvider;
@@ -38,11 +41,11 @@ class ConfigProvider implements ServiceProviderInterface
 {
     function register(Application $app)
     {
-        $app["debug"]=getenv("SNIPPETMANAGER_ENV")=="development"?true:false;
+        $app["debug"]=getenv("SNIPPETMANAGER_ENV")=="development"?TRUE:FALSE;
         //$app['secure_protocol'] = $app["debug"]==true?"http":"https";
         //FR: choisit entre http et https selon le debug mode
         //EN: switch between http (dev) and https (production)
-        define("TEMP_DIR", __DIR__ . "/../temp/");
+        !defined("TEMP_DIR") AND define("TEMP_DIR", __DIR__ . "/../temp/");
         $app->register(new TwigServiceProvider, array(
             "twig.options" => array("cache" => TEMP_DIR."/twig/",),
             "twig.path"    => array(__DIR__ . "/Resources/templates/",)
@@ -96,7 +99,7 @@ class ConfigProvider implements ServiceProviderInterface
                             }),
                             "logout"=>array("logout_path"=>"/account/logout"),
                             "pattern"   => "^/",
-                            "anonymous" => true, /* FR : autorise les utilisateurs anonymes ,EN : allow anonymous users */
+                            "anonymous" => TRUE, /* FR : autorise les utilisateurs anonymes ,EN : allow anonymous users */
                             "form"=>array(
                                 "login_path"=>$app["url_generator"]->generate("account_login"),
                                 "check_path"=>$app["url_generator"]->generate("account_check"),
@@ -143,6 +146,11 @@ class ConfigProvider implements ServiceProviderInterface
             ));
         $app["user_provider"] = $app->share(function ($app) {
             return new EntityUserProvider($app["em.registry"], '\Entity\User', "username");
+        });
+        $app["rss_service"]=$app->share(function($app){
+            $rss= new SimpleRss(array());
+            $rss->setItemAdapter(new SnippetAdapter($app["url_generator"]));
+            return new RssService($app["snippet_service"],$app["category_service"],$rss);
         });
     }
 
