@@ -6,7 +6,8 @@ use Mparaiso\Rss\SimpleRss;
 use Service\RssService;
 use Service\AccountService;
 use Silex\Provider\DoctrineServiceProvider;
-use Mparaiso\Provider\CrudGeneratorServiceProvider;
+use Mparaiso\Provider\CrudServiceProvider;
+use Mparaiso\Provider\AclServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Mparaiso\Doctrine\ORM\Logger\MonologSQLLogger;
@@ -14,7 +15,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntityValidator;
 use Helper\PimpleConstraintValidatorFactory;
 use Helper\EntityManagerRegistry;
 use Service\CategoryService;
-use ServiceProvider\AclServiceProvider;
 use Service\UserService;
 use Symfony\Bridge\Doctrine\Form\DoctrineOrmExtension;
 use Silex\Provider\SessionServiceProvider;
@@ -72,7 +72,6 @@ class ConfigProvider implements ServiceProviderInterface
                 return new MonologSQLLogger($app["monolog"]);
             }),
             "em.metadata"    => array("type" => "yaml", "path" => array(__DIR__ . "/Resources/doctrine/"))));
-        $app->register(new AclServiceProvider);
         $app->register(new FormServiceProvider);
         $app->register(new SessionServiceProvider);
         $app->register(new ValidatorServiceProvider, array(
@@ -120,7 +119,7 @@ class ConfigProvider implements ServiceProviderInterface
         $app->register(new UrlGeneratorServiceProvider);
         $app->register(new TranslationServiceProvider);
         $app->register(new HttpCacheServiceProvider, array("http_cache.cache_dir" =>TEMP_DIR));
-        $app->register(new CrudGeneratorServiceProvider);
+        $app->register(new CrudServiceProvider);
 
         $app["role_service"]     = $app->share(function ($app) {
             return new \Service\RoleService($app['em']);
