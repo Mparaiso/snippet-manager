@@ -1,6 +1,7 @@
 <?php
-use Command\ListServicesCommand;
 use Symfony\Component\Console\Helper\DialogHelper;
+use Mparaiso\Command\InitAclCommand;
+use Mparaiso\Console\Command\ListServicesCommand;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\StatusCommand;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\MigrateCommand;
@@ -9,7 +10,6 @@ use Doctrine\DBAL\Migrations\Tools\Console\Command\ExecuteCommand;
 use Doctrine\DBAL\Migrations\Tools\Console\Command\DiffCommand;
 use Command\CreateRoleCommand;
 use Command\CreateUserCommand;
-use Command\InitAclCommand;
 use Helper\ApplicationHelper;
 
 /**

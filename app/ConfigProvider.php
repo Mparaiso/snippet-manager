@@ -7,7 +7,6 @@ use Service\RssService;
 use Service\AccountService;
 use Silex\Provider\DoctrineServiceProvider;
 use Mparaiso\Provider\CrudServiceProvider;
-use Mparaiso\Provider\AclServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Symfony\Bridge\Doctrine\Security\User\EntityUserProvider;
 use Mparaiso\Doctrine\ORM\Logger\MonologSQLLogger;
@@ -26,6 +25,8 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Mparaiso\Provider\DoctrineORMServiceProvider;
+use Mparaiso\Provider\ConsoleServiceProvider;
+use Mparaiso\Provider\AclServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -120,7 +121,7 @@ class ConfigProvider implements ServiceProviderInterface
         $app->register(new TranslationServiceProvider);
         $app->register(new HttpCacheServiceProvider, array("http_cache.cache_dir" =>TEMP_DIR));
         $app->register(new CrudServiceProvider);
-
+        $app->register(new ConsoleServiceProvider);
         $app["role_service"]     = $app->share(function ($app) {
             return new \Service\RoleService($app['em']);
         });
