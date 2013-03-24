@@ -6,5 +6,7 @@ php:
 
 before_script:
   - composer install
+  - mkdir -p temp
+  - chmod +xrw temp
 
 script: phpunit
