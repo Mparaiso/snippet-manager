@@ -50,7 +50,7 @@ tools and tech:
 + Apache Server
 
 todo :
-
++ @TODO snippets with "." in title crashes the app , fix title names used for urls
 + write all the tests
 + fix bugs
 + write docs
