@@ -12,6 +12,7 @@
         "twig/twig": "*",
         "symfony/twig-bridge": "2.3.*",
         "mparaiso/crudserviceprovider": "*@dev",
+        "mparaiso/silex-simplerest":"*@dev",
         "symfony/form": "2.3.*",
         "symfony/translation": "2.3.*",
         "symfony/validator": "2.3.*",
