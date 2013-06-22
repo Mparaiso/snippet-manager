@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+    PROTOTYPE HTML5 de l'application 
+    SnippetD
+    @author MParaiso <mparaiso@online.fr>
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>SnippetD</title>
+<link rel="stylesheet/less" href="less/snippetd.less" type="text/css"/>
+<script type="text/javascript" src="../../../SnippetD-HTML5/web/js/less.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header block">
+        <h1 class="title">SnippetD <small>by mparaiso</small></h1>
+        <hr />
+        <div id="menu" class="menu">
+            <div class="block search-menu left">
+                <input id="search" type="text" name="search" class="left search-menu" />
+                <input type="button" value="Search" />
+            </div>
+            <div class="button-bar block right">
+                <input type="button" value="All" />
+                <input type="button" value="New" />
+                <input type="button" value="Options" />
+                <input type="button" value="About" />
+            </div>
+            <div class="clear-both"></div>
+        </div>
+        <hr style="margin-top:0;"/>
+        <!-- SUB MENU -->
+        <div id="sub-menu" class="sub-menu">
+            <div class="snippet-count inline-block">No Result found</div>
+            <div class="inline-block right">
+                <select  id="submenu-categories" name="submenu-categories">
+                    <option value="0">All Languages</option>
+                </select>
+                <select  id="submenu-order" name="submenu-order">
+                    <option value="0">Date</option>
+                </select>
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div id="main">
+        <!-- MENU -->
+        <!-- snippet list -->
+        <div class="snippet-list">
+            <div class="snippet-item">
+                <div class="snippet-header">
+                    <input type="button" disabled readonly="true" value="IC" />
+                    <div class='inline-block snippet-name'>Snippet Name</div>
+                    <div class='inline-block snippet-category right'>Snippet Category</div>
+                </div>
+            </div>
+            <div class="snippet-item">
+                <div class="snippet-header">
+                    <input type="button" disabled readonly="true" value="IC" />
+                    <div class='inline-block snippet-name'>Snippet Name</div>
+                    <div class='inline-block snippet-category right'>Snippet Category</div>
+                </div>
+            </div>
+            <div class="snippet-item">
+                <div class="snippet-header">
+                    <input type="button" disabled readonly="true" value="IC" />
+                    <div class='inline-block snippet-name'>Snippet Name</div>
+                    <div class='inline-block snippet-category right'>Snippet Category</div>
+                </div>
+            </div>
+            <div class="snippet-item">
+                <div class="snippet-header">
+                    <input type="button" disabled value="IC" />
+                    <div class='inline-block snippet-name'>Snippet Name</div>
+                    <div class='inline-block snippet-category right'>Snippet Category</div>
+                </div>
+                <div class="snippet-info">
+                    <div class="left">Description</div>
+                    <div class="right">
+                        date-creation<br/>
+                        author<br/>
+                    </div>
+                    <div class="clear-both"></div>
+                </div>
+                <div class="snippet-content">
+                    adipiscing elit. Aenean ac ultricies massa, eu condimentum nibh. Nunc ullamcorper, dui at porttitor ultricies, nisl elit blandit lacus, ut varius ante velit quis eros. Pellentesque quis luctus massa, id pharetra mi. Aliquam sed ultrices eros. Integer at augue eu nisl dapibus rutrum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ligula justo, sagittis eu rhoncus quis, porta in quam. Duis nisi tellus, mollis ut velit at, blandit vulputate erat. Nunc mauris lorem, blandit ut venenatis quis, feugiat vitae neque. Cras vulputate molestie sem, eu consectetur lacus tincidunt eget. Nulla nec lectus c
+                </div>
+                <div class="snippet-menu">
+                    <input type="button" value="Copy" />
+                    <input type="button" value="Edit" />
+                    <input type="button" value="Delete" />
+                </div>
+            </div>
+            <div class="spacer-25">&nbsp;</div>
+        </div>
+        <!-- SNIPPET EDIT TEMPLATE -->
+        <div class="snippet-edit">
+            <div class="left">
+                <select id="" name=""><option value="0">Actionscript</option></select>
+            </div>
+            <div class="right">
+                last edit 2013-19-10
+            </div>
+
+            <div class="snippet-edit-form">
+                <input id="snippet-name" type="text" placeholder="Snippet Name" name="snippet-name" />
+                <textarea id="snippet-description" placeholder="Snippet Description" name="snippet-description" rows="2"></textarea>
+                <textarea id="snippet-content" placeholder="Snippet Content" name="snippet-content"  rows="20"></textarea>
+                <div class="right"> 
+                    <input type="button" value="Reset" id="snippet-edit-reset" />
+                    <input type="button" value="Submit" id="snippet-edit-submit" />
+                </div>            
+                <div class="spacer-25">&nbsp;</div>
+                <div class="spacer-25">&nbsp;</div>
+                <div class="spacer-25">&nbsp;</div>
+            </div>
+        </div>  
+    </div>
+    <div class="footer block">
+        <ul class="pagination">
+            <li><input type="button" name="prev" value="&laquo; Prev " /></li>
+            <li><input type="button" name="next" value="Next &raquo;" /></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

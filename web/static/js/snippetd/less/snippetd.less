@@ -1,0 +1,498 @@
+/**
+ * Feuille de style less pour SnippetD
+ * @author mparaiso <mparaiso@online.fr>
+ * @todo styler la fleche du select 
+ */
+
+/// Variables 
+@light: #FFF;
+@white: #EEE;
+@black: #494949;
+@gray: #AAA;
+@light_gray: lighten(@gray, 15%);
+@dark_gray: #7B7B7B;
+@green: #72c385;
+@red: #ff7d77;
+@gray_button_gradient: linear-gradient(@dark_gray , darken(@dark_gray, 5%));
+@dark_button_gradient: linear-gradient(darken(@dark_gray, 9%), darken(@dark_gray, 15%));
+@red_button_gradient: linear-gradient(lighten(@red, 5%), darken(@red, 5%));
+@footer_gradient: linear-gradient(@gray , darken(@gray, 5%));
+@menu_gradient: linear-gradient(@dark_gray, darken(@dark_gray, 5%));
+@header_gradient: linear-gradient(darken(@dark_gray, 20%), darken(@dark_gray, 30%));
+///@header_height: 133px;
+@header_height: 0px;
+@red: #C71A2A;
+@tahoma: "Open Sans", Lato, Tahoma, sans-serif;
+@arial: Lato, sans-serif;
+@lily: "LiLy Script One", cursive;
+@monospace: monospace;
+/**
+ * FUNCTIONS
+ */
+.transition(@prop:all, @duration:0.5s,@easing: linear) {
+  transition: @prop @easing @duration;
+  -webkit-transition: @prop @easing @duration;
+  -moz-transition: @prop @easing @duration;
+  -ms-transition: @prop @easing @duration;
+  -o-transition: @prop @easing @duration;
+}
+
+/**
+ *
+ * ANIMATION 
+ */
+.sd-hide {
+  opacity: 1;
+}
+
+.sd-hide-active {
+  opacity: 0;
+  line-height: 0;
+}
+
+/**
+ * STYLES
+ */
+
+html {
+
+  -webkit-font-smoothing: none;
+}
+
+body {
+  background-color: @black;
+  color: @white;
+  font-family: @tahoma;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  min-width: 590px;
+  min-height: 480px;
+  position: relative;
+  .selection-disabled;
+  //overflow:hidden;
+}
+
+small {
+  font-size: 50%;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: 190%;
+  margin: 0;
+  padding-top: 15px;
+  padding-left: 0px;
+  padding-bottom: 10px;
+  font-weight: normal;
+  color: #FFF;
+  text-shadow: 1px 1px darken(@red, 60%);
+  a {
+    color: @white;
+    text-decoration: none;
+  }
+}
+
+.header {
+  width: 100%;
+  max-width: 960px;
+  min-width: 590px;
+  ///position:fixed;
+  top: 0;
+  background: @black;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid darken(@black, 5%);
+  border-collapse: collapse;
+  margin: 0px;
+  background: darken(@black, 15%);
+}
+
+div {
+}
+
+button {
+  cursor: pointer;
+  padding: 4px 5px;
+  border: 1px solid darken(#7B7B7B, 10%);
+  background-image: @gray_button_gradient;
+  box-shadow: inset 1px 1px 2px #7F7F7F;/// 1px 1px 5px darken(@dark_gray, 5%);
+  a {
+    color: @white;
+    text-shadow: -1px -1px @black;
+    text-decoration: none;
+  }
+  &:hover {
+    background-image: @red_button_gradient;
+    box-shadow: inset 1px 1px 3px #777;
+  }
+  &[disabled] {
+    background: @red;
+    border: none;
+  }
+}
+
+input {
+  color: @black;
+  font-weight: bold;
+  &[type=text] {
+    font-weight: normal;
+    border: 1px solid darken(#7B7B7B, 10%);
+    &.search-menu {
+      .transition(all,0.3s,ease);
+      // @see http://www.alsacreations.com/tuto/lire/876-transitions-css3-transition-timing-function.html
+      width: 50%;
+    }
+  }
+  &[type=button], &[type=submit] {
+    color: @light;
+    cursor: pointer;
+    border: 1px solid darken(#7B7B7B, 10%);
+    background: @gray_button_gradient;
+    box-shadow: inset 1px 1px 2px #7F7F7F;/// 1px 1px 1px darken(@black, 1%);
+    text-shadow: -1px -1px @black;
+    padding: 3px 5px;
+
+    &:hover {
+      background-image: @red_button_gradient;
+      box-shadow: inset 1px 1px 3px #777;
+    }
+
+  }
+  &[disabled] {
+    background: @red !important;
+    border: none;
+    cursor: not-allowed;
+  }
+}
+
+/**
+ * VALIDATION
+ *
+ */
+input, select, textarea {
+  &.ng-invalid {
+    border: 2px solid @red !important;
+  }
+  &.ng-valid.ng-dirty {
+    border: 2px solid @green !important
+  }
+}
+
+.container {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .main {
+  }
+  width: 100%;
+  min-width: 590px;
+
+}
+
+.padding-5 {
+  padding: 5px;
+  padding-left: 10px;
+}
+
+.menu {
+  .padding-5;
+  background: @menu_gradient;
+  border-top: 1px solid darken(@gray, 10%);
+  border-radius: 2px;
+  .search-menu {
+    width: 50%;
+    &:focus {
+      width: 70%;
+    }
+  }
+}
+
+.sub-menu {
+  border-top: 1px solid darken(@gray, 30%);
+  .padding-5;
+  padding-bottom: 10px;
+}
+
+select {
+  border: none;
+  color: @white;
+  background: darken(@black, 10%);
+  padding: 0;
+  ///-webkit-appearance: none;
+  ///-webkit-background-size: 200px;
+}
+
+select:before {
+  width: 20px;
+  background: black;
+  content: "blop";
+  color: white;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear-both {
+  clear: both;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.snippet-list {
+  position: relative;
+  margin-top: @header_height;
+  height: 100%;
+  padding: 0;
+  width: 100%;
+  .transition;
+  min-height: 500px;
+  .snippet-menu {
+    .padding-5;
+  }
+}
+
+.snippet-edit {
+  margin-top: @header_height;
+  .snippet-edit-form {
+    .padding-5;
+  }
+  input[type=text] {
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 5px;
+  }
+  input[type=button] {
+    background-image: @dark_button_gradient;
+    border: 1px solid @black;
+    &:hover {
+      background-image: @red_button_gradient;
+    }
+  }
+  textarea {
+    border: none;
+    font-family: @monospace;
+    width: 100%;
+    margin-left: 1px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-right: 0;
+  }
+  .right {
+    padding-right: 5px;
+  }
+}
+
+.snippet-item {
+  .transition;
+  .snippet-header {
+    .padding-5;
+    cursor: pointer;
+  }
+  padding: 0;
+  border-top: 1px solid @light;
+  border-bottom: 1px solid @black;
+  background: @light_gray;
+  color: @black;
+  .snippet-name {
+    font-weight: bold;
+    ///.selection-enabled;
+    text-shadow: 1px 1px @white;
+  }
+  &:hover {
+    background: lighten(@light_gray, 10%);
+  }
+  .snippet-content {
+    width: 100%;
+    max-height: 400px;
+    overflow: auto;
+    padding-top: 7px;
+    background: @light;
+    font-family: monospace;
+    .selection-enabled;
+    //.padding-5;
+    padding-right: 0;
+    padding-bottom: 5px;
+    pre {
+      padding-left: 15px;
+      word-wrap: break-word;
+    }
+    &.black {
+      background: #232323;
+      color: @white;
+    }
+  }
+
+  .snippet-menu {
+    background: @menu_gradient;
+    input {
+      color: @light;
+      font-weight: normal;
+    }
+  }
+  .snippet-category {
+    font-family: @arial;
+  }
+  .snippet-info {
+    padding-right: 5px;
+    .left {
+      padding-left: 35px;
+    }
+  }
+}
+
+.options {
+  margin-top: @header_height;
+  fieldset {
+    border: none;
+    border-bottom: 1px dotted @white;
+  }
+  hr {
+    font-size: 110%;
+    border-bottom: 1px dotted @white;
+  }
+}
+
+.spacer-25 {
+  height: 25px;
+}
+
+.footer {
+  .padding-5;
+  padding-right: 0;
+  padding-left: 0;
+  max-width: 960px;
+  background: @footer_gradient;
+  border-top: 1px solid @black;
+  box-shadow: inset 0px 1px 1px @light_gray;
+  bottom: 0px;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  a {
+    color: @light;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  ul.pagination {
+    text-indent: 0;
+    margin: auto;
+    list-style: none;
+    li {
+      margin: auto;
+      .inline-block;
+      button {
+        color: @light;
+        background: @footer_gradient;
+        box-shadow: 0px 1px 1px @gray;
+        border: 1px solid darken(@gray, 10%);
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  background: @black;
+  width: 13px;
+}
+
+::-webkit-scrollbar-button {
+  background: @dark_gray;
+  border-bottom: 1px solid @black;
+}
+
+::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track-piece {
+}
+
+::-webkit-scrollbar-thumb {
+  background: @dark_gray
+}
+
+::-webkit-scrollbar-corner {
+  /* 6 */
+}
+
+::-webkit-resizer {
+  /* 7 */
+}
+
+.selection-disabled {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.selection-enabled {
+  user-select: all;
+  -webkit-touch-callout: all;
+  -webkit-user-select: all;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+}
+
+/**
+ * ANIMATION
+ *
+ */
+
+.si-leave, .si-enter, .si-move {
+  .transition(all,0.3s,ease-in);
+}
+
+.si-enter {
+  opacity: 0;
+  -webkit-transform: rotateX(45deg);
+}
+
+.si-enter.si-enter-active {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+}
+
+.si-leave {
+  opacity: 1;
+  -webkit-transform: rotateX(0deg);
+}
+
+.si-leave.si-leave-active {
+  opacity: 0;
+  -webkit-transform: rotateX(45deg);
+}
+
+.si-move {
+  opacity: 1;
+}
+
+.si-move.si-move-active {
+  opacity: 0;
+}
+
+

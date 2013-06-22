@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--
+    SnippetD
+    Create and save code snippets with SnippetD
+    @author MParaiso <mparaiso@online.fr>
+-->
+<html lang="en" ng-app="snippetd">
+<head>
+    <meta charset="UTF-8"/>
+    <title>SnippetD</title>
+    <link href='http://fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet/less" href="/static/js/snippetd/less/snippetd.less" type="text/css"/>
+    <script type="text/javascript" src="/static/js/less/less.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/highlight/highlight.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/storage.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/snippetd.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/services.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/controllers.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/animations.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/resources.js"></script>
+    <script type="text/javascript" src="/static/js/snippetd/js/prettify.js"></script>
+    <!--<link rel="stylesheet" href="/static/js/snippetd/css/snippetd.css"/>-->
+</head>
+<body ng-controller="MainCtrl">
+<link rel="stylesheet" ng-href="/static/js/highlight/src/styles/{{options.params.selectedTheme.value}}.css"/>
+<noscript><h1>Please enable Javascript to use this website.</h1></noscript>
+<div class="container">
+    <!-- HEADER -->
+    <div class="header block">
+        <h1 class="title"><a href="/">SnippetD </a>
+            <small><a target="_blank" href='https://github.com/Mparaiso'>by mparaiso</a></small>
+        </h1>
+        <hr/>
+        <!-- MAIN MENU -->
+        <div id="menu" class="menu" ng-controller="MainMenuCtrl">
+            <div class="block search-menu left">
+                <form name="search">
+                    <input type="submit" value="search" ng-click="find(keyword)"
+                           ng-disabled="search.$invalid">
+                    <input name="keyword" id="search-keyword"
+                           required type="text" ng-model="keyword" class="search-menu"/>
+                </form>
+            </div>
+            <div class="button-bar block right">
+                <button><a href="#/app/snippets">All</a></button>
+                <button><a href="#/app/snippets/create">New</a></button>
+                <button><a href="#/app/options">Options</a></button>
+                <button><a href="javascript: void 0;" ng-click="export()">Export Snippets</a></button>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+        <hr style="margin-top:0;"/>
+        <!-- SUB MENU -->
+        <div id="sub-menu" class="sub-menu">
+            <div class="snippet-count inline-block">
+                <span ng-show="snippetService.total>0">
+                    {{snippetService.total}} snippet(s)
+                </span>
+                <span ng-show="snippetService.total<=0">
+                    No Result 
+                </span>
+                found
+            </div>
+            <!--<div class="inline-block right">-->
+
+            <!--<label for="">Filter by Category : </label>-->
+            <!--<select  ng-model="options.search.category" ng-options="c as c.name for c in categoryService.categories">-->
+            <!--<option value="999">All</option>-->
+            <!--</select>-->
+            <!--<a  ng-click="resetFilter()" style="cursor:pointer;">Reset Filter</a>-->
+            <!--</div>-->
+        </div>
+        <hr/>
+    </div>
+    <div id="main">
+        <div ng-view></div>
+    </div>
+    <!-- FOOTER -->
+    <div class="footer block">
+        <ul class="pagination">
+            <li>
+                <button>
+                    <a ng-click="getPage('first')">First</a></button>
+            </li>
+            <li>&nbsp;</li>
+            <li>
+                <button>
+                    <a ng-click="getPage('previous')" href="javascript: void 0;">&laquo; Prev</a></button>
+            </li>
+            <li>&nbsp;</li>
+            <li>
+                <button>
+                    <a ng-click="getPage('next')" href="javascript: void 0;">Next &raquo;</a></button>
+            </li>
+
+            <li>&nbsp;</li>
+            <li>
+                <button>
+                    <a ng-click="getPage('last')" href="javascript: void 0;">Last</a></button>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- SNIPPET LIST PAGE TEMPLATE -->
+<script type="text/ng-template" id="snippet-list.html">
+    <div class="snippet-list" ng-show="(snippetService.snippets|filter:byCategory).length === 0">
+        <h3>No Snippet Found , please create a new one.</h3>
+    </div>
+    <div class="snippet-list" ng-show="snippetService.snippets.length > 0"
+         ng-init="selectedSnippet=null">
+        <div class="snippet-item" ng-repeat="snippet in snippetService.snippets" ng-animate="'si'">
+            <span ng-include="'snippet-item.html'"></span>
+        </div>
+        <div class="spacer-25">&nbsp;</div>
+        <div class="spacer-25">&nbsp;</div>
+        <div class="spacer-25">&nbsp;</div>
+    </div>
+</script>
+<!-- SNIPPET READ ITEM TEMPLATE -->
+<script type="text/ng-template" id="snippet-read.html">
+    <div class="snippet-item" ng-animate="'si'">
+        <span class="snippet-read" ng-include="'snippet-item.html'"
+              ng-init="snippetService.selectedSnippet=snippet"></span>
+    </div>
+</script>
+<!-- SNIPPET ITEM TEMPLATE -->
+<script type="text/ng-template" id="snippet-item.html">
+    <span ng-controller="SnippetItemCtrl">
+    <div class="snippet-header"
+         ng-click="snippetService.selectedSnippet=snippetService.selectedSnippet==snippet?null:snippet">
+        <input type="button" disabled
+               value="{{$index+1+(snippetService.getOffset()*options.params.snippetPerPage)}}"/>
+
+        <div class='inline-block snippet-name'>{{snippet.title}}</div>
+        <div class='inline-block snippet-category right'>
+            {{getCategoryById(snippet.category_id).name}}
+        </div>
+    </div>
+    <div ng-hide="snippetService.selectedSnippet!==snippet" class="snippet-detail"
+         ng-animate="'sd'">
+        <div class="snippet-info" ng-click="snippetService.selectedSnippet=null">
+            <div class="left">{{snippet.description}}</div>
+            <div class="right">
+                {{snippet.created_at|date:'shortDate'}}<br/>
+                {{snippet.author}}<br/>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+        <div class="snippet-content" ng-class="options.params.selectedBackground.value">
+            <pre ng-bind-html="snippet.prettyContent"></pre>
+        </div>
+        <div class="snippet-menu">
+            <!--<input type="button" value="Copy"/>-->
+            <button><a href="#/app/snippets/read/{{snippet.id}}">Details</a></button>
+            <button><a href="#/app/snippets/edit/{{snippet.id}}">Edit</a></button>
+            <input type="button" data-ng-click="remove(snippet)" value="Delete"/>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+    </span>
+</script>
+<!-- LIST STATUS TEMPLATE -->
+<script type="text/ng-template" id="list-status.html">
+</script>
+<!-- SNIPPET EDIT PAGE TEMPLATE-->
+<script type="text/ng-template" id="snippet-edit.html">
+    <div ng-show="snippet" ng-include="'snippet-form.html'">
+    </div>
+    <div ng-hide="snippet">
+        <h3 class="snippet-edit">Snippet not found.</h3>
+    </div>
+    <div class="spacer-25">&nbsp;</div>
+    <div class="spacer-25">&nbsp;</div>
+</script>
+<!-- SNIPPET FORM TEMPLATE -->
+<script type="text/ng-template" id="snippet-form.html">
+    <div class="snippet-edit" ng-controller="SnippetFormCtrl">
+        <form name="form" class="css-form">
+            <div class="left padding-5">
+                <label for='s-cat'> Category :</label>
+                <select id='s-cat' ng-model="snippet.category_id" ng-options="c.id|number as c.name for c in categories"
+                        required></select>
+            </div>
+            <div class="right">
+                last edit 2013-19-10
+            </div>
+            <div class="snippet-edit-form">
+                <input type="hidden" name="snippet-id" ng-model="snippet.id"/>
+                <input ng-model="snippet.title" type="text" placeholder="Snippet Name" required/>
+                <textarea ng-model="snippet.description" placeholder="Snippet Description"
+                          rows="2" required></textarea>
+                <textarea ng-model="snippet.content" placeholder="Snippet Content" rows="20" required></textarea>
+
+                <div>
+                    <input type="button" value="Reset"/>
+                    <input type="button" ng-click="save(snippet)" value="Submit" ng-disabled="form.$invalid"/>
+                </div>
+            </div>
+        </form>
+        <div class="spacer-25">&nbsp;</div>
+        <div class="spacer-25">&nbsp;</div>
+    </div>
+</script>
+<!-- OPTIONS PAGE TEMPLATE -->
+<script type="text/ng-template" id="options.html">
+    <form class="options padding-5">
+        <h2>Options</h2>
+        <h4>Syntax coloring</h4>
+        <hr/>
+        <p title="Choose a syntax coloring theme">
+            <label for="theme">Syntax colorscheme : </label>
+            <select id="theme" ng-model="options.params.selectedTheme"
+                    ng-options="theme as theme.value for theme in options.themes"></select>
+        </p>
+
+        <p>
+            <label>Snippet background : </label>
+            <span ng-repeat="c in options.backgrounds">
+                {{c.value}} <input id="bg-color{{$index}}" type="radio" name="bg-color"
+                                   ng-value="c" ng-model="options.params.selectedBackground"/>
+            </span>
+        </p>
+        <hr/>
+        <h4>Snippets listing</h4>
+
+        <p>
+            <label for="s-p-p">Snippet per page : </label>
+            <input id="s-p-p" type="number" ng-model="options.params.snippetPerPage"/>
+        </p>
+        <hr>
+        <h4>Notifications</h4>
+
+        <p>
+            <label>Notification time out: </label>
+            <input type="range" min="100" max="10000" ng-model="options.params.notificationTimeout"/>
+
+        </p>
+
+        <p>
+            <label>Show notifications : </label>
+            <input type="checkbox" ng-model="options.params.showNotifications"/>
+        </p>
+
+    </form>
+</script>
+</body>
+</html>
