@@ -40,9 +40,9 @@ class Config implements \Silex\ServiceProviderInterface
     {
         $app->register(new DoctrineServiceProvider(), array(
             "db.options" => array(
-                "driver"   => getenv("SIMPE_REST_DRIVER"),
-                "host"     => getenv("SIMPE_REST_HOST"),
-                "dbname"   => getenv("SIMPE_REST_DBNAME"),
+                "driver"   => getenv("SIMPLE_REST_DRIVER"),
+                "host"     => getenv("SIMPLE_REST_HOST"),
+                "dbname"   => getenv("SIMPLE_REST_DBNAME"),
                 "user"     => getenv("SIMPLE_REST_USER"),
                 "password" => getenv("SIMPLE_REST_PASSWORD"),
                 "port"     => getenv("SIMPLE_REST_PORT")

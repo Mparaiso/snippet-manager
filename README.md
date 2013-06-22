@@ -7,8 +7,8 @@ author: Mparaiso <mparaiso@online.fr>
 
 server variables :
 
-SIMPE_REST_ENV: development or production
-SIMPE_REST_DBNAME: database name
+SIMPLE_REST_ENV: development or production
+SIMPLE_REST_DBNAME: database name
 SIMPLE_REST_USER: database user
 SIMPLE_REST_PASSWORD :database passord
 SIMPE_REST_HOST : localhost ( optional)
