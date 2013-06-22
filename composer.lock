@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d7317aca15e6cea0bd22519d9eca66a8",
+    "hash": "c712cefd32c224e3f172d9c792efe082",
     "packages": [
         {
             "name": "doctrine/common",
@@ -285,6 +285,40 @@
             "time": "2013-05-11 16:24:01"
         },
         {
+            "name": "mparaiso/silex-simplerest",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mparaiso/silex-simplerest.git",
+                "reference": "953b51d87764fe1804a822894298764f9a726cd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mparaiso/silex-simplerest/zipball/953b51d87764fe1804a822894298764f9a726cd4",
+                "reference": "953b51d87764fe1804a822894298764f9a726cd4",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Mparaiso": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "description": "Restfull controller for silex",
+            "homepage": "https://github.com/Mparaiso/silex-simplerest",
+            "keywords": [
+                "extensions",
+                "rest",
+                "restfull",
+                "silex"
+            ],
+            "time": "2013-06-21 07:02:00"
+        },
+        {
             "name": "pimple/pimple",
             "version": "v1.0.2",
             "source": {
@@ -555,17 +589,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.2.2",
+            "version": "v2.2.3",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "v2.2.2"
+                "reference": "v2.2.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.2.2",
-                "reference": "v2.2.2",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.2.3",
+                "reference": "v2.2.3",
                 "shasum": ""
             },
             "require": {
@@ -598,7 +632,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-05-27 14:47:40"
+            "time": "2013-06-13 07:47:06"
         },
         {
             "name": "symfony/debug",
@@ -1684,7 +1718,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mparaiso/consoleserviceprovider": 20,
-        "mparaiso/crudserviceprovider": 20
+        "mparaiso/crudserviceprovider": 20,
+        "mparaiso/silex-simplerest": 20
     },
     "platform": [
 
