@@ -29,7 +29,7 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
-use Controller\Indexcontroller;
+use Controller\IndexController;
 
 /**
  * Silex Application configuration as a service provider
