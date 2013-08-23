@@ -3,9 +3,7 @@
         "silex/silex": "1.*",
         "doctrine/dbal": "*",
         "mparaiso/consoleserviceprovider": "*@dev",
-        "symfony/serializer": "2.3.*",
-        "symfony/dom-crawler": "2.3.*",
-        "symfony/browser-kit": "2.3.*",
+        "symfony/symfony": "2.3.*",
         "monolog/monolog": "*",
         "symfony/monolog-bridge": "2.3.*",
         "symfony/doctrine-bridge": "2.3.*",
@@ -13,11 +11,6 @@
         "symfony/twig-bridge": "2.3.*",
         "mparaiso/crudserviceprovider": "*@dev",
         "mparaiso/silex-simplerest":"*@dev",
-        "symfony/form": "2.3.*",
-        "symfony/translation": "2.3.*",
-        "symfony/validator": "2.3.*",
-        "symfony/config":"2.3.*"
-
     },
     "autoload":{
         "psr-0":{
