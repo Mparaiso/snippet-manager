@@ -31,6 +31,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Controller\Indexcontroller;
 
+/**
+ * Silex Application configuration as a service provider
+ */
 class Config implements \Silex\ServiceProviderInterface
 {
 
@@ -181,7 +184,7 @@ class Config implements \Silex\ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-       
+        // index controller
         $app->mount("/",$app["index_controller"]);
         $app->mount("/api/", $app["snippet_controller"]);
         $app->mount("/api/", $app["category_controller"]);
