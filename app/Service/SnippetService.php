@@ -6,7 +6,7 @@ namespace Service;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Model\Snippet;
-use Mparaiso\SimpleRest\Model\AbstractModel;
+use Mparaiso\SimpleRest\Model\IModel;
 use Mparaiso\SimpleRest\Service\Service;
 
 class SnippetService extends Service
@@ -16,7 +16,7 @@ class SnippetService extends Service
         return $datetime->format("Y-m-d H:i:s");
     }
 
-    function create(AbstractModel $model)
+    function create(IModel $model)
     {
         /* @var Snippet $model */
         if ($model->getId() != NULL) {
