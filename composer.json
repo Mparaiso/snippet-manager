@@ -3,7 +3,7 @@
         "silex/silex": "1.*",
         "doctrine/dbal": "*",
         "mparaiso/consoleserviceprovider": "*@dev",
-        "symfony/symfony": "2.3.*",
+        "symfony/symfony": "2.2.*",
         "monolog/monolog": "*",
         "symfony/monolog-bridge": "2.3.*",
         "symfony/doctrine-bridge": "2.3.*",
