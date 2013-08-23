@@ -14,3 +14,15 @@ SIMPLE_REST_PASSWORD :database passord
 SIMPE_REST_HOST : localhost ( optional)
 SIMPE_REST_DRIVER : pdo driver ( pdo_mysql , etc ... )
 SIMPLE_REST_PORT: db port
+
+## WEB SERVER CONFIGURATION
+
+### with PHP builtin server :
+
+launch the app that way
+
+in the web folder : 
+
+	php -S localhost:3000 index.php
+
+index.php is the server router so you need to add it to the command line when launching the PHP server.

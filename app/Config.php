@@ -29,6 +29,7 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
+use Controller\Indexcontroller;
 
 class Config implements \Silex\ServiceProviderInterface
 {
@@ -78,6 +79,10 @@ class Config implements \Silex\ServiceProviderInterface
         $app->register(new CrudServiceProvider);
 
         $app->register(new UrlGeneratorServiceProvider);
+
+        $app["index_controller"] = $app->share(function($app){
+            return new IndexController;
+        });
 
         $app['snippet_provider'] = $app->share(function ($app) {
             return new DBALProvider($app["db"], array(
@@ -176,10 +181,8 @@ class Config implements \Silex\ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        $app->get("/", function () {
-            $content = file_get_contents(__DIR__ . '/../web/static/js/snippetd/partials/index.html');
-            return $content;
-        });
+       
+        $app->mount("/",$app["index_controller"]);
         $app->mount("/api/", $app["snippet_controller"]);
         $app->mount("/api/", $app["category_controller"]);
 
