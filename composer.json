@@ -10,7 +10,7 @@
         "twig/twig": "*",
         "symfony/twig-bridge": "2.3.*",
         "mparaiso/crudserviceprovider": "*@dev",
-        "mparaiso/silex-simplerest":"*@dev",
+        "mparaiso/silex-simplerest":"*@dev"
     },
     "autoload":{
         "psr-0":{
