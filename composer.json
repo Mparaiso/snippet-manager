@@ -5,10 +5,10 @@
         "mparaiso/consoleserviceprovider": "*@dev",
         "symfony/symfony": "2.2.*",
         "monolog/monolog": "*",
-        "symfony/monolog-bridge": "2.3.*",
-        "symfony/doctrine-bridge": "2.3.*",
+        "symfony/monolog-bridge": "2.2.*",
+        "symfony/doctrine-bridge": "2.2.*",
         "twig/twig": "*",
-        "symfony/twig-bridge": "2.3.*",
+        "symfony/twig-bridge": "2.2.*",
         "mparaiso/crudserviceprovider": "*@dev",
         "mparaiso/silex-simplerest":"*@dev"
     },
