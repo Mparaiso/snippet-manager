@@ -11,8 +11,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lily+Script+One' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet/less" href="/static/js/snippetd/less/snippetd.less" type="text/css"/>
-    <script type="text/javascript" src="/static/js/less/less.min.js"></script>
+    <link rel="stylesheet" href="/static/js/snippetd/less/snippetd.css" type="text/css"/>
     <script type="text/javascript" src="/static/js/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/highlight/highlight.min.js"></script>
     <script type="text/javascript" src="/static/js/angular/angular.min.js"></script>
@@ -160,6 +159,8 @@
             <button><a href="#/app/snippets/read/{{snippet.id}}">Details</a></button>
             <button><a href="#/app/snippets/edit/{{snippet.id}}">Edit</a></button>
             <input type="button" data-ng-click="remove(snippet)" value="Delete"/>
+            <label for="">Embedded</label>
+            <input type="text" readonly value="<iframe seamless='seamless' frameborder='0' src='{{origin}}/snippet/embedded/{{snippet.id}}?&style={{options.params.selectedTheme.value}}' width='100%' height='auto'></iframe>">
         </div>
         <div class="clear-both"></div>
     </div>

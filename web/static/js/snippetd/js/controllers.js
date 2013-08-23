@@ -80,8 +80,8 @@ function SnippetReadCtrl($scope, $routeParams, $location, $log, SnippetService, 
     };
 }
 
-function SnippetItemCtrl($scope, SnippetService, CategoryService, Snippet, Options, $routeParams, $log) {
-
+function SnippetItemCtrl($window,$scope, SnippetService, CategoryService, Snippet, Options, $routeParams, $log) {
+    $scope.origin = $window.location.origin;
     $scope.options = Options;
     $scope.getCategoryById = function (id) {
         return CategoryService.getById(id);

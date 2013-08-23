@@ -3,10 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{snippet.title}}</title>
+	<link rel="stylesheet" href="/static/js/snippetd/less/snippetd.css" type="text/css"/>
 	<link rel="stylesheet" href="/static/js/highlight/src/styles/{{style}}.css">
 	<style>
 	body{
 		font-family: "Myriad Pro",Arial,sans-serif;
+		min-height: 0;
 	}
 	h4,h5{
 		margin:5px;
@@ -18,11 +20,11 @@
 	</style>
 </head>
 <body>
-	<h4>{{snippet.title}}</h4>
+	<h4 class="snippet-info">{{snippet.title}}</h4>
 	{% if showDescription==true %}
 	<h5>{{snippet.description}}</h5>
 	{% endif %}
-	<pre><code>{{snippet.prettyContent|raw}}
+	<pre class="snippet-content"><code>{{snippet.prettyContent|raw}}
 	</code></pre>
 </body>
 </html>

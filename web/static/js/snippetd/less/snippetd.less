@@ -137,6 +137,10 @@ button {
 input {
   color: @black;
   font-weight: bold;
+  &[readonly]{
+    color:@gray !important;
+    padding: 3px 5px;
+  }
   &[type=text] {
     font-weight: normal;
     border: 1px solid darken(#7B7B7B, 10%);

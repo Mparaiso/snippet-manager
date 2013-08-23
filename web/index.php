@@ -15,6 +15,7 @@ $autoload->add("", __DIR__ . "/../app");
 $autoload->add("", __DIR__ . "/../../lib");
 
 $debug = getenv("SIMPLE_REST_ENV") == "development" ? TRUE : FALSE;
+
 $app = new App(array("debug" => $debug));
 
 $app->run();

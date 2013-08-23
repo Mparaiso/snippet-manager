@@ -1,12 +1,14 @@
 <?php
 
-
 namespace Controller;
 
 use Silex\ControllerProviderInterface;
 use Silex\Application;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * IndexController
+ */
 class IndexController implements ControllerProviderInterface{
 
 	/**
