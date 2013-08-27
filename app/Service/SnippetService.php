@@ -9,8 +9,14 @@ use Model\Snippet;
 use Mparaiso\SimpleRest\Model\IModel;
 use Mparaiso\SimpleRest\Service\Service;
 
+/**
+ * Manage snippet models
+ */
 class SnippetService extends Service
 {
+    /**
+     *  convert a DateTime object to a mysql compatible date string
+     */
     function makeDate(DateTime $datetime)
     {
         return $datetime->format("Y-m-d H:i:s");
