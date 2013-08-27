@@ -1,6 +1,7 @@
 # move app to VCS
 
-github:
+commit:
+
 	git add . \
 	git commit -am"update" \
 	git push github --all
@@ -8,11 +9,13 @@ github:
 # deploy the app
 
 deploy:
+
 	git add. \
 	git commit -am"update before deploy" \
 	git push origin 
 
 # test php app
 
-test-php:
+test:
+
 	phpunit

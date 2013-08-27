@@ -22,6 +22,11 @@ class SnippetService extends Service
         return $datetime->format("Y-m-d H:i:s");
     }
 
+    /**
+     * @param IModel $model
+     * @return mixed
+     * Persist a snippet
+     */
     function create(IModel $model)
     {
         /* @var Snippet $model */
@@ -44,7 +49,7 @@ class SnippetService extends Service
         $connection = $this->provider->getConnection();
         /** @var Connection $connection */
         $qb = $connection->createQueryBuilder();
-        $qb->select("*")->from("{$this->provider->getName()}", "s")->join("s","category","c","c.id = s.category_id");
+        $qb->select("*")->from("{$this->provider->getName()}", "s")->join("s", "category", "c", "c.id = s.category_id");
         $qb->where("s.title LIKE :search ")
             ->orWhere("s.description LIKE :search ")
             ->orWhere("s.content LIKE :search")

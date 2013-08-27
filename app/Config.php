@@ -6,10 +6,10 @@
  * FR : Configuration de l'application<br>
  * EN : Application Configuration<br>
  */
-
 use Command\AddCategoriesCommand;
 use Command\AddDefaultSnippetsCommand;
 use Command\GenerateDatabaseCommand;
+use Controller\IndexController;
 use Controller\SnippetController;
 use Mparaiso\CodeGeneration\Controller\CRUD;
 use Mparaiso\Provider\ConsoleServiceProvider;
@@ -29,7 +29,6 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
-use Controller\IndexController;
 
 /**
  * Silex Application configuration as a service provider
@@ -44,12 +43,12 @@ class Config implements \Silex\ServiceProviderInterface
     {
         $app->register(new DoctrineServiceProvider(), array(
             "db.options" => array(
-                "driver"   => getenv("SIMPLE_REST_DRIVER"),
-                "host"     => getenv("SIMPLE_REST_HOST"),
-                "dbname"   => getenv("SIMPLE_REST_DBNAME"),
-                "user"     => getenv("SIMPLE_REST_USER"),
+                "driver" => getenv("SIMPLE_REST_DRIVER"),
+                "host" => getenv("SIMPLE_REST_HOST"),
+                "dbname" => getenv("SIMPLE_REST_DBNAME"),
+                "user" => getenv("SIMPLE_REST_USER"),
                 "password" => getenv("SIMPLE_REST_PASSWORD"),
-                "port"     => getenv("SIMPLE_REST_PORT")
+                "port" => getenv("SIMPLE_REST_PORT")
             )
         ));
 
@@ -67,7 +66,7 @@ class Config implements \Silex\ServiceProviderInterface
         }));
 
         $app->register(new TwigServiceProvider, array(
-            'twig.path'    => __DIR__ . "/Resources/views",
+            'twig.path' => __DIR__ . "/Resources/views",
             "twig.options" => array(
                 "cache" => __DIR__ . "/../temp/twig"
             )
@@ -83,15 +82,15 @@ class Config implements \Silex\ServiceProviderInterface
 
         $app->register(new UrlGeneratorServiceProvider);
 
-        $app["index_controller"] = $app->share(function($app){
+        $app["index_controller"] = $app->share(function ($app) {
             return new IndexController;
         });
 
         $app['snippet_provider'] = $app->share(function ($app) {
             return new DBALProvider($app["db"], array(
                 "model" => $app["snippet_model"],
-                "name"  => "snippet",
-                "id"    => "id"
+                "name" => "snippet",
+                "id" => "id"
             ));
         });
 
@@ -101,10 +100,11 @@ class Config implements \Silex\ServiceProviderInterface
 
         $app["snippet_controller"] = $app->share(function ($app) {
             $controller = new SnippetController(array(
-                "resource"          => "snippet",
+                "resource" => "snippet",
                 "resourcePluralize" => "snippets",
-                "model"             => $app["snippet_model"],
-                "service"           => $app["snippet_service"]
+                "model" => $app["snippet_model"],
+                "service" => $app["snippet_service"],
+                "debug" => $app["debug"]
             ));
             return $controller;
         });
@@ -112,12 +112,12 @@ class Config implements \Silex\ServiceProviderInterface
         $app["snippet_crud_controller"] = $app->share(function ($app) {
             return new CRUD(
                 array(
-                    "resourceName"   => "snippet",
-                    "service"        => $app["snippet_service"],
-                    "entityClass"    => $app["snippet_model"],
-                    "formClass"      => $app["snippet_form"],
-                    "propertyList"   => array("title", "description"),
-                    "properties"     => array("title", "description", "content"),
+                    "resourceName" => "snippet",
+                    "service" => $app["snippet_service"],
+                    "entityClass" => $app["snippet_model"],
+                    "formClass" => $app["snippet_form"],
+                    "propertyList" => array("title", "description"),
+                    "properties" => array("title", "description", "content"),
                     "templateLayout" => "crud_layout.html.twig"
                 ));
         });
@@ -125,8 +125,8 @@ class Config implements \Silex\ServiceProviderInterface
         $app['category_provider'] = $app->share(function ($app) {
             return new DBALProvider($app["db"], array(
                 "model" => $app["category_model"],
-                "name"  => "category",
-                "id"    => "id"
+                "name" => "category",
+                "id" => "id"
             ));
         });
 
@@ -136,10 +136,10 @@ class Config implements \Silex\ServiceProviderInterface
 
         $app["category_controller"] = $app->share(function ($app) {
             $controller = new Controller(array(
-                "resource"          => "category",
+                "resource" => "category",
                 "resourcePluralize" => "categories",
-                "model"             => $app["category_model"],
-                "service"           => $app["category_service"]
+                "model" => $app["category_model"],
+                "service" => $app["category_service"]
             ));
             return $controller;
         });
@@ -147,10 +147,10 @@ class Config implements \Silex\ServiceProviderInterface
         $app["category_crud_controller"] = $app->share(function ($app) {
             return new CRUD(
                 array(
-                    "resourceName"   => "category",
-                    "service"        => $app["category_service"],
-                    "entityClass"    => $app["category_model"],
-                    "formClass"      => $app["category_form"],
+                    "resourceName" => "category",
+                    "service" => $app["category_service"],
+                    "entityClass" => $app["category_model"],
+                    "formClass" => $app["category_form"],
                     "templateLayout" => "crud_layout.html.twig"
                 ));
         });
@@ -185,7 +185,7 @@ class Config implements \Silex\ServiceProviderInterface
     public function boot(Application $app)
     {
         // index controller
-        $app->mount("/",$app["index_controller"]);
+        $app->mount("/", $app["index_controller"]);
         $app->mount("/api/", $app["snippet_controller"]);
         $app->mount("/api/", $app["category_controller"]);
 
