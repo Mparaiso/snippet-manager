@@ -4,7 +4,7 @@ ct: coffee tests
 	@npm run ct &
 commit:
 	@git add .
-	@git commit -am"$(message) `date`"
+	@git commit -am"$(message) `date`" | :
 deploy: views coffee commit
 	@git push origin master
 start:
