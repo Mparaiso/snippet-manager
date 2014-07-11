@@ -74,8 +74,9 @@ class CategoryDataAccessObject extends BaseDataAccessObject
 
 
 container = new Pimple({
+    debug:if process.env.NODE_ENV is "production" then false else true,
     ip:process.env.OPENSHIFT_NODEJS_IP||"127.0.0.1",
-    port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000
+    port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
     db:{
         host:process.env.SNIPPED_DBHOST,
         user:process.env.SNIPPED_DBUSER,
@@ -100,7 +101,7 @@ container.set('connection', container.share ->
 )
 
 container.set('swig', container.share ->
-    swig.setDefaults(cache:false)
+    swig.setDefaults(cache:if container.debug then false else "memory")
     swig.setFilter('slug',slug)
     swig
 )
