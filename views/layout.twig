@@ -12,15 +12,17 @@
      
     <main class="container container-narrow">
         <div class="header">
-            <!--<ul class="nav nav-pills pull-right">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>-->
+            <ul class="nav nav-pills pull-right">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a href="#">Signin</a></li>
+              <li><a href="#">Signup</a></li>
+            </ul>
             <h2 class="text-muted"><a href="/" class="brand">{{title}}</a> <small><small>manage your snippets online</small></small></h2>
         </div>
             <p class="lead">&nbsp;</p>
+            <div class="content">
             {% block content %}{% endblock %}
+            </div>
         <footer class="footer">
             <p>&copy; mparaiso <mparaiso@online.fr> 2014</p>
         </footer>

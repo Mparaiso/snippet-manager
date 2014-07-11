@@ -1,6 +1,6 @@
 {% extends 'layout.twig' %}
 {% block content %}
-<h3>Latest snippets</h3>
+<h3>Snippets for "{{category.title}}"</h3>
 <div class="row">
 {% for  snippet in snippets %}
     <section class="col-md-6">
@@ -9,5 +9,3 @@
 {% endfor %}
 </div>
 {% endblock %}
-
-
