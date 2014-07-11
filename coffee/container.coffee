@@ -4,7 +4,8 @@ mysql = require "mysql"
 q = require "q"
 path = require "path"
 swig = require "swig"
-
+slug = require "slug"
+_ = require "lodash"
 ###
 # Classes
 ###
@@ -17,10 +18,57 @@ class BaseDataAccessObject
     find:(id)->
         q.ninvoke(@connection,'query',"SELECT * from #{@tableName} WHERE #{@idColumnName} = ?",[id])
         .spread((results,fields)->results[0])
+    ###
+    # given a list of records populate a virtual field owned by the record according to the relative id
+    # @return (collection:Array<T>)=>Promise<Array<T>> returns a function
+    ###
+    populate:(ownedDataAccessObject,idColumnName,ownedIdColumnName,virtualColumnName)->
+        (collection)->
+            q(collection)
+            .then((collection)->[collection,ownedDataAccessObject.findAll()])
+            .spread((collection,ownedCollection)->
+                _.map(collection,(item)->
+                    item[virtualColumnName] = _.find(ownedCollection,(ownedItem)->item[idColumnName]==ownedItem[ownedIdColumnName])
+                    item
+                )
+            )
+    ###
+    # like populate but for 1 record
+    ###
+    populateOne:(ownedDataAccessObject,idColumnName,virtualColumnName)->
+        (record)->
+            q(record)
+            .then((record)->[record,ownedDataAccessObject.find(record[idColumnName])])
+            .spread((record,ownedRecord)->
+                record[virtualColumnName]=ownedRecord
+                record
+            )
+
 
 class SnippetDataAccessObject extends BaseDataAccessObject
-    constructor:(options)->
+    constructor:(options,@categoryService)->
         options.tableName="snippets"
+        options.idColumnName="id"
+        super(options)
+
+    _populateCategories:(snippets)->
+        @populate(@categoryService,'category_id',@categoryService.idColumnName,'category')(snippets)
+
+    _populateOneCategory:(snippet)->
+        @populateOne(@categoryService,'category_id','category')(snippet)
+
+    findAll:->
+        super()
+        .then(@_populateCategories.bind(this))
+
+    find:(id)->
+        super(id)
+        .then(@_populateOneCategory.bind(this))
+
+class CategoryDataAccessObject extends BaseDataAccessObject
+    
+    constructor:(options)->
+        options.tableName="categories"
         options.idColumnName="id"
         super(options)
 
@@ -39,9 +87,8 @@ container = new Pimple({
 container.set('locals',{
     title:"Snipped"
 })
-container.set('snippetService',container.share -> new SnippetDataAccessObject({connection:container.connection}))
-
-container.set('CategoryService',container.share -> class CategoryService )
+container.set('snippetService',container.share -> new SnippetDataAccessObject({connection:container.connection},container.categoryService))
+container.set('categoryService',container.share -> new CategoryDataAccessObject({connection:container.connection}) )
 container.set('connection', container.share ->
     connection = mysql.createConnection({
         host: container.db.host
@@ -54,11 +101,13 @@ container.set('connection', container.share ->
 
 container.set('swig', container.share ->
     swig.setDefaults(cache:false)
+    swig.setFilter('slug',slug)
     swig
 )
 container.set('app',container.share ->
     app = express()
     app.locals(container.locals)
+
     app.use(express.static(path.join(__dirname,"..","public")))
     app.engine('twig',container.swig.renderFile)
     app.set('view engine','twig')
