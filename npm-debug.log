@@ -1,0 +1,31 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'shrinkwrap' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.21
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 error Error: Problems were encountered
+5 error Please correct and try again.
+5 error missing: async@~0.2.6, required by uglify-js@2.4.12
+5 error missing: source-map@~0.1.7, required by uglify-js@2.4.12
+5 error     at shrinkwrap_ (C:\Program Files\nodejs\node_modules\npm\lib\shrinkwrap.js:29:15)
+5 error     at C:\Program Files\nodejs\node_modules\npm\lib\shrinkwrap.js:23:5
+5 error     at C:\Program Files\nodejs\node_modules\npm\lib\ls.js:43:30
+5 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:119:5
+5 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:233:14
+5 error     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:48:11)
+5 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:233:14
+5 error     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:48:11)
+5 error     at C:\Program Files\nodejs\node_modules\npm\node_modules\read-installed\read-installed.js:233:14
+5 error     at cb (C:\Program Files\nodejs\node_modules\npm\node_modules\slide\lib\async-map.js:48:11)
+6 error If you need help, you may report this log at:
+6 error     <http://github.com/isaacs/npm/issues>
+6 error or email it to:
+6 error     <npm-@googlegroups.com>
+7 error System Windows_NT 6.1.7601
+8 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "shrinkwrap"
+9 error cwd c:\development\categories\openshift\snippet
+10 error node -v v0.10.21
+11 error npm -v 1.3.11
+12 verbose exit [ 1, true ]
