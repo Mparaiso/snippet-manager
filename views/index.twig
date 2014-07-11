@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
-</head>
-<body>
-    <div class="container container-narrow">
-        <div class="row">
-            <div class="col-md-12">
-                {{message}}  
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+{% extends 'layout.twig' %}
+{% block content %}
+<div class="row">
+{% for  snippet in snippets %}
+    <section class="col-md-6">
+        <h4 class="truncate"><a href="/snippet/{{snippet.id}}/{{snippet.title}}">{{snippet.title}}</a></h4>
+        <p>{{snippet.description}}</p>
+        <p>&nbsp;</p>
+    </section>
+{% endfor %}
+</div>
+{% endblock %}
+
+

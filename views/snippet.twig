@@ -1,0 +1,19 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h3>{{snippet.title}}</h3> 
+    <p class="text-muted">{{snippet.created_at|date('Y-m-d')}}</p>
+    <p>{{snippet.description}}</p>
+    <pre>
+
+{{snippet.content}}
+
+</pre>
+{% endblock %}
+{% block scripts %}
+    {{parent()}}
+    <script type="text/javascript" src="//cdn.jsdelivr.net/highlight.js/8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/8.0/styles/monokai_sublime.css" />
+    <script type="text/javascript">
+        hljs.highlightBlock(document.querySelector('pre'));
+    </script>
+{% endblock %}
