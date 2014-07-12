@@ -6,6 +6,9 @@ body{
     width:100%;
     height:100%;
 }
+a{
+    color:#3297DA;
+}
 .container {
     max-width: 66%;
     min-width:480px;
@@ -16,10 +19,18 @@ body{
 }
 .truncate{
     white-space: nowrap;
-    overflow-x: hidden;
+    overflow: hidden;
+    line-height:1.5em;
     text-overflow: ellipsis;
 }
 .brand{
-    color:inherit!important;
     text-decoration: none!important;
+    color:#D35300!important;
+    font-family: 'Lobster', serif;
+}
+.pumkin{
+    color:#D35300!important;
+}
+.green-sea{
+color:#15A186!important;
 }

@@ -1,11 +1,13 @@
 {% extends 'layout.twig' %}
 {% block content %}
-    <h3>{{snippet.title}} <a href="/category/{{snippet.category.id}}/{{snippet.category.title}}"><small><small class="label label-default">{{snippet.category.title}}</small></small></a></h3> 
-    <p class="text-muted">{{snippet.created_at|date('Y-m-d')}}</p>
+    <h3>{{snippet.title}}</h3> 
+    <p class="text-muted">
+        <small>
+            {{snippet.created_at|date('Y-m-d')}} {{snippet.user.username}} <a href="/category/{{snippet.category.id}}/{{snippet.category.title}}">{{snippet.category.title}}</a>
+        </small>
+    </p>
     <p>{{snippet.description}}</p>
-    <pre>
-
-{{snippet.content}}
+    <pre>{{snippet.content}}
 
 </pre>
 {% endblock %}

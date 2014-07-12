@@ -1,6 +1,10 @@
 ###
+#
 # DBAL : Database Abstraction layer
+# coffee/dbal.coffee
+# Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
 ###
+
 mysql = require "mysql"
 q = require "q"
 _ = require "lodash"
@@ -11,6 +15,7 @@ util = require "util"
 # Build SQL EXPRESSIONS
 ###
 class ExpressionBuilder
+    @nullOperators={$null:"?? IS NULL",$nnull:"?? IS NOT NULL"}
     @operators = {$eq:"?? <=> ?",$ne:"?? != ?",$neq:"?? != ?",$in:'?? IN (?)',$nin:'?? NOT IN (?)',$gt:'?? > ?',$lt:'?? < ?',$gte:'?? >= ?',$lte:'?? <= ?',$like:'?? LIKE ?'}
     @subExpressionOperators = {$or: "%s OR %s" ,$and: "%s AND %s",$nor:"%$ OR NOT %s"}
     @unaryOperators = {$not: "NOT "}
@@ -22,7 +27,7 @@ class ExpressionBuilder
     # @return boolean
     ###
     isOperator:(value)->
-        typeof value is "object" and  ExpressionBuilder.operators.hasOwnProperty(Object.keys(value)[0])
+        not _.isNull(value) and typeof value is "object" and  ExpressionBuilder.operators.hasOwnProperty(Object.keys(value)[0])
     ###
     # is subexp operator ($and,$or...)
     # @return boolean
@@ -128,7 +133,7 @@ class QueryBuilder
     orderBy:(@_orderBy)->
         return this
     build:(model={})->
-        _.extend(@model,{})
+        _.extend(@model,model)
         params = []
         switch @type
             when "DELETE"
@@ -155,7 +160,6 @@ class QueryBuilder
                 if @select isnt "*" then params.push(@select)
                 params.push(@tableName)
                 params = params.concat(p)
-                console.log(@_orderBy)
                 if @_orderBy isnt undefined then params.push(@_orderBy)
                 if @_limit isnt undefined then params.push([@offset,@_limit])
                 ["SELECT #{if @select isnt "*" then "??" else "*" } FROM ?? #{if whereString then "WHERE #{whereString}" else "" } #{if @_orderBy then 'ORDER BY ?' else '' } #{if @_limit then 'LIMIT ?' else '' }".trimRight(), params]
@@ -207,13 +211,14 @@ class BaseDataAccessObject
             )
     ###
     # like populate but for 1 record
+    # @return (record:T)=>Promise<T>
     ###
     populateOne:(ownedDataAccessObject,idColumnName,virtualColumnName)->
         (record)->
             q(record)
-            .then((record)->[record,ownedDataAccessObject.find(record[idColumnName])])
+                .then((record)->[record,ownedDataAccessObject.find(if record then record[idColumnName] else null)])
             .spread((record,ownedRecord)->
-                record[virtualColumnName]=ownedRecord
+                if record then record[virtualColumnName]=ownedRecord
                 record
             )
 

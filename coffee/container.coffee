@@ -52,10 +52,12 @@ class SnippetDataAccessObject extends BaseDataAccessObject
     findAll:->
         super()
         .then(@_populateCategories.bind(this))
+        .then(@_populateUsers.bind(this))
 
     find:(id)->
         super(id)
         .then(@_populateOneCategory.bind(this))
+        .then(@_populateOneUser.bind(this))
 
 class CategoryDataAccessObject extends BaseDataAccessObject
     
@@ -80,7 +82,7 @@ container.set('ExpressionBuilder',-> ExpressionBuilder )
 container.set('locals',{
     title:"Snipped"
 })
-container.set('snippetService',container.share -> new SnippetDataAccessObject(connection:container.connection,container.categoryService))
+container.set('snippetService',container.share -> new SnippetDataAccessObject(connection:container.connection,container.categoryService,container.userService))
 container.set('categoryService',container.share -> new CategoryDataAccessObject(connection:container.connection) )
 container.set('userService',container.share -> new UserDataAccessObject(connection:container.connection))
 container.set('connection', container.share ->
