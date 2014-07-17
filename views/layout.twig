@@ -15,14 +15,30 @@
     <main class="container container-narrow">
         <div class="header">
             <ul class="nav nav-pills pull-right">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="#">Signin</a></li>
-              <li><a href="#">Signup</a></li>
+              <li class="{%if route == "home"%}active{%endif%}"><a href="/">Home</a></li>
+              {% if isAuthenticated %}
+                <li class="{%if route == "profile" %}active{%endif%}"><a href="/profile">Welcome back <strong>{{user.username}}</strong></a></li>
+                <li class="">
+                    <a href="/profile/signout">Sign out</a>
+                </li>
+              {%else%}
+                <li class="{%if route == "signin"%}active{%endif%}"><a href="/signin">Signin</a></li>
+                <li class="{%if route == "join"%}active{%endif%}"><a href="/join">Join</a></li>
+              {%endif%}
             </ul>
-            <h2 class="text-muted"><a href="/" class="brand green-sea">{{title}}</a> 
-            <small><small class="green-sea">manage your snippets online</small></small></h2>
+            <h2 class="text-muted"><a href="/" class="brand">{{title}}</a> 
+            <small><small class="brand">{{slogan}}</small></small></h2>
         </div>
             <p class="lead">&nbsp;</p>
+            {% if flash %}
+                <ul class="list-unstyled">
+                {% for type,messages in flash %}
+                    {% for message in messages %}
+                        <li class="text-{{type}}">{{ message }}</li>
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            {%endif%}
             <div class="content">
             {% block content %}{% endblock %}
             </div>

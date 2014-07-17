@@ -8,5 +8,6 @@ commit:
 deploy: views coffee commit
 	@git push origin master
 start:
+	@clear
 	@supervisor  -e 'js|coffee'  --ignore node_modules server.js &
 .PHONY: start

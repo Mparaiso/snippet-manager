@@ -1,15 +1,22 @@
 {% extends 'layout.twig' %}
 {% block content %}
-    <h3>{{snippet.title}}</h3> 
+    <h3>
+        {{snippet.title}} 
+        {% include 'include//favorite.twig'%}
+    </h3> 
     <p class="text-muted">
         <small>
-            {{snippet.created_at|date('Y-m-d')}} {{snippet.user.username}} <a href="/category/{{snippet.category.id}}/{{snippet.category.title}}">{{snippet.category.title}}</a>
+            {{snippet.created_at|date('Y-m-d')}} <a href="/category/{{snippet.category.id}}/{{snippet.category.title}}">{{snippet.category.title}}</a> , by <a href="/user/{{snippet.user.id}}">{{snippet.user.username}}</a> 
         </small>
     </p>
     <p>{{snippet.description}}</p>
     <pre>{{snippet.content}}
-
 </pre>
+{#
+<pre>
+    {{snippet|json(4)}}
+</pre>
+#}
 {% endblock %}
 {% block scripts %}
     {{parent()}}
