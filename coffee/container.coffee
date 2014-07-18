@@ -89,6 +89,7 @@ container.set 'Category',container.share (container)->
     Category.hasMany(container.Snippet)
     container.Snippet.belongsTo(Category)
     return Category
+### user data access object ###
 container.set 'User', container.share (c)->
     User = c.sequelize.define('User',{
         username:Sequelize.STRING(100)
@@ -112,7 +113,11 @@ container.set 'User', container.share (c)->
     c.Role.hasMany(User,{through:'users_roles'})
     User.hasMany(c.Snippet)
     c.Snippet.belongsTo(User)
+
+    User.hasMany(c.UserPermission)
+    c.UserPermission.belongsTo(User)
     return User
+### user role data access object ###
 container.set 'Role',container.share (c)->
     Role = c.sequelize.define('Role',{
         name:Sequelize.STRING,
@@ -122,7 +127,30 @@ container.set 'Role',container.share (c)->
         underscored:true,
         tableName:'roles'
     })
+    Role.hasMany(c.RolePermission)
+    c.RolePermission.belongsTo(Role)
     return Role
+### role permissions DAO ###
+container.set 'RolePermission',container.share (c)->
+    RolePermission = c.sequelize.define('RolePermission',{
+        permission_name:Sequelize.STRING(100)
+        permission_type:Sequelize.INTEGER(1)
+    },{
+        timestamps:false,
+        underscored:true,
+        tableName:'role_permissions'
+    })
+### user permissions DAO ###
+container.set 'UserPermission',container.share (c)->
+    UserPermission = c.sequelize.define('UserPermisson',{
+        permission_name:Sequelize.STRING(100)
+        permission_type:Sequelize.INTEGER(1)
+        user_id:Sequelize.INTEGER
+    },{
+        timestamps:false,
+        underscored:true,
+        tableName:'user_permissions'
+    })
 container.set 'SnippetService',container.share (container)->
     {
         new:(data)->
@@ -284,7 +312,7 @@ container.set 'forms',container.share (c)->
         .add('title','text',{validators:[c.form.validation.Required()],attributes:{class:'form-control'}})
         .add('description','textarea',{validators:[c.form.validation.Required()],attributes:{maxlength:255,rows:3,class:'form-control'}})
         .add('category_id','select',{label:'Language',choices:categories.map((cat)->{key:cat.title,value:cat.id}),validators:[c.form.validation.Required()],attributes:{class:'form-control'}})
-        .add('content','textarea',{validators:[c.form.validation.Required()],attributes:{rows:10,class:'form-control'}})
+        .add('content','textarea',{validators:[c.form.validation.Required()],attributes:{spellcheck:false,rows:10,class:'form-control'}})
     return forms
 container.set 'middlewares',container.share (c)->
     mustBeAuthenticated:class mustBeAuthenticated
@@ -327,9 +355,7 @@ container.set "passport" , container.share (container)->
                 switch
                     when user and UserService.validPassword(user.password,password)
                         ### register user in acl ###
-                        container.acl.get()
-                        .then (acl)-> acl.addUserRoles(user.id,_.pluck(user.roles,'id'))
-                        .then -> user
+                        user
                     else
                         req.flash('danger',"Invalid credentials")
                         return false

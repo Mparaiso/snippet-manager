@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "Snipped,manage your snippets online",
   "keywords": [
-    "OpenShift",
+    "snippet",
     "Node.js",
     "application",
-    "openshift"
+    "code"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "mparaiso",
+    "email": "mparaiso@online.fr",
     "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",
@@ -37,10 +37,11 @@
     "bcrypt-nodejs": "0.0.x",
     "sequelize": "~1.7.9",
     "less-middleware": "~1.0.3",
-    "mpm.form":"~0.0.6",
-    "connect-redis":"~1.4.7",
-    "redis":"~0.11.0",
-    "acl":"~0.4.2"
+    "mpm.form": "~0.0.6",
+    "connect-redis": "~1.4.7",
+    "redis": "~0.11.0",
+    "acl": "~0.4.2",
+    "virgen-acl": "0.0.20"
   },
   "devDependencies": {
     "coffee-script": "~1.x",
