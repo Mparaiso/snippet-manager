@@ -2,6 +2,7 @@
 # Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
 # Snipped , manage your snippets online
 ###
+### IoC container ###
 Pimple = require "pimple"
 express = require "express"
 mysql = require "mysql"
@@ -11,13 +12,13 @@ swig = require "swig"
 slug = require "slug"
 _ = require "lodash"
 util = require "util"
-bcrypt = require "bcrypt-nodejs" 
+bcrypt = require "bcrypt-nodejs"
 Sequelize  = require "sequelize"
 flash = require "connect-flash"
 redis = require 'redis'
 RedisStore = require('connect-redis')(express)
 container = new Pimple
-    debug:if process.env.NODE_ENV is "production" then false else true,
+    debug:false#if process.env.NODE_ENV is "production" then false else true,
     secret:"Secret sentence"
     ip:process.env.OPENSHIFT_NODEJS_IP||"127.0.0.1",
     port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
@@ -30,39 +31,34 @@ container = new Pimple
     redis:{
         port:process.env.SNIPPED_REDIS_PORT,
         host:process.env.SNIPPED_REDIS_HOST,
-        debug_mode:if process.env.NODE_ENV is "production" then false else true,
+        debug_mode:false #if process.env.NODE_ENV is "production" then false else true,
         password:process.env.SNIPPED_REDIS_PASSWORD
     },
     session:{
         ttl:1000*60*60*24
         name:"snipped"
         secret:"my secret session sentence"
+    },
+    elasticSearch:{
+        url:process.env.SNIPPED_ELASTIC_SEARCH_URL
     }
     name:"snipped"
 container.set 'ExpressionBuilder',-> ExpressionBuilder
 container.set 'redisClient',container.share (c)->
-    redis.debug_mode=c.debug
     redis.createClient(c.redis.port,c.redis.host,{auth_pass:c.redis.password})
 container.set 'locals',
     title:"Snipped",
     subtitle:"manage your snippets online",
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
-container.set 'session-middleware',container.share (c)->
-    if c.redis.host and c.redis.port
-        return express.session
-            ttl:c.session.ttl,
-            name:c.session.name,
-            secret:c.session.secret,
-            store:new RedisStore
-                client:c.redisClient
-    else
-        express.session(secret:c.secret,name:c.name)
+container.set 'sessionMiddleware',container.share (c)->
+    c.middlewares.redisSession()
 container.set 'sequelize', container.share (container)->
     sequelize = new Sequelize(container.db.database,container.db.user,container.db.password,{
         host:container.db.host
         logging: if container.debug is true then console.log else false
         dialect:"mysql"
+        #pool:if not container.debug then {maxConnections:8,maxIdleTime:30}
     })
 container.set 'Snippet',container.share (container)->
     Snippet = container.sequelize.define("Snippet",{
@@ -75,7 +71,13 @@ container.set 'Snippet',container.share (container)->
         tags:Sequelize.STRING,
     },{
         underscored: true,
-        tableName:"snippets"
+        tableName:"snippets",
+        instanceMethods:{
+            getResourceId:->
+                "snippet"
+            toString:->
+                @title
+        }
     })
 container.set 'Category',container.share (container)-> 
     Category=container.sequelize.define('Category',{
@@ -84,7 +86,11 @@ container.set 'Category',container.share (container)->
     },{
         timestamps:false,
         underscored: true,
-        tableName:"categories"
+        tableName:"categories",
+        instanceMethods:{
+            toString:->
+                @title
+        }
     })
     Category.hasMany(container.Snippet)
     container.Snippet.belongsTo(Category)
@@ -95,6 +101,7 @@ container.set 'User', container.share (c)->
         username:Sequelize.STRING(100)
         email:Sequelize.STRING(100)
         password:Sequelize.STRING(100)
+        role_id:Sequelize.INTEGER
     },{
         timestamps:false,
         underscored: true,
@@ -105,51 +112,38 @@ container.set 'User', container.share (c)->
             hasFavoriteSync:(favorite)-> this.favorites.some (f)->f.id is favorite.id
             toString:->
                 this.username
+            getRoleId:->
+                this.role.name
         }
     })
     User.hasMany(c.Snippet,{as:"Favorites",through:'favorites'})
     c.Snippet.hasMany(User,{as:"Fans",through:'favorites'})
-    User.hasMany(c.Role,{through:'users_roles'})
-    c.Role.hasMany(User,{through:'users_roles'})
+    c.Role.hasMany(User)
+    User.belongsTo(c.Role)
     User.hasMany(c.Snippet)
     c.Snippet.belongsTo(User)
-
-    User.hasMany(c.UserPermission)
-    c.UserPermission.belongsTo(User)
     return User
+container.set 'CategoryWithSnippetCount',container.share (c)->
+    c.sequelize.define('CategoryWithSnippetCount',{
+        title:Sequelize.STRING,
+        snippet_count:Sequelize.INTEGER,
+    },{
+        tableName:'categories_with_snippet_count',
+        underscored:true,
+        timestamps:false
+    })
 ### user role data access object ###
 container.set 'Role',container.share (c)->
     Role = c.sequelize.define('Role',{
-        name:Sequelize.STRING,
-        label:Sequelize.STRING(50)
+        name:Sequelize.STRING
     },{
         timestamps:false,
         underscored:true,
-        tableName:'roles'
-    })
-    Role.hasMany(c.RolePermission)
-    c.RolePermission.belongsTo(Role)
-    return Role
-### role permissions DAO ###
-container.set 'RolePermission',container.share (c)->
-    RolePermission = c.sequelize.define('RolePermission',{
-        permission_name:Sequelize.STRING(100)
-        permission_type:Sequelize.INTEGER(1)
-    },{
-        timestamps:false,
-        underscored:true,
-        tableName:'role_permissions'
-    })
-### user permissions DAO ###
-container.set 'UserPermission',container.share (c)->
-    UserPermission = c.sequelize.define('UserPermisson',{
-        permission_name:Sequelize.STRING(100)
-        permission_type:Sequelize.INTEGER(1)
-        user_id:Sequelize.INTEGER
-    },{
-        timestamps:false,
-        underscored:true,
-        tableName:'user_permissions'
+        tableName:'roles',
+        instanceMethods:{
+            toString:->
+                @name
+        }
     })
 container.set 'SnippetService',container.share (container)->
     {
@@ -166,6 +160,8 @@ container.set 'CategoryService',container.share (c)->
     {
         findAll:container.Category.findAll.bind(c.Category)
         findById:c.Category.find.bind(c.Category)
+        findByIdWithSnippets:(id)->
+            c.Category.find({where:{id:id},include:[{model:c.Snippet,include:[c.Category,c.User]}]})
     }
 container.set 'UserService',container.share (c)->
     {
@@ -192,12 +188,25 @@ container.set 'UserService',container.share (c)->
                     if foundUser.username is user.username then throw "That username is already taken"
             .then => user.password = @generateHash(user.password) ; user.save()
     }
+container.set 'SearchService',container.share (c)->
+    {
+        indexSnippet:(snippet)->
+        search:(query)->
+    }
 container.set 'IndexController',container.share (c)->
     {
         index:(req,res,next)->
             c.SnippetService.findAll()
             .then((snippets)->res.render('index',{snippets,route:'home'}))
             .catch((err)->next(err))
+        readSnippet:(req,res,next)->
+            c.SnippetService.findById(req.params.snippetId)
+                .then (snippet)-> if snippet then res.render('snippet',{snippet,category:snippet.category}) else res.send(404) if not snippet
+            .catch (err)->next(err)
+        readCategory:(req,res,next)->
+            c.CategoryService.findByIdWithSnippets(req.params.categoryId)
+            .spread (category)-> res.render('category',{snippets:category.snippets,category})
+            .catch (err)-> next(err)
     }
 container.set 'UserController',container.share (c)->
     {
@@ -216,8 +225,7 @@ container.set 'UserController',container.share (c)->
             .then (categories)-> [categories,req.user.getSnippets({where:{id:req.params.snippetId}})]
             .spread (categories,snippets)->
                 snippet=snippets[0]
-                form = c.forms.createSnippetForm(categories)
-                form.setModel(snippet)
+                form = c.forms.createSnippetForm(categories).setModel(snippet)
                 if req.method is "POST"
                     form.bind(req.body)
                     if form.validateSync()
@@ -252,14 +260,15 @@ container.set 'UserController',container.share (c)->
                 res.render('profile/snippet-list',{pageTitle:'Your favorites',snippets})
             .catch (err)-> next(err)
         profileSnippetFavoriteToggle:(req,res,next)->
-            snippet=res.locals.snippet
-            q().then -> 
-                if req.user.hasFavoriteSync(snippet)
+            c.SnippetService.findById(req.params.snippetId)
+            .then (snippet)->
+                if not snippet then res.send(404,"snippet with id #{req.params.snippetId} not found")
+                else if req.user.hasFavoriteSync(snippet)
                     req.user.removeFavorite(snippet)
                 else
                     req.user.addFavorite(snippet)
             .then ->
-                res.redirect('/snippet/'+snippet.id)
+                res.redirect('/snippet/'+req.params.snippetId)
             .catch (err)-> next(err)
         signOut:(req,res)->
             req.logout() 
@@ -282,16 +291,36 @@ container.set 'UserController',container.share (c)->
             res.render('join',{route:'join',form:registrationForm})
     }
 container.set 'acl',container.share (c)->
-    roles =
-        user:2,
-        administrator:1
-    Acl = require 'acl'
-    acl = new Acl(new Acl.redisBackend(c.redisClient,"acl"))
-    {
-        get:->
-            acl.allow([roles.user],'snippet',['create','read','update','delete'])
-            .then -> acl
-    }
+    Acl = require('virgen-acl').Acl
+    acl = new Acl
+    ### set up roles ###
+    acl.addRole("member")
+    acl.addRole('administrator','member')
+    # set up resource
+    acl.addResource('snippet')
+    acl.addResource('route')
+    acl.deny()
+    acl.allow('administrator')
+    acl.allow('member','snippet',['create','update','delete'])
+    acl.allow(null,'snippet',['list','read'])
+    acl.allow('member','route',['/profile',
+        '/profile/snippet',
+        '/profile/signout',
+        '/profile/favorite',
+        '/profile/snippet/create',
+        '/profile/snippet/:snippetId/update',
+        '/profile/snippet/:snippetId/delete',
+        '/profile/snippet/:snippetId/favorite'
+    ])
+    acl.allow(null,'route',['/','/*','/snippet',
+        '/snippet/:snippetId/:snippetTitle?',
+        '/category/:categoryId/:categoryTitle?',
+        '/join',
+        '/signin'
+    ])
+    acl.deny('member','route',['/signin','/join'])
+    acl.pquery = -> q.ninvoke(acl,'query',arguments...)
+    return acl
 container.set 'swig', container.share ->
     swig.setDefaults(cache:if container.debug then false else "memory")
     swig.setFilter('slug',slug)
@@ -314,22 +343,55 @@ container.set 'forms',container.share (c)->
         .add('category_id','select',{label:'Language',choices:categories.map((cat)->{key:cat.title,value:cat.id}),validators:[c.form.validation.Required()],attributes:{class:'form-control'}})
         .add('content','textarea',{validators:[c.form.validation.Required()],attributes:{spellcheck:false,rows:10,class:'form-control'}})
     return forms
+   
 container.set 'middlewares',container.share (c)->
-    mustBeAuthenticated:class mustBeAuthenticated
-        constructor:(req,res,next)->
-            if req.isAuthenticated() 
-                next()
-            else res.redirect('/signin')
-    mustBeAnonymous:class mustBeAnonymous
-        constructor:(req,res,next)->
-            if req.isAuthenticated()
-                res.redirect('/profile')
-            else next()
+    aclQueryCallbackForMiddlewares =  (err,isAllowed)->
+        if isAllowed is true
+            next()
+        else if err then next(err) else res.send(401)
+
+    inMemorySession:->
+        express.session(secret:c.secret,name:c.name)
+
+    redisSession:->
+         express.session
+            ttl:c.session.ttl,
+            name:c.session.name,
+            secret:c.session.secret,
+            store:new RedisStore
+                client:c.redisClient
+
+    queryAcl:(resource,action)->
+        (req,res,next)->
+            c.acl.query (req.isAuthenticated() and req.user),resource,action,aclQueryCallbackForMiddleWares   
+
+    ### signin user ###
+    signIn:(successRedirect='/profile',failureRedirect='/signin',failureFlash=true)->
+        c.passport.authenticate 'local-login',
+            successRedirect
+            failureRedirect
+            failureFlash
+
+    ### creates a middleware that uses virgen-acl , passport, and route resource to decide url access control ###
+    firewall:(acl,strict=true)->
+        routes=undefined
+        findRoute = _.memoize((url)->_(routes).find((route)->route.regexp.test(url)))
+        return (req,res,next)->
+                routes?= _(req.app.routes).values().flatten(true).value()
+                route = findRoute(req.url)
+                if route 
+                    return acl.query(req.isAuthenticated() and req.user?.getRoleId(),'route',route.path,(err,isAllowed)->
+                        if err then next(err)
+                        else if not isAllowed then res.send(401,"user #{req.user} with role #{req.user?.getRoleId()} is not allowed on route #{route.path}")
+                        else next()
+                    )
+                else if strict then res.send(404,'route not found with strict firewall') else next()
+
 container.set 'params',container.share (c)->
-    snippetId:(req,res,next,id)->   
+    snippetId:(req,res,next,id)->
         c.SnippetService.findById(id)
         .then (snippet)->
-            if snippet 
+            if snippet
                 res.locals.snippet = snippet
                 next()
             else throw "snippet with id #{id} not found"
@@ -363,6 +425,7 @@ container.set "passport" , container.share (container)->
             .then((user)->done(null,user))
     ))
     return passport
+
  container.set 'app',container.share (c)->
     app = express()
     ### static assets ###
@@ -373,7 +436,7 @@ container.set "passport" , container.share (container)->
     ### passport user management ###
     app.use(express.cookieParser(c.secret))
     ### session middleware ###
-    app.use(c['session-middleware'])
+    app.use(c.sessionMiddleware)
     app.use(flash())
     app.use(c.passport.initialize())
     app.use(c.passport.session())
@@ -386,38 +449,26 @@ container.set "passport" , container.share (container)->
     )
     app.engine('twig',c.swig.renderFile)
     app.set('view engine','twig')
-
+    
     app.use (req,res,next)->
-        if req.isAuthenticated()
-            res.locals.user = req.user
-            res.locals.isAuthenticated = true
-        for key,value of c.locals
-            res.locals[key]=value
+        # add c.locals to res.locals
+        _.defaults res.locals,c.locals
         res.locals.flash = req.flash()
         next()
 
-    ### parametric middlewares ###
-    app.param "snippetId",c.params.snippetId
-    app.param "categoryId",c.params.categoryId
-
-    app.get '/snippet/:snippetId/:snippetTitle?',(req,res,next)->
-        res.render('snippet')
-
-    app.get '/category/:categoryId/:categoryTitle?',(req,res,next)->
-        res.locals.category.getSnippets()
-        .then (snippets)-> res.render('category',{snippets})
-        .catch (err)-> next(err)
-
-    app.all  '/join',c.UserController.register
-    app.get  '/signin',[c.middlewares.mustBeAnonymous,c.UserController.signIn]
-    app.post '/signin', c.passport.authenticate('local-login',{
-             successRedirect:'/profile',
-             failureRedirect:'/signin',
-             failureFlash:true
-        })
+    app.use (req,res,next)->
+        # add user and isAuthenticated to locals if req.isAuthenticated()
+        if req.isAuthenticated()
+            res.locals.user = req.user
+            res.locals.isAuthenticated = true
+        else
+            res.locals.user= undefined
+            res.locals.isAuthenticated = false
+        next()
+    ### firewall ###
+    app.use c.middlewares.firewall(c.acl)
 
     ### subroute for profile ###
-    app.use  '/profile',c.middlewares.mustBeAuthenticated
     app.use  '/profile',((r,res,next)->res.locals.route="profile";next())
     app.get  '/profile',c.UserController.profileIndex
     app.all  '/profile/snippet/create',c.UserController.profileSnippetCreate
@@ -427,8 +478,23 @@ container.set "passport" , container.share (container)->
     app.get  '/profile/snippet',c.UserController.profileSnippet
     app.get  '/profile/favorite',c.UserController.profileFavorite
     app.get  '/profile/signout', c.UserController.signOut
-    app.all  '/',c.IndexController.index
     
+    ### public routes ###
+    app.get '/*',(req,res,next)->
+        #console.log('categoriesWithSnippetCount')
+        c.CategoryWithSnippetCount.findAll({limit:10})
+        .then (categories)-> 
+            #console.log("\ncategories\n",categories)
+            res.locals.categoriesWithSnippetCount = categories
+            next()
+        .catch (err)-> next(err)
+
+    app.get  '/snippet/:snippetId/:snippetTitle?',c.IndexController.readSnippet
+    app.get  '/category/:categoryId/:categoryTitle?',c.IndexController.readCategory
+    app.all  '/join'  , c.UserController.register
+    app.get  '/signin', c.UserController.signIn
+    app.post '/signin', c.middlewares.signIn()
+    app.get  '/', c.IndexController.index
     return app
    
 module.exports = container

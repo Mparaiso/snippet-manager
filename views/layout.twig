@@ -5,13 +5,12 @@
     <title>{{title}}</title>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700,900' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/snipped-icon.png"/>
     {% block head %}{% endblock %}
 </head>
 <body>
-     
     <main class="container container-narrow">
         <div class="header">
             <ul class="nav nav-pills pull-right">
@@ -39,6 +38,18 @@
                 {% endfor %}
                 </ul>
             {%endif%}
+            {% if categoriesWithSnippetCount.length > 0  %}
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <ul class="nav navbar-nav">
+                        {% for _category in categoriesWithSnippetCount %}
+                            <li class="{%if category && (_category.id == category.id)%}active{%endif%}"><a href='/category/{{_category.id}}/{{_category.title}}'>{{ _category.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </nav>
+            <p>&nbsp;</p>
+            {% endif %}
             <div class="content">
             {% block content %}{% endblock %}
             </div>

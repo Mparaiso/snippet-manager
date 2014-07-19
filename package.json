@@ -40,11 +40,10 @@
     "mpm.form": "~0.0.6",
     "connect-redis": "~1.4.7",
     "redis": "~0.11.0",
-    "acl": "~0.4.2",
-    "virgen-acl": "0.0.20"
+    "virgen-acl": "0.0.20",
+    "request":"2.31.0"
   },
   "devDependencies": {
-    "coffee-script": "~1.x",
     "jasmine-node": "~2.0.0"
   },
   "bundleDependencies": [],

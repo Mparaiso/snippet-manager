@@ -10,4 +10,7 @@ deploy: views coffee commit
 start:
 	@clear
 	@supervisor  -e 'js|coffee'  --ignore node_modules server.js &
+cluster:
+	@clear
+	@supervisor  -e 'js|coffee'  --ignore node_modules cluster.js &
 .PHONY: start
