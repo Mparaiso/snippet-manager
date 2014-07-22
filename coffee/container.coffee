@@ -366,10 +366,12 @@ container.set 'middlewares',container.share (c)->
 
     ### signin user ###
     signIn:(successRedirect='/profile',failureRedirect='/signin',failureFlash=true)->
-        c.passport.authenticate 'local-login',
-            successRedirect,
-            failureRedirect,
-            failureFlash
+        c.passport.authenticate 'local-login',{
+                successRedirect,
+                failureRedirect,
+                failureFlash
+            }
+
 
     ### creates a middleware that uses virgen-acl , passport, and route resource to decide url access control ###
     firewall:(acl,strict=true)->
@@ -426,7 +428,7 @@ container.set "passport" , container.share (container)->
 container.set "events",container.share (container)->
     {
         ### Promise<snippet> , container , req , res, next ###
-        SNIPPET_AFTER_CREATE:'SNIPPET_AFTER_CREATE'
+        'SNIPPET_AFTER_CREATE'
     }
 container.set 'app',container.share (c)->
     app = express()
