@@ -452,7 +452,7 @@ container.set 'app',container.share (c)->
     )
     app.engine('twig',c.swig.renderFile)
     app.set('view engine','twig')
-    app.set('view cache',c.debug)
+    #app.set('view cache',c.debug)
     app.use (req,res,next)->
         # add c.locals to res.locals
         _.defaults res.locals,c.locals
