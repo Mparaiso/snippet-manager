@@ -343,12 +343,11 @@ container.set 'forms',container.share (c)->
         .add('category_id','select',{label:'Language',choices:categories.map((cat)->{key:cat.title,value:cat.id}),validators:[c.form.validation.Required()],attributes:{class:'form-control'}})
         .add('content','textarea',{validators:[c.form.validation.Required()],attributes:{spellcheck:false,rows:10,class:'form-control'}})
     return forms
-   
 container.set 'middlewares',container.share (c)->
-    aclQueryCallbackForMiddlewares =  (err,isAllowed)->
-        if isAllowed is true
-            next()
-        else if err then next(err) else res.send(401)
+    aclQueryCallbackForMiddlewares =(req,res,next)->
+        (err,isAllowed)->
+            if isAllowed is true then next()
+            else if err then next(err) else res.send(401)
 
     inMemorySession:->
         express.session(secret:c.secret,name:c.name)
@@ -363,13 +362,13 @@ container.set 'middlewares',container.share (c)->
 
     queryAcl:(resource,action)->
         (req,res,next)->
-            c.acl.query (req.isAuthenticated() and req.user),resource,action,aclQueryCallbackForMiddleWares   
+            c.acl.query (req.isAuthenticated() and req.user),resource,action,aclQueryCallbackForMiddleWares(req,res,next)
 
     ### signin user ###
     signIn:(successRedirect='/profile',failureRedirect='/signin',failureFlash=true)->
         c.passport.authenticate 'local-login',
-            successRedirect
-            failureRedirect
+            successRedirect,
+            failureRedirect,
             failureFlash
 
     ### creates a middleware that uses virgen-acl , passport, and route resource to decide url access control ###
@@ -386,7 +385,6 @@ container.set 'middlewares',container.share (c)->
                         else next()
                     )
                 else if strict then res.send(404,'route not found with strict firewall') else next()
-
 container.set 'params',container.share (c)->
     snippetId:(req,res,next,id)->
         c.SnippetService.findById(id)
@@ -425,8 +423,12 @@ container.set "passport" , container.share (container)->
             .then((user)->done(null,user))
     ))
     return passport
-
- container.set 'app',container.share (c)->
+container.set "events",container.share (container)->
+    {
+        ### Promise<snippet> , container , req , res, next ###
+        SNIPPET_AFTER_CREATE:'SNIPPET_AFTER_CREATE'
+    }
+container.set 'app',container.share (c)->
     app = express()
     ### static assets ###
     app.use(require('less-middleware')(path.join(__dirname,'..','public')))
@@ -496,7 +498,46 @@ container.set "passport" , container.share (container)->
     app.post '/signin', c.middlewares.signIn()
     app.get  '/', c.IndexController.index
     return app
-   
+container.set 'events',container.share (c)->
+    {
+        'BEFORE_SNIPPET_CREATE',
+        'AFTER_SNIPPET_CREATE',
+    }
+container.set 'qevent',container.share (c)->
+    new c.EventEmitter(q)
+
+container.set 'EventEmitter',container.share (c)->
+    class EventEmitter
+        constructor:(@_Q,@_eventList=[])->
+
+        on:(event, listener)->
+            if typeof event is "string"
+                event = { name: event, listener: listener ,priority:0}
+            @_eventList.push(event);
+
+        off:(eventName, listener)->
+            @_eventList.filter (el)-> if el.name == eventName and listener then el.listener == listener else true
+            .forEach (el)=> @_eventList.splice(@_eventList.indexOf(el), 1)
+            return this
+
+        emit:(eventName,args...)->
+            @_eventList.filter  (e)-> e.name is eventName;
+            .sort (a, b)-> b.priority - a.priority;
+            .reduce(
+                ((q, next)-> q.then(next.listener.bind(next.listener, args...))),
+                @_Q.when(true)
+            )
+
+        once:(eventName, listener)->
+            if typeof eventName != "string"
+                _evName = eventName.name
+            else
+                _evName = eventName
+            _listener = =>
+                @off(eventName, listener)
+                listener(arguments...)
+            @on(eventName, _listener)
+
+        has:(eventName, listener)->
+            @._eventList.some  (event)-> event.name == eventName && event.listener == listener
 module.exports = container
-
-
