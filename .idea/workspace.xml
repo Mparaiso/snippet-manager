@@ -22,10 +22,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="snippet-list.twig" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="snippet-list.twig" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/profile/snippet-list.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="16" selection-start="54" selection-end="54" vertical-scroll-proportion="0.027687296" vertical-offset="0" max-vertical-offset="614">
+            <state line="6" column="33" selection-start="233" selection-end="233" vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="544">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="snippet-create.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/profile/snippet-create.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="627">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="snippet-update.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/profile/snippet-update.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="170">
               <folding />
             </state>
           </provider>
@@ -49,9 +67,9 @@
         <option value="$PROJECT_DIR$/tests/qevent.test.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/coffee/container.coffee" />
-        <option value="$PROJECT_DIR$/views/profile/snippet-create.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-list.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-update.twig" />
+        <option value="$PROJECT_DIR$/views/profile/snippet-create.twig" />
       </list>
     </option>
   </component>
@@ -425,23 +443,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/profile/snippet-create.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="28" selection-start="89" selection-end="89" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/profile/snippet-update.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="28" selection-start="89" selection-end="89" vertical-scroll-proportion="0.054226477" vertical-offset="0" max-vertical-offset="627">
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="170">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/profile/snippet-list.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="16" selection-start="54" selection-end="54" vertical-scroll-proportion="0.027687296" vertical-offset="0" max-vertical-offset="614">
+        <state line="6" column="33" selection-start="233" selection-end="233" vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile/snippet-create.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="627">
           <folding />
         </state>
       </provider>

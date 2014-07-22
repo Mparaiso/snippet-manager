@@ -1,5 +1,5 @@
 {# views/profile/snippet-list.twig #}
-{% extends '..//profile.twig' %}
+{% extends './../profile.twig' %}
 {% block profile_content %}
     <h3 class="no-top">{{pageTitle}}</h3>
     {% if snippets.length >0 %}
@@ -7,7 +7,7 @@
     {% for snippet in snippets %}
 
             <div class="col-md-6">
-                {%include "..\\include\\snippet-row.twig"%}
+                {%include "./../include/snippet-row.twig"%}
                 {% if user and snippet.user_id == user.id %}
                     <div>
                         <a href="/profile/snippet/{{snippet.id}}/update">edit</a> | 
