@@ -154,10 +154,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="makefile" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="makefile" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/makefile">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="27" selection-start="204" selection-end="204" vertical-scroll-proportion="0.23111783" vertical-offset="0" max-vertical-offset="662">
+            <state line="9" column="27" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
               <folding />
             </state>
           </provider>
@@ -174,10 +174,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="package.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="25" selection-start="538" selection-end="538" vertical-scroll-proportion="-0.0" vertical-offset="357" max-vertical-offset="1054">
+            <state line="20" column="14" selection-start="454" selection-end="454" vertical-scroll-proportion="0.30016053" vertical-offset="153" max-vertical-offset="1054">
               <folding />
             </state>
           </provider>
@@ -230,12 +230,12 @@
         <option value="$PROJECT_DIR$/views/profile/snippet-list.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-update.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-create.twig" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/cluster.js" />
         <option value="$PROJECT_DIR$/views/layout.twig" />
         <option value="$PROJECT_DIR$/coffee/container.coffee" />
         <option value="$PROJECT_DIR$/makefile" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -480,13 +480,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="25" selection-start="538" selection-end="538" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="1054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/layout.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="49" selection-start="1040" selection-end="1040" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="1173">
@@ -626,7 +619,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="27" selection-start="204" selection-end="204" vertical-scroll-proportion="0.23111783" vertical-offset="0" max-vertical-offset="662">
+        <state line="9" column="27" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="14" selection-start="454" selection-end="454" vertical-scroll-proportion="0.30016053" vertical-offset="153" max-vertical-offset="1054">
           <folding />
         </state>
       </provider>
