@@ -48,7 +48,7 @@
   },
   "bundleDependencies": [],
   "private": true,
-  "main": "cluster.js",
+  "main": "server.js",
   "scripts": {
     "test": "node ./node_modules/jasmine-node/bin/jasmine-node --matchAll tests",
     "ct": "node ./node_modules/jasmine-node/bin/jasmine-node --coffee --verbose --matchAll --watchFolders ./coffee --autoTest tests"
