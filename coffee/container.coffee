@@ -53,7 +53,7 @@ container.set 'locals',
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
 container.set 'sessionMiddleware',container.share (c)->
-    session = if c.debug then c.middlewares.redisSession() else c.middlewares.inMemorySession()
+    session = c.middlewares.redisSession()
     return session
 container.set 'sequelize', container.share (container)->
     sequelize = new Sequelize(container.db.database,container.db.user,container.db.password,{
