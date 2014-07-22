@@ -1,4 +1,4 @@
-/*jslint eqeq:true,node:true,es5:true,white:true,plusplus:true,nomen:true,unparam:true,devel:true,regexp:true */
+/*jslint eqeq:true,node:true,white:true,plusplus:true,nomen:true,unparam:true,devel:true,regexp:true */
 /* parrallel server */
 "use strict";
 var cluster = require('cluster');
@@ -14,8 +14,15 @@ if (cluster.isMaster){
     console.log('worker ' + worker.process.pid + ' died');
   });
 }else{
-http.createServer(container.app).listen(container.port,container.ip,function  () {
-    console.log('listening on %s:%s',container.ip,container.port);
-});
+    if(process.env.IS_HEROKU){
+        http.createServer(container.app).listen(container.port,function  () {
+            console.log('listening on port %s',container.port);
+        });
+    }else{
+        http.createServer(container.app).listen(container.port,container.ip,function  () {
+            console.log('listening on %s:%s',container.ip,container.port);
+        });
+    }
+
 }
 
