@@ -22,6 +22,7 @@ container = new Pimple
     secret:"Secret sentence"
     ip:process.env.OPENSHIFT_NODEJS_IP||"127.0.0.1",
     port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
+    google_analytics_id:"",
     db:{
         host:process.env.SNIPPED_DBHOST,
         user:process.env.SNIPPED_DBUSER,
@@ -59,6 +60,8 @@ container.set 'sequelize', container.share (container)->
         host:container.db.host
         logging: if container.debug is true then console.log else false
         dialect:"mysql"
+        syncOnAssociation:false,
+        pool: { maxConnections: 2, maxIdleTime: 30},
     })
 container.set 'Snippet',container.share (container)->
     Snippet = container.sequelize.define("Snippet",{
