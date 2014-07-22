@@ -58,7 +58,6 @@ container.set 'sequelize', container.share (container)->
         host:container.db.host
         logging: if container.debug is true then console.log else false
         dialect:"mysql"
-        #pool:if not container.debug then {maxConnections:8,maxIdleTime:30}
     })
 container.set 'Snippet',container.share (container)->
     Snippet = container.sequelize.define("Snippet",{
@@ -470,7 +469,7 @@ container.set 'app',container.share (c)->
             res.locals.isAuthenticated = false
         next()
     ### firewall ###
-    app.use c.middlewares.firewall(c.acl)
+    #app.use c.middlewares.firewall(c.acl)
 
     ### subroute for profile ###
     app.use  '/profile',((r,res,next)->res.locals.route="profile";next())
