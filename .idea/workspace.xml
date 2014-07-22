@@ -22,139 +22,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="container.coffee" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
+      <file leaf-file-name="snippet-list.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/profile/snippet-list.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="371" column="28" selection-start="15462" selection-end="15462" vertical-scroll-proportion="0.41626015" vertical-offset="1053" max-vertical-offset="1785">
-              <folding>
-                <element signature="n#!!doc" expanded="false" />
-                <element signature="e#120#141#0" expanded="false" />
-                <element signature="e#541#1418#1" expanded="false" />
-                <element signature="e#776#958#0" expanded="false" />
-                <element signature="e#970#1207#0" expanded="false" />
-                <element signature="e#1221#1321#0" expanded="false" />
-                <element signature="e#1341#1399#0" expanded="false" />
-                <element signature="e#1631#1732#0" expanded="false" />
-                <element signature="e#1945#2244#0" expanded="false" />
-                <element signature="e#2033#2243#0" expanded="false" />
-                <element signature="e#2303#2805#0" expanded="false" />
-                <element signature="e#2350#2601#0" expanded="false" />
-                <element signature="e#2602#2804#0" expanded="false" />
-                <element signature="e#2685#2798#0" expanded="false" />
-                <element signature="e#2866#3268#0" expanded="false" />
-                <element signature="e#2913#2989#0" expanded="false" />
-                <element signature="e#2990#3165#0" expanded="false" />
-                <element signature="e#3101#3159#0" expanded="false" />
-                <element signature="e#3269#3300#0" expanded="false" />
-                <element signature="e#3349#4287#0" expanded="false" />
-                <element signature="e#3382#3537#0" expanded="false" />
-                <element signature="e#3538#4035#0" expanded="false" />
-                <element signature="e#3644#4029#0" expanded="false" />
-                <element signature="e#4355#4592#0" expanded="false" />
-                <element signature="e#4401#4481#0" expanded="false" />
-                <element signature="e#4482#4591#0" expanded="false" />
-                <element signature="e#4593#4629#0" expanded="false" />
-                <element signature="e#4677#4917#0" expanded="false" />
-                <element signature="e#4710#4747#0" expanded="false" />
-                <element signature="e#4748#4916#0" expanded="false" />
-                <element signature="e#4853#4910#0" expanded="false" />
-                <element signature="e#4983#5348#2" expanded="false" />
-                <element signature="e#5407#5661#2" expanded="false" />
-                <element signature="e#5716#6824#2" expanded="false" />
-                <element signature="e#6431#6818#0" expanded="false" />
-                <element signature="e#6528#6738#0" expanded="false" />
-                <element signature="e#6562#6738#0" expanded="false" />
-                <element signature="e#6881#6946#2" expanded="false" />
-                <element signature="e#7005#7712#2" expanded="false" />
-                <element signature="e#7050#7188#0" expanded="false" />
-                <element signature="e#7238#7463#0" expanded="false" />
-                <element signature="e#7514#7706#0" expanded="false" />
-                <element signature="e#7770#11707#2" expanded="false" />
-                <element signature="e#7822#8032#0" expanded="false" />
-                <element signature="e#8091#8298#0" expanded="false" />
-                <element signature="e#8357#8998#0" expanded="false" />
-                <element signature="e#8547#8961#0" expanded="false" />
-                <element signature="e#8706#8893#0" expanded="false" />
-                <element signature="e#8793#8893#0" expanded="false" />
-                <element signature="e#9057#9663#0" expanded="false" />
-                <element signature="e#9134#9626#0" expanded="false" />
-                <element signature="e#9327#9566#0" expanded="false" />
-                <element signature="e#9414#9566#0" expanded="false" />
-                <element signature="e#9716#9951#0" expanded="false" />
-                <element signature="e#9787#9914#0" expanded="false" />
-                <element signature="e#10005#10239#0" expanded="false" />
-                <element signature="e#10076#10202#0" expanded="false" />
-                <element signature="e#10306#10788#0" expanded="false" />
-                <element signature="e#10400#10667#0" expanded="false" />
-                <element signature="e#10829#10872#0" expanded="false" />
-                <element signature="e#10917#11003#0" expanded="false" />
-                <element signature="e#11050#11701#0" expanded="false" />
-                <element signature="e#11237#11633#0" expanded="false" />
-                <element signature="e#11348#11633#0" expanded="false" />
-                <element signature="e#11754#12751#0" expanded="false" />
-                <element signature="e#11808#11828#0" expanded="false" />
-                <element signature="e#12165#12442#0" expanded="false" />
-                <element signature="e#12471#12628#0" expanded="false" />
-                <element signature="e#12797#12905#0" expanded="false" />
-                <element signature="e#12954#14501#0" expanded="false" />
-                <element signature="e#13009#13521#0" expanded="false" />
-                <element signature="e#13560#13833#0" expanded="false" />
-                <element signature="e#13885#14484#0" expanded="false" />
-                <element signature="e#14613#14733#0" expanded="false" />
-                <element signature="e#14643#14733#0" expanded="false" />
-                <element signature="e#14841#15027#0" expanded="false" />
-                <element signature="e#14869#15027#1" expanded="false" />
-                <element signature="e#15214#15233#0" expanded="false" />
-                <element signature="e#15483#15592#0" expanded="false" />
-                <element signature="e#15634#16395#0" expanded="false" />
-                <element signature="e#15785#16395#0" expanded="false" />
-                <element signature="e#15932#16294#0" expanded="false" />
-                <element signature="e#16058#16272#0" expanded="false" />
-                <element signature="e#16445#17025#2" expanded="false" />
-                <element signature="e#16483#16719#0" expanded="false" />
-                <element signature="e#16551#16686#0" expanded="false" />
-                <element signature="e#16578#16629#0" expanded="false" />
-                <element signature="e#16763#17025#0" expanded="false" />
-                <element signature="e#16852#16991#0" expanded="false" />
-                <element signature="e#16880#16933#0" expanded="false" />
-                <element signature="e#17087#17999#0" expanded="false" />
-                <element signature="e#17518#17972#0" expanded="false" />
-                <element signature="e#17592#17892#0" expanded="false" />
-                <element signature="e#17707#17735#0" expanded="false" />
-                <element signature="e#17814#17892#0" expanded="false" />
-                <element signature="e#18057#18158#0" expanded="false" />
-                <element signature="e#18067#18121#0" expanded="false" />
-                <element signature="e#18205#20942#0" expanded="false" />
-                <element signature="e#18225#18246#0" expanded="false" />
-                <element signature="e#18407#18422#0" expanded="false" />
-                <element signature="e#18462#18494#0" expanded="false" />
-                <element signature="e#18543#18569#0" expanded="false" />
-                <element signature="e#19021#19105#0" expanded="false" />
-                <element signature="e#19218#19441#0" expanded="false" />
-                <element signature="e#19255#19327#0" expanded="false" />
-                <element signature="e#19353#19426#0" expanded="false" />
-                <element signature="e#19446#19462#0" expanded="false" />
-                <element signature="e#19510#19538#0" expanded="false" />
-                <element signature="e#20215#20236#0" expanded="false" />
-                <element signature="e#20330#20575#0" expanded="false" />
-                <element signature="e#20473#20542#0" expanded="false" />
-                <element signature="e#20992#21064#2" expanded="false" />
-                <element signature="e#21192#22432#0" expanded="false" />
-                <element signature="e#21219#22432#2" expanded="false" />
-                <element signature="e#21298#21433#0" expanded="false" />
-                <element signature="e#21483#21683#0" expanded="false" />
-                <element signature="e#21732#21978#0" expanded="false" />
-                <element signature="e#22029#22300#0" expanded="false" />
-                <element signature="e#22198#22262#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="authenticate.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/passport/lib/middleware/authenticate.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="193" column="0" selection-start="7436" selection-end="7436" vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="5882">
+            <state line="1" column="16" selection-start="54" selection-end="54" vertical-scroll-proportion="0.027687296" vertical-offset="0" max-vertical-offset="614">
               <folding />
             </state>
           </provider>
@@ -178,6 +49,9 @@
         <option value="$PROJECT_DIR$/tests/qevent.test.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/coffee/container.coffee" />
+        <option value="$PROJECT_DIR$/views/profile/snippet-create.twig" />
+        <option value="$PROJECT_DIR$/views/profile/snippet-list.twig" />
+        <option value="$PROJECT_DIR$/views/profile/snippet-update.twig" />
       </list>
     </option>
   </component>
@@ -246,6 +120,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="profile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -394,7 +300,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="371" column="28" selection-start="15462" selection-end="15462" vertical-scroll-proportion="0.41626015" vertical-offset="1053" max-vertical-offset="1785">
+        <state line="371" column="28" selection-start="15462" selection-end="15462" vertical-scroll-proportion="-10.24" vertical-offset="1053" max-vertical-offset="1785">
           <folding>
             <element signature="n#!!doc" expanded="false" />
             <element signature="e#120#141#0" expanded="false" />
@@ -516,6 +422,27 @@
             <element signature="e#22029#22300#0" expanded="false" />
             <element signature="e#22198#22262#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile/snippet-create.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="28" selection-start="89" selection-end="89" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile/snippet-update.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="28" selection-start="89" selection-end="89" vertical-scroll-proportion="0.054226477" vertical-offset="0" max-vertical-offset="627">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile/snippet-list.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="16" selection-start="54" selection-end="54" vertical-scroll-proportion="0.027687296" vertical-offset="0" max-vertical-offset="614">
+          <folding />
         </state>
       </provider>
     </entry>
