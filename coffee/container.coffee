@@ -12,7 +12,7 @@ swig = require "swig"
 slug = require "slug"
 _ = require "lodash"
 util = require "util"
-bcrypt = require "bcrypt-nodejs"
+bcrypt = require "bcrypt-node_js"
 Sequelize  = require "sequelize"
 flash = require "connect-flash"
 redis = require 'redis'
@@ -53,7 +53,7 @@ container.set 'locals',
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
 container.set 'sessionMiddleware',container.share (c)->
-    session = c.middlewares.redisSession()
+    session = if c.debug then c.middlewares.redisSession() else c.middleware.inMemorySession()
     return session
 container.set 'sequelize', container.share (container)->
     sequelize = new Sequelize(container.db.database,container.db.user,container.db.password,{
