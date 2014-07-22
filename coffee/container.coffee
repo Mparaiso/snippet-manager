@@ -18,7 +18,7 @@ flash = require "connect-flash"
 redis = require 'redis'
 RedisStore = require('connect-redis')(express)
 container = new Pimple
-    debug:false#if process.env.NODE_ENV is "production" then false else true,
+    debug:true#if process.env.NODE_ENV is "production" then false else true,
     secret:"Secret sentence"
     ip:process.env.OPENSHIFT_NODEJS_IP||"127.0.0.1",
     port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
@@ -469,7 +469,7 @@ container.set 'app',container.share (c)->
             res.locals.isAuthenticated = false
         next()
     ### firewall ###
-    #app.use c.middlewares.firewall(c.acl)
+    app.use c.middlewares.firewall(c.acl)
 
     ### subroute for profile ###
     app.use  '/profile',((r,res,next)->res.locals.route="profile";next())
