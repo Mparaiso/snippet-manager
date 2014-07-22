@@ -7,6 +7,8 @@ commit:
 	@git commit -am"$(message) `date`" | :
 deploy: views coffee commit
 	@git push origin master
+heroku: views coffee commit
+	@git push heroku master
 start:
 	@clear
 	@supervisor  -e 'js|coffee'  --ignore node_modules server.js &
