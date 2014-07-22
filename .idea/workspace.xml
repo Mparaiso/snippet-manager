@@ -22,10 +22,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="container.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="container.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="4" selection-start="541" selection-end="541" vertical-scroll-proportion="0.44530046" vertical-offset="0" max-vertical-offset="1275">
+            <state line="20" column="4" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="1275">
               <folding>
                 <element signature="n#!!doc" expanded="false" />
                 <element signature="e#120#141#0" expanded="false" />
@@ -181,7 +181,16 @@
       <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="18" selection-start="1142" selection-end="1142" vertical-scroll-proportion="-16.115385" vertical-offset="431" max-vertical-offset="1054">
+            <state line="21" column="25" selection-start="538" selection-end="538" vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="1054">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Procfile" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Procfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="0" selection-start="21" selection-end="21" vertical-scroll-proportion="0.025679758" vertical-offset="0" max-vertical-offset="662">
               <folding />
             </state>
           </provider>
@@ -206,8 +215,9 @@
         <option value="$PROJECT_DIR$/views/profile/snippet-list.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-update.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-create.twig" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/coffee/container.coffee" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/Procfile" />
       </list>
     </option>
   </component>
@@ -475,16 +485,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="18" selection-start="1142" selection-end="1142" vertical-scroll-proportion="-16.115385" vertical-offset="431" max-vertical-offset="1054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="4" selection-start="541" selection-end="541" vertical-scroll-proportion="0.44530046" vertical-offset="0" max-vertical-offset="1275">
+        <state line="20" column="4" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="1275">
           <folding>
             <element signature="n#!!doc" expanded="false" />
             <element signature="e#120#141#0" expanded="false" />
@@ -613,6 +616,20 @@
             <element signature="e#22084#22355#0" expanded="false" />
             <element signature="e#22253#22317#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="25" selection-start="538" selection-end="538" vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="21" selection-end="21" vertical-scroll-proportion="0.025679758" vertical-offset="0" max-vertical-offset="662">
+          <folding />
         </state>
       </provider>
     </entry>
