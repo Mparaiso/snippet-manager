@@ -22,52 +22,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="model.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/coffee/model.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="149" column="32" selection-start="6300" selection-end="6300" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-              <folding>
-                <element signature="n#!!doc" expanded="false" />
-                <element signature="e#240#533#0" expanded="false" />
-                <element signature="e#304#532#0" expanded="false" />
-                <element signature="e#615#898#0" expanded="false" />
-                <element signature="e#994#1127#0" expanded="false" />
-                <element signature="e#1367#1674#0" expanded="false" />
-                <element signature="e#1850#2776#0" expanded="false" />
-                <element signature="e#1889#1977#0" expanded="false" />
-                <element signature="e#1978#2677#0" expanded="false" />
-                <element signature="e#2105#2175#0" expanded="false" />
-                <element signature="e#2202#2667#0" expanded="false" />
-                <element signature="e#2281#2653#0" expanded="false" />
-                <element signature="e#2781#2812#0" expanded="false" />
-                <element signature="e#2853#5581#0" expanded="false" />
-                <element signature="e#2886#3061#0" expanded="false" />
-                <element signature="e#3062#5301#0" expanded="false" />
-                <element signature="e#3184#3951#0" expanded="false" />
-                <element signature="e#3634#3937#0" expanded="false" />
-                <element signature="e#3672#3915#0" expanded="false" />
-                <element signature="e#3978#5291#0" expanded="false" />
-                <element signature="e#4839#5277#0" expanded="false" />
-                <element signature="e#4956#5189#0" expanded="false" />
-                <element signature="e#5001#5189#0" expanded="false" />
-                <element signature="e#5641#5906#0" expanded="false" />
-                <element signature="e#5687#5779#0" expanded="false" />
-                <element signature="e#5780#5905#0" expanded="false" />
-                <element signature="e#5911#5947#0" expanded="false" />
-                <element signature="e#5987#6267#0" expanded="false" />
-                <element signature="e#6020#6065#0" expanded="false" />
-                <element signature="e#6066#6266#0" expanded="false" />
-                <element signature="e#6187#6256#0" expanded="false" />
-                <element signature="e#6313#6367#0" expanded="false" />
-                <marker date="1406159600525" expanded="true" signature="199:6367" placeholder="..." />
-                <marker date="1406159600525" expanded="false" signature="576:1806" placeholder="..." />
-                <marker date="1406159600525" expanded="false" signature="899:1805" placeholder="underscored: true..." />
-                <marker date="1406159600525" expanded="false" signature="1154:1795" placeholder="new:(data)-&gt;&#10;                    this.build(data)..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="controller.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coffee/controller.coffee">
           <provider selected="true" editor-type-id="text-editor">
@@ -205,15 +159,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sprints.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sprints.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sprints.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="61" selection-start="359" selection-end="359" vertical-scroll-proportion="0.24018839" vertical-offset="0" max-vertical-offset="637">
+            <state line="9" column="61" selection-start="359" selection-end="359" vertical-scroll-proportion="-6.12" vertical-offset="0" max-vertical-offset="255">
               <folding />
             </state>
           </provider>
           <provider editor-type-id="MarkdownPreviewEditor">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="deplist.txt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/trash/deplist.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="662">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -361,6 +324,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="trash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snipped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -434,12 +411,12 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="780" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2152502" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20413026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20413026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32683983" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -509,10 +486,10 @@
             <element signature="e#6066#6266#0" expanded="false" />
             <element signature="e#6187#6256#0" expanded="false" />
             <element signature="e#6313#6367#0" expanded="false" />
-            <marker date="1406159600525" expanded="true" signature="199:6367" placeholder="..." />
-            <marker date="1406159600525" expanded="false" signature="576:1806" placeholder="..." />
-            <marker date="1406159600525" expanded="false" signature="899:1805" placeholder="underscored: true..." />
-            <marker date="1406159600525" expanded="false" signature="1154:1795" placeholder="new:(data)-&gt;&#10;                    this.build(data)..." />
+            <marker date="1406159600525" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406159600525" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1406159600525" expanded="false" signature="-1:-1" placeholder="underscored: true..." />
+            <marker date="1406159600525" expanded="false" signature="-1:-1" placeholder="new:(data)-&gt;&#10;                    this.build(data)..." />
           </folding>
         </state>
       </provider>
@@ -801,10 +778,10 @@
             <element signature="e#6066#6266#0" expanded="false" />
             <element signature="e#6187#6256#0" expanded="false" />
             <element signature="e#6313#6367#0" expanded="false" />
-            <marker date="1406159600525" expanded="true" signature="199:6367" placeholder="..." />
-            <marker date="1406159600525" expanded="false" signature="576:1806" placeholder="..." />
-            <marker date="1406159600525" expanded="false" signature="899:1805" placeholder="underscored: true..." />
-            <marker date="1406159600525" expanded="false" signature="1154:1795" placeholder="new:(data)-&gt;&#10;                    this.build(data)..." />
+            <marker date="1406159600525" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406159600525" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1406159600525" expanded="false" signature="-1:-1" placeholder="underscored: true..." />
+            <marker date="1406159600525" expanded="false" signature="-1:-1" placeholder="new:(data)-&gt;&#10;                    this.build(data)..." />
           </folding>
         </state>
       </provider>
@@ -824,13 +801,6 @@
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/deplist.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="662">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
@@ -990,12 +960,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sprints.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="61" selection-start="359" selection-end="359" vertical-scroll-proportion="0.24018839" vertical-offset="0" max-vertical-offset="637">
+        <state line="9" column="61" selection-start="359" selection-end="359" vertical-scroll-proportion="-6.12" vertical-offset="0" max-vertical-offset="255">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trash/deplist.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="662">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
