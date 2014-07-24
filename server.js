@@ -4,9 +4,17 @@ var container = require('./coffee/container');
 var http = require('http');
 
 if(!module.parent){
-    http.createServer(container.app).listen(container.port,container.ip,function(){
-        console.log('listening on %s:%s',container.ip,container.port);
-    });
+    if(process.env.IS_HEROKU){
+        http.createServer(container.app).listen(container.port,function(){
+            console.log('listening on %s',container.port);
+        });
+
+    }else{
+        http.createServer(container.app).listen(container.port,container.ip,function(){
+            console.log('listening on %s:%s',container.ip,container.port);
+        });
+
+    }
 }else{
     module.exports = container;
 }
