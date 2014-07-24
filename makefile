@@ -13,8 +13,10 @@ push: commit
 	@git push origin master
 start:
 	@clear
-	@supervisor  -e 'js|coffee'  --ignore node_modules server.js &
+	@supervisor  -e 'js|coffee'  --ignore 'node_modules,trash,.openshift,.settings,.git,assets,public,views' server
+	.js &
 cluster:
 	@clear
-	@supervisor  -e 'js|coffee'  --ignore node_modules cluster.js &
+	@supervisor  -e 'js|coffee'  --ignore 'node_modules|trash|.openshift|.settings|.git|assets|public|views' cluster
+	.js &
 .PHONY: start

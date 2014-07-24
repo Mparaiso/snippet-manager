@@ -1,0 +1,13 @@
+<ul class="nav nav-pills pull-right">
+    <li class="{%if route == "home"%}active{%endif%}"><a href="/">Home</a></li>
+    {% if user and isAuthenticated %}
+        <li class="{%if route == "profile" %}active{%endif%}"><a href="/profile">Welcome back <strong>{{user.username}}</strong></a></li>
+        <li><a href="/profile/snippet/create">New snippet</a></li>
+        <li class="">
+            <a href="/profile/signout">Sign out</a>
+        </li>
+    {%else%}
+        <li class="{%if route == "signin"%}active{%endif%}"><a href="/signin">Signin</a></li>
+        <li class="{%if route == "join"%}active{%endif%}"><a href="/join">Join</a></li>
+    {%endif%}
+</ul>

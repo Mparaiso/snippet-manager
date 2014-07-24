@@ -92,24 +92,6 @@ container.set 'swig', container.share ->
     swig.setDefaults(cache:if container.debug then false else "memory")
     swig.setFilter('slug',slug)
     swig
-container.set 'forms',container.share (c)->
-    forms={}
-    forms.createRegistrationForm = ->
-        c.form.create('registration')
-        .add('username','text',{validators:[c.form.validation.Required(),c.form.validation.Length(5,100)],attributes:{class:'form-control',required:true}})
-        .add('email','email',{validators:[c.form.validation.Required(),c.form.validation.Length(6,100),c.form.validation.Email()],attributes:{class:'form-control'}})
-        .add('password','repeated',{validators:[c.form.validation.Required(),c.form.validation.Length(5,50)],attributes:{type:'password',class:'form-control'}})
-    forms.createSignInForm=->
-        c.form.create('signin')
-        .add('email','email',{attributes:{required:true,class:'form-control'},validators:[c.form.validation.Required()]})
-        .add('password','password',{attributes:{required:true,class:'form-control'},validators:[c.form.validation.Required()]})
-    forms.createSnippetForm=(categories)->
-        c.form.create('snippet')
-        .add('title','text',{validators:[c.form.validation.Required()],attributes:{class:'form-control'}})
-        .add('description','textarea',{validators:[c.form.validation.Required()],attributes:{maxlength:255,rows:3,class:'form-control'}})
-        .add('category_id','select',{label:'Language',choices:categories.map((cat)->{key:cat.title,value:cat.id}),validators:[c.form.validation.Required()],attributes:{class:'form-control'}})
-        .add('content','textarea',{validators:[c.form.validation.Required()],attributes:{spellcheck:false,rows:10,class:'form-control'}})
-    return forms
 ###
     middlewares
 ###
@@ -213,10 +195,9 @@ container.set "events",container.share (container)->
 container.set 'app',container.share (c)->
     app = express()
     ### static assets ###
-    app.use(require('less-middleware')(path.join(__dirname,'..','public')))
+    app.use('/css',require('less-middleware')(path.join(__dirname,'..','public','css')))
     app.use(express.static(path.join(__dirname,"..","public"),{maxAge:100000}))
     ### logging ###
-    app.use(express.logger('dev'))
     ### passport user management ###
     app.use(express.cookieParser(c.secret))
     ### session middleware ###
@@ -228,17 +209,21 @@ container.set 'app',container.share (c)->
     app.use(express.bodyParser())
     app.use(express.methodOverride())
     #
-    app.configure('developpment',->
-        app.use(express.errorHandler())
-    )
     app.engine('twig',c.swig.renderFile)
     app.set('view engine','twig')
-    #app.set('view cache',c.debug)
+
     app.use (req,res,next)->
         # add c.locals to res.locals
         _.defaults res.locals,c.locals
         res.locals.flash = req.flash()
         next()
+    ### errors ###
+    if c.debug
+        app.enable('verbose errors')
+        app.use(express.errorHandler())
+        app.use(express.logger('dev'))
+    else
+        app.disable('verbose errors')
 
     app.use (req,res,next)->
         # add user and isAuthenticated to locals if req.isAuthenticated()
@@ -251,6 +236,7 @@ container.set 'app',container.share (c)->
         next()
     ### firewall ###
     app.use c.middlewares.firewall(c.acl)
+
 
     ### subroute for profile ###
     app.use  '/profile',((r,res,next)->res.locals.route="profile";next())
@@ -268,7 +254,7 @@ container.set 'app',container.share (c)->
         c.CategoryWithSnippetCount.findAll({limit:10})
         .then (categories)-> 
             res.locals.categoriesWithSnippetCount = categories
-            next()
+            next('route')
         .catch next
 
     app.get  '/snippet/:snippetId/:snippetTitle?',c.IndexController.readSnippet
@@ -277,6 +263,13 @@ container.set 'app',container.share (c)->
     app.get  '/signin', c.UserController.signIn
     app.post '/signin', c.middlewares.signIn()
     app.get  '/', c.IndexController.index
+    app.all  '/*',(req,res,next)-> err  = new Error('not found') ; err.status=404 ; next(err)
+    # custom error page
+    if not c.debug then  app.use  c.ErrorController['500']
+
+
+
+
     return app
 container.set 'qevent',container.share (c)->
     qevent = new c.EventEmitter(c.q)
@@ -318,5 +311,6 @@ container.set 'EventEmitter',container.share (c)->
 container.register require('./model')
 container.register require('./controller')
 container.register require('./event')
+container.register require('./form')
 module.exports = container
 

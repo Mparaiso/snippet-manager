@@ -113,8 +113,8 @@ module.exports = (c)->
                     @findByEmailOrUsername(user.email,user.username)
                     .then (foundUser)->
                             if foundUser
-                                if foundUser.email is user.email then throw "That email is already taken"
-                                if foundUser.username is user.username then throw "That username is already taken"
+                                if foundUser.email is user.email then throw new Error("That email is already taken")
+                                if foundUser.username is user.username then throw new Error("That username is already taken")
                     .then => user.password = @generateHash(user.password) ; user.save()
             }
         })
