@@ -1,6 +1,8 @@
 Snipped
 =======
 
+[![Build Status](https://travis-ci.org/Mparaiso/snipped-nodejs.svg?branch=master)](https://travis-ci.org/Mparaiso/snipped-nodejs)
+
 author : mparaiso <mparaiso@online.fr>
 
 license: GPL
