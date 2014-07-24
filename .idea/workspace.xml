@@ -178,10 +178,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qevent.test.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="qevent.test.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/qevent.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="28" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.76888216" vertical-offset="341" max-vertical-offset="1003">
+            <state line="50" column="28" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="1003">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".travis.yml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="49" selection-end="49" vertical-scroll-proportion="0.10271903" vertical-offset="0" max-vertical-offset="662">
               <folding />
             </state>
           </provider>
@@ -231,6 +240,7 @@
         <option value="$PROJECT_DIR$/coffee/container.coffee" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/tests/qevent.test.js" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -922,7 +932,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/qevent.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="28" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.76888216" vertical-offset="341" max-vertical-offset="1003">
+        <state line="50" column="28" selection-start="1901" selection-end="1901" vertical-scroll-proportion="0.0" vertical-offset="341" max-vertical-offset="1003">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="49" selection-end="49" vertical-scroll-proportion="0.10271903" vertical-offset="0" max-vertical-offset="662">
           <folding />
         </state>
       </provider>
