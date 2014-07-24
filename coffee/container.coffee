@@ -24,6 +24,7 @@ RedisStore = require('connect-redis')(express)
 container = new Pimple
     debug:if process.env.NODE_ENV is "production" then false else true,
     secret:"Secret sentence"
+    isHeroku:process.env.IS_HEROKU
     ip:process.env.OPENSHIFT_NODEJS_IP||"127.0.0.1",
     port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
     google_analytics_id:"",
@@ -60,8 +61,7 @@ container.set 'locals',
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
 container.set 'sessionMiddleware',container.share (c)->
-    session = c.middlewares.inMemorySession()
-    return session
+    if c.isHeroku then c.middlewares.redisSession() else c.middlewares.inMemorySession()
 container.set 'acl',container.share (c)->
     Acl = require('virgen-acl').Acl
     acl = new Acl
