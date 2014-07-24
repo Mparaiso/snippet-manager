@@ -29,7 +29,6 @@ describe('qevent', function () {
             var callbacks = {
                 cb1: function (obj) {
                     obj.foo = "foo";
-                    throw 'foo';
                 },
                 cb2: function (obj) {
                     obj.bar = "bar";
