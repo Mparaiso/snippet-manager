@@ -21,10 +21,17 @@
                     <h1 class="text-info"><a href="/profile/favorite">{{favoriteCount||0}}</a></h1>
                     <div>Favorites</div>
                 </div>
-                <div class="col-md-12">
-                    <h3>email : {{user.email}}</h3>
-                    {#<h2>roles : {%for role in user.roles %} {{role.label}} {%endfor%}</h2>#}
-                </div>
+                <section class="col-md-12">
+                    <hr/>
+                    <h3>Your Latest snippets</h3>
+                        {%for snippet in latestSnippets %}
+                                {% include 'include/snippet-row.twig' %}
+                                <div>
+                                    <a href="/profile/snippet/{{ snippet.id }}/update">edit</a> |
+                                    <a href="/profile/snippet/{{snippet.id}}/delete">remove</a>
+                                </div>
+                        {%endfor%}
+                </section>
             </div> 
     {% endblock %}
 </section>

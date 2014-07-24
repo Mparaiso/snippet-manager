@@ -1,0 +1,6 @@
+    <ul class="pager">
+        <li class="previous {%if offset==0%}disabled{%endif%}"><a {%if offset==0%}disabled{%endif%} href="?&offset={{offset-1}}">Previous</a></li>
+        <li class="next {%if (item_count % item_per_page) != 0 || item_count == 0  %}disabled{%endif%}">
+            <a href="?&offset={{offset+1}}">Next</a>
+        </li>
+    </ul>

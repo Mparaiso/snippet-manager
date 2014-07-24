@@ -1,3 +1,13 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+Snipped
+=======
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+author : mparaiso <mparaiso@online.fr>
+
+license: GPL
+
+demo : https://snipped.herokuapp.com
+
+Manage your code snippets online with snipped
+
+powered by nodejs,express,mysql and redis
+
