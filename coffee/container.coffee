@@ -195,6 +195,7 @@ container.set "events",container.share (container)->
 container.set 'app',container.share (c)->
     app = express()
     ### static assets ###
+    app.disable 'x-powered-by'
     app.use('/css',require('less-middleware')(path.join(__dirname,'..','public','css')))
     app.use(express.static(path.join(__dirname,"..","public"),{maxAge:100000}))
     ### logging ###
