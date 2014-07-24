@@ -50,7 +50,7 @@
   "private": true,
   "main": "cluster.js",
   "scripts": {
-    "test": "node ./node_modules/jasmine-node/bin/jasmine-node --matchAll tests",
+    "test": "node ./node_modules/jasmine-node/bin/jasmine-node --matchAll tests --verbose",
     "ct": "node ./node_modules/jasmine-node/bin/jasmine-node --coffee --verbose --matchAll --watchFolders ./coffee --autoTest tests"
   }
 }

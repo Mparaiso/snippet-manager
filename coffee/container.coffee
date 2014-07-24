@@ -300,7 +300,7 @@ container.set 'EventEmitter',container.share (c)->
             .sort (a, b)-> b.priority - a.priority;
             .reduce(
                 ((q, next)-> q.then(next.listener.bind(next.listener, args...))),
-                @_Q.when(true)
+                @_Q()
             )
 
         once:(eventName, listener)->

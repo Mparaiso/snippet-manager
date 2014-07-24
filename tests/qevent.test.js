@@ -25,24 +25,26 @@ describe('qevent', function () {
         });
     });
     describe('#on', function () {
-        beforeEach(function () {
-            this.cb1 = function (obj) {
-                obj.foo = "foo";
-            };
-            this.cb2 = function (obj) {
-                obj.bar = "bar";
-            };
-            spyOn(this, 'cb1');
-            spyOn(this, 'cb2');
-        });
         it('should mutate obj', function (done) {
-            var baz = {};
-            this.qevent.on(this.event, this.cb1);
-            this.qevent.on(this.event, this.cb2);
+            var callbacks = {
+                cb1: function (obj) {
+                    obj.foo = "foo";
+                    throw 'foo';
+                },
+                cb2: function (obj) {
+                    obj.bar = "bar";
+                }
+            };
+
+            spyOn(callbacks,'cb1').and.callThrough();
+            spyOn(callbacks,'cb2').and.callThrough();
+            var baz = new Object();
+            this.qevent.on(this.event, callbacks.cb1);
+            this.qevent.on(this.event, callbacks.cb2);
             this.qevent.emit(this.event, baz)
                 .then(function () {
-                    expect(this.cb1).toHaveBeenCalledWith(baz);
-                    expect(this.cb2).toHaveBeenCalledWith(baz);
+                    expect(callbacks.cb1).toHaveBeenCalledWith(baz,undefined);
+                    expect(callbacks.cb2).toHaveBeenCalledWith(baz,undefined);
                     expect(baz.foo).toEqual('foo');
                     expect(baz.bar).toEqual('bar');
                 }.bind(this))
