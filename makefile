@@ -9,6 +9,8 @@ deploy: views coffee commit
 	@git push origin master
 heroku: views coffee commit
 	@git push heroku master
+push: commit
+	@git push origin master
 start:
 	@clear
 	@supervisor  -e 'js|coffee'  --ignore node_modules server.js &

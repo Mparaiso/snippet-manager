@@ -99,10 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="container.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="container.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="322" column="0" selection-start="12798" selection-end="12798" vertical-scroll-proportion="0.8890601" vertical-offset="324" max-vertical-offset="1003">
+            <state line="322" column="0" selection-start="12798" selection-end="12798" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="1003">
               <folding>
                 <element signature="n#!!doc" expanded="false" />
                 <element signature="e#120#141#0" expanded="false" />
@@ -183,6 +183,15 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="makefile" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="0" selection-start="443" selection-end="443" vertical-scroll-proportion="0.51359516" vertical-offset="0" max-vertical-offset="662">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
@@ -216,7 +225,6 @@
         <option value="$PROJECT_DIR$/views/profile/snippet-create.twig" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/cluster.js" />
-        <option value="$PROJECT_DIR$/makefile" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/views/profile.twig" />
         <option value="$PROJECT_DIR$/views/layout.twig" />
@@ -229,6 +237,7 @@
         <option value="$PROJECT_DIR$/coffee/container.coffee" />
         <option value="$PROJECT_DIR$/coffee/event.coffee" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/makefile" />
       </list>
     </option>
   </component>
@@ -630,11 +639,6 @@
         <state line="28" column="0" selection-start="879" selection-end="879" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="27" selection-start="204" selection-end="204" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="21" selection-start="685" selection-end="685" vertical-scroll-proportion="-20.26923" vertical-offset="0" max-vertical-offset="1054" />
@@ -807,7 +811,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="322" column="0" selection-start="12798" selection-end="12798" vertical-scroll-proportion="0.8890601" vertical-offset="324" max-vertical-offset="1003">
+        <state line="322" column="0" selection-start="12798" selection-end="12798" vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="1003">
           <folding>
             <element signature="n#!!doc" expanded="false" />
             <element signature="e#120#141#0" expanded="false" />
@@ -884,6 +888,13 @@
             <element signature="e#12247#12518#0" expanded="false" />
             <element signature="e#12416#12480#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="443" selection-end="443" vertical-scroll-proportion="0.51359516" vertical-offset="0" max-vertical-offset="662">
+          <folding />
         </state>
       </provider>
     </entry>
