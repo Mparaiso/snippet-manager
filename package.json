@@ -41,8 +41,7 @@
     "connect-redis": "~1.4.7",
     "redis": "~0.11.0",
     "virgen-acl": "0.0.20",
-    "request":"2.31.0",
-    "nodetime":"~0.8.15"
+    "request":"2.31.0"
   },
   "devDependencies": {
     "jasmine-node": "~2.0.0"
