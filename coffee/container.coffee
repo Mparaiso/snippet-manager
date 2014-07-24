@@ -7,6 +7,7 @@
 require('nodetime').profile({
     accountKey: 'ab8afef122f805f50737adfcd503ffd272a02c9d', 
     appName: 'snipped'
+)}
 Pimple = require "pimple"
 express = require "express"
 mysql = require "mysql"
