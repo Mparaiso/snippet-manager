@@ -120,6 +120,7 @@ module.exports=(c)->
                 else
                     res.status(500)
                     "Server error"
+            console.log(err)
             res.render('500.twig',{errorMessage})
     ###
         Admin actions
