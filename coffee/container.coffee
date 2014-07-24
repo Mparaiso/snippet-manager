@@ -201,7 +201,7 @@ container.set 'app',container.share (c)->
     app = express()
     ### static assets ###
     app.disable 'x-powered-by'
-    app.use('/css',require('less-middleware')(path.join(__dirname,'..','public','css')))
+    app.use('/css',require('less-middleware')(path.join(__dirname,'..','public','css'),{once:if c.debug then true else false}))
     app.use(express.static(path.join(__dirname,"..","public"),{maxAge:100000}))
     ### logging ###
     ### passport user management ###
@@ -230,6 +230,7 @@ container.set 'app',container.share (c)->
         app.use(express.logger('dev'))
     else
         app.disable('verbose errors')
+        app.disable('view cache')
 
     app.use (req,res,next)->
         # add user and isAuthenticated to locals if req.isAuthenticated()
