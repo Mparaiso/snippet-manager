@@ -61,7 +61,7 @@ container.set 'locals',
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
 container.set 'sessionMiddleware',container.share (c)->
-    if c.isHeroku then c.middlewares.redisSession() else c.middlewares.inMemorySession()
+    if not c.debug then c.middlewares.redisSession() else c.middlewares.inMemorySession()
 container.set 'acl',container.share (c)->
     Acl = require('virgen-acl').Acl
     acl = new Acl
