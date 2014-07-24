@@ -3,12 +3,12 @@
 # Snipped , manage your snippets online
 ###
 ### IoC container ###
-
+###
 require('nodetime').profile({
     accountKey: 'ab8afef122f805f50737adfcd503ffd272a02c9d', 
     appName: 'snipped'
 });
-
+###
 Pimple = require "pimple"
 express = require "express"
 mysql = require "mysql"
@@ -61,7 +61,7 @@ container.set 'locals',
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
 container.set 'sessionMiddleware',container.share (c)->
-    session = c.middlewares.redisSession()
+    session = c.middlewares.inMemorySession()
     return session
 container.set 'acl',container.share (c)->
     Acl = require('virgen-acl').Acl

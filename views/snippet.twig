@@ -1,3 +1,7 @@
+{#
+    Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
+    views/snippet.twig
+#}
 {% extends 'layout.twig' %}
 {% block content %}
     <h3>
@@ -20,9 +24,27 @@
 {% endblock %}
 {% block scripts %}
     {{parent()}}
+    <script type="text/javascript">
+        var category = "{{snippet.category.title}}".toLowerCase();
+    </script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/highlight.js/8.0/highlight.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/showdown/0.3.1/showdown.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/8.0/styles/monokai_sublime.css" />
     <script type="text/javascript">
-        hljs.highlightBlock(document.querySelector('pre'));
+        /**
+         * either display the code snippet with mardown or a syntax highlighter
+         */
+        var converter,el,pre;
+        if(category!=="markdown"){
+            hljs.highlightBlock(document.querySelector('pre'));
+        }else{
+            converter = new Showdown.converter();
+            el=document.createElement('p');
+            el.class="markdown";
+            pre = document.querySelector('pre')
+            el.innerHTML =converter.makeHtml(pre.textContent);
+            pre.parentElement.appendChild(el);
+            pre.style.display="none";
+        }
     </script>
 {% endblock %}
