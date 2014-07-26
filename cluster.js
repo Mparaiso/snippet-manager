@@ -6,23 +6,27 @@ var http=require('http');
 var numCPUs = require('os').cpus().length;
 var container = require('./server');
 var i;
-if (cluster.isMaster){
-    for(i =0;i<numCPUs;i++){
-        cluster.fork();
-    }
- cluster.on('exit', function(worker, code, signal) {
-    console.log('worker ' + worker.process.pid + ' died');
-  });
-}else{
-    if(process.env.IS_HEROKU){
-        http.createServer(container.app).listen(container.port,function  () {
-            console.log('listening on port %s',container.port);
+if(!module.parent){
+    if (cluster.isMaster){
+        for(i =0;i<numCPUs;i++){
+            cluster.fork();
+        }
+        cluster.on('exit', function(worker, code, signal) {
+            console.log('worker ' + worker.process.pid + ' died');
         });
     }else{
-        http.createServer(container.app).listen(container.port,container.ip,function  () {
-            console.log('listening on %s:%s',container.ip,container.port);
-        });
-    }
+        if(process.env.IS_HEROKU){
+            http.createServer(container.app).listen(container.port,function  () {
+                console.log('listening on port %s',container.port);
+            });
+        }else{
+            http.createServer(container.app).listen(container.port,container.ip,function  () {
+                console.log('listening on %s:%s',container.ip,container.port);
+            });
+        }
 
+    }
+}else{
+    module.exports=container;
 }
 

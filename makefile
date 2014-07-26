@@ -2,7 +2,7 @@ test: coffee tests
 	@npm test &
 ct: coffee tests
 	@npm run ct &
-commit:
+commit: compile
 	@git add .
 	@git commit -am"$(message) `date`" | :
 push: commit
@@ -17,4 +17,6 @@ start:
 cluster:
 	@clear
 	@supervisor  -e 'js|coffee'  --ignore 'node_modules|trash|.openshift|.settings|.git|assets|public|views' cluster.js &
-.PHONY: start push
+compile:
+	@coffee -c -o js coffee
+.PHONY: start push compile

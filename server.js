@@ -1,6 +1,13 @@
 /*jslint eqeq:true,node:true,es5:true,white:true,plusplus:true,nomen:true,unparam:true,devel:true,regexp:true */
-require('coffee-script').register();
-var container = require('./coffee/container');
+var container;
+if(process.env.NODE_ENV==="production"){
+    require('source-map-support').install();
+    container=require('./js/container');
+}else{
+    require('coffee-script').register();
+    container = require('./coffee/container');
+}
+
 var http = require('http');
 
 if(!module.parent){
