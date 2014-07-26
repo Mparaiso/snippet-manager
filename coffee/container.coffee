@@ -218,7 +218,7 @@ container.set 'app',container.share (c)->
     app.engine('twig',c.swig.renderFile)
     app.set('view engine','twig')
 
-    app.use require('compression')()
+    #app.use require('compression')()
     app.use (req,res,next)->
         # add c.locals to res.locals
         _.defaults res.locals,c.locals
