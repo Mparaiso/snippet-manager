@@ -244,7 +244,7 @@ container.set 'app',container.share (c)->
     ### firewall ###
     app.use c.middlewares.firewall(c.acl)
 
-
+    app.use express.compress()
     ### subroute for profile ###
     app.use  '/profile',((r,res,next)->res.locals.route="profile";next())
     app.get  '/profile',c.UserController.profileIndex
