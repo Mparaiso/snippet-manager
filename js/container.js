@@ -350,7 +350,6 @@
     app.use(express.methodOverride());
     app.engine('twig', c.swig.renderFile);
     app.set('view engine', 'twig');
-    app.use(express.compress());
     app.use(function(req, res, next) {
       _.defaults(res.locals, c.locals);
       res.locals.flash = req.flash();
