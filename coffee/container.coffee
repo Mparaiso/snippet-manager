@@ -201,7 +201,7 @@ container.set 'app',container.share (c)->
     app = express()
     ### static assets ###
     app.disable 'x-powered-by'
-    app.use('/css',require('less-middleware')(path.join(__dirname,'..','public','css'),{once:if c.debug then true else false}))
+    app.use('/css',require('less-middleware')(path.join(__dirname,'..','public','css'),{once:if c.debug then false else true}))
     app.use(express.static(path.join(__dirname,"..","public"),{maxAge:100000}))
     ### logging ###
     ### passport user management ###

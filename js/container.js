@@ -332,7 +332,7 @@
     /* static assets */
     app.disable('x-powered-by');
     app.use('/css', require('less-middleware')(path.join(__dirname, '..', 'public', 'css'), {
-      once: c.debug ? true : false
+      once: c.debug ? false : true
     }));
     app.use(express["static"](path.join(__dirname, "..", "public"), {
       maxAge: 100000
