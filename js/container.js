@@ -158,8 +158,10 @@
         return express.session({
           secret: c.secret,
           name: c.name,
-          httpOnly: true,
-          maxAge: 60 * 60 * 1000
+          cookie: {
+            maxAge: 1000 * 60 * 60 * 24,
+            httpOnly: true
+          }
         });
       },
 
@@ -350,6 +352,7 @@
     app.use(express.methodOverride());
     app.engine('twig', c.swig.renderFile);
     app.set('view engine', 'twig');
+    app.use(require('compression')());
     app.use(function(req, res, next) {
       _.defaults(res.locals, c.locals);
       res.locals.flash = req.flash();

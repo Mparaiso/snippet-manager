@@ -109,7 +109,7 @@ container.set 'middlewares',container.share (c)->
         session stored in memory
     ###
     inMemorySession:->
-        express.session(secret:c.secret,name:c.name,httpOnly:true,maxAge:60*60*1000)
+        express.session(secret:c.secret,name:c.name,cookie:{maxAge:1000*60*60*24,httpOnly:true})
     ###
         session stored in redis
     ###
@@ -218,7 +218,7 @@ container.set 'app',container.share (c)->
     app.engine('twig',c.swig.renderFile)
     app.set('view engine','twig')
 
-    #app.use express.compress()
+    app.use require('compression')()
     app.use (req,res,next)->
         # add c.locals to res.locals
         _.defaults res.locals,c.locals
