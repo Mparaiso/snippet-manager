@@ -109,7 +109,7 @@ container.set 'middlewares',container.share (c)->
         session stored in memory
     ###
     inMemorySession:->
-        express.session(secret:c.secret,name:c.name)
+        express.session(secret:c.secret,name:c.name,httpOnly:true,maxAge:60*60*1000)
     ###
         session stored in redis
     ###
@@ -218,6 +218,7 @@ container.set 'app',container.share (c)->
     app.engine('twig',c.swig.renderFile)
     app.set('view engine','twig')
 
+    app.use express.compress()
     app.use (req,res,next)->
         # add c.locals to res.locals
         _.defaults res.locals,c.locals
@@ -244,7 +245,6 @@ container.set 'app',container.share (c)->
     ### firewall ###
     app.use c.middlewares.firewall(c.acl)
 
-    app.use express.compress()
     ### subroute for profile ###
     app.use  '/profile',((r,res,next)->res.locals.route="profile";next())
     app.get  '/profile',c.UserController.profileIndex

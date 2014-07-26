@@ -157,7 +157,9 @@
       inMemorySession: function() {
         return express.session({
           secret: c.secret,
-          name: c.name
+          name: c.name,
+          httpOnly: true,
+          maxAge: 60 * 60 * 1000
         });
       },
 
@@ -348,6 +350,7 @@
     app.use(express.methodOverride());
     app.engine('twig', c.swig.renderFile);
     app.set('view engine', 'twig');
+    app.use(express.compress());
     app.use(function(req, res, next) {
       _.defaults(res.locals, c.locals);
       res.locals.flash = req.flash();
@@ -376,7 +379,6 @@
 
     /* firewall */
     app.use(c.middlewares.firewall(c.acl));
-    app.use(express.compress());
 
     /* subroute for profile */
     app.use('/profile', (function(r, res, next) {
