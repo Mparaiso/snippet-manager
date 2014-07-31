@@ -5,18 +5,12 @@
     Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
  */
 
+
+/*
+    controller service provider
+ */
+
 (function() {
-  var q, _;
-
-  q = require("q");
-
-  _ = require("lodash");
-
-
-  /*
-      controller service provider
-   */
-
   module.exports = function(c) {
     c.set('IndexController', c.share(function(c) {
       return {
@@ -61,13 +55,14 @@
               category: category
             });
           })["catch"](next);
-        }
+        },
+        search: function(req, res, next) {}
       };
     }));
     c.set('UserController', c.share(function(c) {
       return {
         profileIndex: function(req, res, next) {
-          return q([req.user.countSnippets(), req.user.countFavorites(), req.user.getLatestSnippets()]).spread(function(snippetCount, favoriteCount, latestSnippets) {
+          return c.q([req.user.countSnippets(), req.user.countFavorites(), req.user.getLatestSnippets()]).spread(function(snippetCount, favoriteCount, latestSnippets) {
             return res.render('profile', {
               route: 'profile',
               snippetCount: snippetCount,
@@ -141,7 +136,7 @@
             snippets.forEach(function(s) {
               return s.user = req.user;
             });
-            return res.render('profile/snippet-list', {
+            return res.render('profile/snippets', {
               pageTitle: 'Your snippets',
               snippets: snippets
             });
@@ -154,7 +149,7 @@
             snippets.forEach(function(s) {
               return s.user = req.user;
             });
-            return res.render('profile/snippet-list', {
+            return res.render('profile/favorite', {
               pageTitle: 'Your favorites',
               snippets: snippets
             });
@@ -196,7 +191,7 @@
           registrationForm.setModel(user);
           if (req.method === "POST" && registrationForm.bind(req.body) && registrationForm.validateSync() === true) {
             return c.User.register(user).then(function(user) {
-              return q.ninvoke(req, 'logIn', user, {});
+              return c.q.ninvoke(req, 'logIn', user, {});
             }).then(function() {
               return res.redirect('/profile');
             })["catch"](function(err) {
@@ -236,11 +231,12 @@
         }
       };
     }));
+    return c.set('AdminController', c.share(function(c) {
 
-    /*
-        Admin actions
-     */
-    return c.set('AdminController', c.share(function(c) {}));
+      /*
+          Admin actions
+       */
+    }));
   };
 
 }).call(this);

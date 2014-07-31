@@ -1,26 +1,18 @@
-{# views/profile/snippet-list.twig #}
-{% extends './../profile.twig' %}
-{% block profile_content %}
-    <h3 class="no-top">{{pageTitle}}</h3>
-    {% if snippets.length >0 %}
-        <div class="row">
-    {% for snippet in snippets %}
-
-            <div class="col-md-6">
-                {%include "./../include/snippet-row.twig"%}
+{% for  page in snippets|paginate(2) %}
+    <div class="row col-md-12">
+        {% for snippet in page %}
+            <section class="col-md-6">
+                {% include "../include/snippet-row.twig" %}
                 {% if user and snippet.user_id == user.id %}
                     <div>
-                        <a href="/profile/snippet/{{snippet.id}}/update">edit</a> | 
-                        <form class="inline" action="/profile/snippet/{{snippet.id}}/delete" method="POST" role="form">
+                        <a href="/profile/snippet/{{ snippet.id }}/update">edit</a> |
+                        <form class="inline" action="/profile/snippet/{{ snippet.id }}/delete" method="POST"
+                              role="form">
                             <input class="btn btn-link primary inline" value="remove" type="submit"/>
                         </form>
                     </div>
-                {%endif%}
-            </div>
-      
-    {% endfor %}
-  </div>
-    {%else%}
-        <h2 class="text-info">No snippets yet,please create a new one.</h2>
-    {%endif%}
-{% endblock %}
+                {% endif %}
+            </section>
+        {% endfor %}
+    </div>
+{% endfor %}

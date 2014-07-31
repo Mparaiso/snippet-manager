@@ -93,11 +93,7 @@
   }));
 
   container.set('sessionMiddleware', container.share(function(c) {
-    if (!c.debug) {
-      return c.middlewares.redisSession();
-    } else {
-      return c.middlewares.inMemorySession();
-    }
+    return c.middlewares.redisSession();
   }));
 
   container.set('acl', container.share(function(c) {
@@ -128,6 +124,21 @@
       cache: container.debug ? false : "memory"
     });
     swig.setFilter('slug', slug);
+    swig.setFilter('paginate', function(array, items_per_page) {
+      var index, value, _i, _len, _results;
+      if (array == null) {
+        array = [];
+      }
+      if (items_per_page == null) {
+        items_per_page = 1;
+      }
+      _results = [];
+      for ((items_per_page > 0 ? (index = _i = 0, _len = array.length) : index = _i = array.length - 1); items_per_page > 0 ? _i < _len : _i >= 0; index = _i += items_per_page) {
+        value = array[index];
+        _results.push(array.slice(index, index + items_per_page));
+      }
+      return _results;
+    });
     return swig;
   }));
 

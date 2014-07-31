@@ -1,0 +1,12 @@
+{# views/profile/favorites #}
+{% extends './../profile.twig' %}
+{% block profile_content %}
+    <h3 class="no-top">{{ pageTitle }}</h3>
+    {% if snippets.length >0 %}
+        <div class="row">
+            {% include 'snippet-list.twig' %}
+        </div>
+    {% else %}
+        <h2 class="text-info">No favorite found.</h2>
+    {% endif %}
+{% endblock %}

@@ -61,7 +61,7 @@ container.set 'locals',
     slogan:"manage your snippets online"
 container.set 'form',container.share (c)-> require 'mpm.form'
 container.set 'sessionMiddleware',container.share (c)->
-    if not c.debug then c.middlewares.redisSession() else c.middlewares.inMemorySession()
+    c.middlewares.redisSession() # else c.middlewares.inMemorySession()
 container.set 'acl',container.share (c)->
     Acl = require('virgen-acl').Acl
     acl = new Acl
@@ -96,7 +96,10 @@ container.set 'acl',container.share (c)->
 container.set 'swig', container.share ->
     swig.setDefaults(cache:if container.debug then false else "memory")
     swig.setFilter('slug',slug)
-    swig
+    swig.setFilter('paginate',(array=[],items_per_page=1)->
+        ( array.slice(index,index+items_per_page) for value,index in array by items_per_page )
+    )
+    return swig
 ###
     middlewares
 ###

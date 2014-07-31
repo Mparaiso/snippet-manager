@@ -26,14 +26,9 @@
                     <section class="col-md-12">
                         <hr/>
                         {% if snippetCount > 0 %}
-                            <h3>Your Latest snippets</h3>
-                            {% for snippet in latestSnippets %}
-                                {% include 'include/snippet-row.twig' %}
-                                <div>
-                                    <a href="/profile/snippet/{{ snippet.id }}/update">edit</a> |
-                                    <a href="/profile/snippet/{{ snippet.id }}/delete">remove</a>
-                                </div>
-                            {% endfor %}
+                            <div class="row">
+                                {% include 'profile/snippet-list.twig' %}
+                            </div>
                         {% else %}
                             <h3>No snippet yet</h3>
                             <p><a href="/profile/snippet/create">Create a snippet</a></p>

@@ -1,16 +1,10 @@
 {% extends 'layout.twig' %}
 {% block content %}
-<h3>Snippets for "{{category.title}}"</h3>
-<div class="row min-height">
-{% for  snippet in snippets %}
-    <section class="col-md-6 snippet-row">
-        {% include "include/snippet-row.twig" %}
-    </section>
-{% endfor %}
-<div class="row">
-    <section class="col-md-12">
-        {%include 'include/pager.twig'%}
-    </section>
-</div>
-</div>
+    <h3>Snippets for "{{ category.title }}"</h3>
+    {% include 'include/snippet-list.twig' %}
+    <div class="row">
+        <section class="col-md-12">
+            {% include 'include/pager.twig' %}
+        </section>
+    </div>
 {% endblock %}

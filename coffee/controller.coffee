@@ -3,14 +3,13 @@
     Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
 ###
 
-q = require "q"
-_ = require "lodash"
 ###
     controller service provider
 ###
 module.exports=(c)->
+
     c.set 'IndexController',c.share (c)->
-        {
+
         index:(req,res,next)->
             offset = if +req.query.offset > 0 then +req.query.offset * c.snippet_per_page else 0
             c.Snippet.listAll(undefined,c.snippet_per_page,offset)
@@ -25,11 +24,13 @@ module.exports=(c)->
             c.Category.findByIdWithSnippets(req.params.categoryId,c.snippet_per_page,offset)
             .then (category)-> res.render('category',{offset:+req.query.offset||0,item_per_page:c.snippet_per_page,item_count:category.snippets.length, snippets:category.snippets,category})
             .catch next
-        }
+        search:(req,res,next)->
+            #c.Snippet.
+
     c.set 'UserController',c.share (c)->
         {
         profileIndex:(req,res,next)->
-            q([req.user.countSnippets(),req.user.countFavorites(),req.user.getLatestSnippets()])
+            c.q([req.user.countSnippets(),req.user.countFavorites(),req.user.getLatestSnippets()])
             .spread (snippetCount,favoriteCount,latestSnippets)-> res.render('profile',{route:'profile',snippetCount,favoriteCount,latestSnippets})
             .catch next
         profileSnippetDelete:(req,res,next)->
@@ -73,13 +74,13 @@ module.exports=(c)->
             req.user.getSnippets()
             .then (snippets)->
                 snippets.forEach (s)-> s.user=req.user
-                res.render('profile/snippet-list',{pageTitle:'Your snippets',snippets})
+                res.render('profile/snippets',{pageTitle:'Your snippets',snippets})
             .catch (err)-> next(err)
         profileFavorite:(req,res,next)->
             req.user.getFavorites()
             .then (snippets)->
                 snippets.forEach (s)->s.user=req.user
-                res.render('profile/snippet-list',{pageTitle:'Your favorites',snippets})
+                res.render('profile/favorite',{pageTitle:'Your favorites',snippets})
             .catch (err)-> next(err)
         profileSnippetFavoriteToggle:(req,res,next)->
             c.Snippet.findById(req.params.snippetId)
@@ -104,13 +105,14 @@ module.exports=(c)->
             registrationForm.setModel(user)
             if req.method is "POST" and registrationForm.bind(req.body) and registrationForm.validateSync() is true
                 return c.User.register(user)
-                .then (user)-> q.ninvoke req,'logIn',user,{}
+                .then (user)-> c.q.ninvoke req,'logIn',user,{}
                 .then -> res.redirect('/profile')
                 .catch (err)->
                     console.log(err)
                     res.render('join',{form:registrationForm,error:err.message,route:'join'})
             res.render('join',{route:'join',form:registrationForm})
         }
+
     c.set 'ErrorController',c.share (c)->
         '500':(err,req,res,next)->
             errorMessage = switch err.status
@@ -122,7 +124,8 @@ module.exports=(c)->
                     "Server error"
             console.log(err)
             res.render('500.twig',{errorMessage})
-    ###
-        Admin actions
-    ###
+
     c.set 'AdminController',c.share (c)->
+        ###
+            Admin actions
+        ###
