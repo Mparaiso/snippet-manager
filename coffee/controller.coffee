@@ -28,7 +28,6 @@ module.exports=(c)->
             #c.Snippet.
 
     c.set 'UserController',c.share (c)->
-        {
         profileIndex:(req,res,next)->
             c.q([req.user.countSnippets(),req.user.countFavorites(),req.user.getLatestSnippets()])
             .spread (snippetCount,favoriteCount,latestSnippets)-> res.render('profile',{route:'profile',snippetCount,favoriteCount,latestSnippets})
@@ -111,7 +110,6 @@ module.exports=(c)->
                     console.log(err)
                     res.render('join',{form:registrationForm,error:err.message,route:'join'})
             res.render('join',{route:'join',form:registrationForm})
-        }
 
     c.set 'ErrorController',c.share (c)->
         '500':(err,req,res,next)->

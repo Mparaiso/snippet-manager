@@ -24,13 +24,14 @@
                         <div>Favorites</div>
                     </div>
                     <section class="col-md-12">
-                        <hr/>
+                        <h3>Latest Snippets</h3>
                         {% if snippetCount > 0 %}
                             <div class="row">
-                                {% include 'profile/snippet-list.twig' %}
+                                {% include 'profile/snippet-list.twig' with {snippets:latestSnippets,
+                                title:"Latest snippets"} %}
                             </div>
                         {% else %}
-                            <h3>No snippet yet</h3>
+                            <h4>No snippet yet</h4>
                             <p><a href="/profile/snippet/create">Create a snippet</a></p>
                         {% endif %}
                     </section>

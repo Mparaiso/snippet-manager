@@ -5,36 +5,11 @@
  * Snipped , manage your snippets online
  */
 
-
-/* IoC container */
-
 (function() {
-  var Pimple, RedisStore, container, express, flash, mysql, path, q, redis, slug, swig, util, _,
+  var Pimple, container,
     __slice = [].slice;
 
   Pimple = require("pimple");
-
-  express = require("express");
-
-  mysql = require("mysql");
-
-  q = require("q");
-
-  path = require("path");
-
-  swig = require("swig");
-
-  slug = require("slug");
-
-  _ = require("lodash");
-
-  util = require("util");
-
-  flash = require("connect-flash");
-
-  redis = require('redis');
-
-  RedisStore = require('connect-redis')(express);
 
   container = new Pimple({
     debug: process.env.NODE_ENV === "production" ? false : true,
@@ -68,15 +43,9 @@
     category_per_page: 10
   });
 
-  container.set('_', function() {
-    return _;
-  });
-
-  container.set('q', function() {
-    return q;
-  });
-
   container.set('redisClient', container.share(function(c) {
+    var redis;
+    redis = require('redis');
     return redis.createClient(c.redis.port, c.redis.host, {
       auth_pass: c.redis.password
     });
@@ -114,16 +83,19 @@
     acl.allow(null, 'route', ['/', '/*', '/snippet', '/snippet/:snippetId/:snippetTitle?', '/category/:categoryId/:categoryTitle?', '/join', '/signin']);
     acl.deny('member', 'route', ['/signin', '/join']);
     acl.pquery = function() {
-      return q.ninvoke.apply(q, [acl, 'query'].concat(__slice.call(arguments)));
+      var _ref;
+      return (_ref = c.q).ninvoke.apply(_ref, [acl, 'query'].concat(__slice.call(arguments)));
     };
     return acl;
   }));
 
-  container.set('swig', container.share(function() {
+  container.set('swig', container.share(function(c) {
+    var swig;
+    swig = require("swig");
     swig.setDefaults({
       cache: container.debug ? false : "memory"
     });
-    swig.setFilter('slug', slug);
+    swig.setFilter('slug', c.slug);
     swig.setFilter('paginate', function(array, items_per_page) {
       var index, value, _i, _len, _results;
       if (array == null) {
@@ -148,7 +120,8 @@
    */
 
   container.set('middlewares', container.share(function(c) {
-    var aclQueryCallbackForMiddlewares;
+    var aclQueryCallbackForMiddlewares, _;
+    _ = c._;
     aclQueryCallbackForMiddlewares = function(req, res, next) {
       return function(err, isAllowed) {
         if (isAllowed === true) {
@@ -166,7 +139,7 @@
           session stored in memory
        */
       inMemorySession: function() {
-        return express.session({
+        return c.express.session({
           secret: c.secret,
           name: c.name,
           cookie: {
@@ -180,11 +153,11 @@
           session stored in redis
        */
       redisSession: function() {
-        return express.session({
+        return c.express.session({
           ttl: c.session.ttl,
           name: c.session.name,
           secret: c.session.secret,
-          store: new RedisStore({
+          store: new c.RedisStore({
             client: c.redisClient
           })
         });
@@ -336,103 +309,6 @@
       Express app configuration
    */
 
-  container.set('app', container.share(function(c) {
-    var app;
-    app = express();
-
-    /* static assets */
-    app.disable('x-powered-by');
-    app.use('/css', require('less-middleware')(path.join(__dirname, '..', 'public', 'css'), {
-      once: c.debug ? false : true
-    }));
-    app.use(express["static"](path.join(__dirname, "..", "public"), {
-      maxAge: 100000
-    }));
-
-    /* logging */
-
-    /* passport user management */
-    app.use(express.cookieParser(c.secret));
-
-    /* session middleware */
-    app.use(c.sessionMiddleware);
-    app.use(flash());
-    app.use(c.passport.initialize());
-    app.use(c.passport.session());
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.engine('twig', c.swig.renderFile);
-    app.set('view engine', 'twig');
-    app.use(function(req, res, next) {
-      _.defaults(res.locals, c.locals);
-      res.locals.flash = req.flash();
-      return next();
-    });
-
-    /* errors */
-    if (c.debug) {
-      app.enable('verbose errors');
-      app.use(express.errorHandler());
-      app.use(express.logger('dev'));
-    } else {
-      app.disable('verbose errors');
-      app.disable('view cache');
-    }
-    app.use(function(req, res, next) {
-      if (req.isAuthenticated()) {
-        res.locals.user = req.user;
-        res.locals.isAuthenticated = true;
-      } else {
-        res.locals.user = void 0;
-        res.locals.isAuthenticated = false;
-      }
-      return next();
-    });
-
-    /* firewall */
-    app.use(c.middlewares.firewall(c.acl));
-
-    /* subroute for profile */
-    app.use('/profile', (function(r, res, next) {
-      res.locals.route = "profile";
-      return next();
-    }));
-    app.get('/profile', c.UserController.profileIndex);
-    app.all('/profile/snippet/create', c.UserController.profileSnippetCreate);
-    app.all('/profile/snippet/:snippetId/update', c.UserController.profileSnippetUpdate);
-    app.post('/profile/snippet/:snippetId/delete', c.UserController.profileSnippetDelete);
-    app.post('/profile/snippet/:snippetId/favorite', c.UserController.profileSnippetFavoriteToggle);
-    app.get('/profile/snippet', c.UserController.profileSnippet);
-    app.get('/profile/favorite', c.UserController.profileFavorite);
-    app.get('/profile/signout', c.UserController.signOut);
-
-    /* public routes */
-    app.get('/*', function(req, res, next) {
-      return c.CategoryWithSnippetCount.findAll({
-        limit: 10
-      }).then(function(categories) {
-        res.locals.categoriesWithSnippetCount = categories;
-        return next('route');
-      })["catch"](next);
-    });
-    app.get('/snippet/:snippetId/:snippetTitle?', c.IndexController.readSnippet);
-    app.get('/category/:categoryId/:categoryTitle?', c.IndexController.readCategory);
-    app.all('/join', c.UserController.register);
-    app.get('/signin', c.UserController.signIn);
-    app.post('/signin', c.middlewares.signIn());
-    app.get('/', c.IndexController.index);
-    app.all('/*', function(req, res, next) {
-      var err;
-      err = new Error('not found');
-      err.status = 404;
-      return next(err);
-    });
-    if (!c.debug) {
-      app.use(c.ErrorController['500']);
-    }
-    return app;
-  }));
-
   container.set('qevent', container.share(function(c) {
     var qevent;
     qevent = new c.EventEmitter(c.q);
@@ -482,7 +358,7 @@
           return b.priority - a.priority;
         }).reduce((function(q, next) {
           var _ref;
-          return q.then((_ref = next.listener).bind.apply(_ref, [next.listener].concat(__slice.call(args))));
+          return c.q.then((_ref = next.listener).bind.apply(_ref, [next.listener].concat(__slice.call(args))));
         }), this._Q());
       };
 
@@ -513,6 +389,10 @@
     })();
   }));
 
+  container.set('RedisStore', container.share(function(c) {
+    return require('connect-redis')(c.express);
+  }));
+
   container.register(require('./model'));
 
   container.register(require('./controller'));
@@ -520,6 +400,40 @@
   container.register(require('./event'));
 
   container.register(require('./form'));
+
+  container.register(require('./app'));
+
+  container.set('express', container.share(function() {
+    return require('express');
+  }));
+
+  container.set('path', container.share(function() {
+    return require('path');
+  }));
+
+  container.set('q', container.share(function() {
+    return require('q');
+  }));
+
+  container.set('_', container.share(function() {
+    return require("lodash");
+  }));
+
+  container.set('util', container.share(function() {
+    return require("util");
+  }));
+
+  container.set('mysql', container.share(function() {
+    return require("mysql");
+  }));
+
+  container.set('slug', container.share(function() {
+    return require("slug");
+  }));
+
+  container.set('flash', container.share(function() {
+    return require("connect-flash");
+  }));
 
   module.exports = container;
 
