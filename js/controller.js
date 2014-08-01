@@ -56,7 +56,21 @@
             });
           })["catch"](next);
         },
-        search: function(req, res, next) {}
+        search: function(req, res, next) {
+          var limit, offset, query;
+          query = req.query.q;
+          offset = isNaN(+req.query.offset) ? 0 : +req.query.offset;
+          limit = c.snippet_per_page;
+          return c.Search.search(query, null, limit, offset * limit).then(function(snippets) {
+            return res.render('search', {
+              snippets: snippets,
+              q: query,
+              offset: offset,
+              item_per_page: limit,
+              item_count: snippets.length
+            });
+          })["catch"](next);
+        }
       };
     }));
     c.set('UserController', c.share(function(c) {

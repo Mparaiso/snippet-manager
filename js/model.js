@@ -8,11 +8,13 @@
 (function() {
   var Sequelize, bcrypt;
 
-  bcrypt = require("bcrypt-nodejs");
+  bcrypt = require('bcrypt-nodejs');
 
-  Sequelize = require("sequelize");
+  Sequelize = require('sequelize');
 
   module.exports = function(c) {
+    var q, _;
+    _ = c._, q = c.q;
     c.set('sequelize', c.share(function(c) {
       var sequelize;
       return sequelize = new Sequelize(c.db.database, c.db.user, c.db.password, {
@@ -38,7 +40,7 @@
         tags: Sequelize.STRING
       }, {
         underscored: true,
-        tableName: "snippets",
+        tableName: 'snippets',
         instanceMethods: {
           getResourceId: function() {
             return "snippet";
@@ -302,8 +304,29 @@
     }));
     return c.set('Search', c.share(function(c) {
       return {
-        indexSnippet: function(snippet) {},
-        search: function(query) {}
+        indexSnippet: function(snippet) {
+          throw "not implemented yet";
+        },
+        search: function(query, order, limit, offset) {
+          var request;
+          if (order == null) {
+            order = [['created_at', "DESC"]];
+          }
+          if (limit == null) {
+            limit = c.snippet_per_page;
+          }
+          if (offset == null) {
+            offset = 0;
+          }
+          request = {
+            order: order,
+            limit: limit,
+            offset: offset,
+            where: ['snippets.title like ? or snippets.description like ? or snippets.content like ? or category.title LIKE ? ', "%" + query + "%", "%" + query + "%", "%" + query + "%", "%" + query + "%"],
+            include: [c.Category]
+          };
+          return c.Snippet.findAll(request);
+        }
       };
     }));
   };

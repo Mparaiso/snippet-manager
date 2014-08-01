@@ -62,7 +62,7 @@ module.exports = (container)->
 
         ### public routes ###
         app.get '/*',(req,res,next)->
-            c.CategoryWithSnippetCount.findAll({limit:10})
+            c.CategoryWithSnippetCount.findAll({limit:12})
             .then (categories)->
                     res.locals.categoriesWithSnippetCount = categories
                     next('route')
@@ -70,6 +70,7 @@ module.exports = (container)->
 
         app.get  '/snippet/:snippetId/:snippetTitle?',c.IndexController.readSnippet
         app.get  '/category/:categoryId/:categoryTitle?',c.IndexController.readCategory
+        app.get  '/search',c.IndexController.search
         app.all  '/join'  , c.UserController.register
         app.get  '/signin', c.UserController.signIn
         app.post '/signin', c.middlewares.signIn()

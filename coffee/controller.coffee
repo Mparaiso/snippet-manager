@@ -9,7 +9,6 @@
 module.exports=(c)->
 
     c.set 'IndexController',c.share (c)->
-
         index:(req,res,next)->
             offset = if +req.query.offset > 0 then +req.query.offset * c.snippet_per_page else 0
             c.Snippet.listAll(undefined,c.snippet_per_page,offset)
@@ -25,7 +24,12 @@ module.exports=(c)->
             .then (category)-> res.render('category',{offset:+req.query.offset||0,item_per_page:c.snippet_per_page,item_count:category.snippets.length, snippets:category.snippets,category})
             .catch next
         search:(req,res,next)->
-            #c.Snippet.
+            query = req.query.q
+            offset = if isNaN(+req.query.offset) then 0 else +req.query.offset
+            limit = c.snippet_per_page
+            c.Search.search(query,null,limit,offset*limit)
+            .then (snippets)-> res.render('search',{snippets,q:query,offset,item_per_page:limit,item_count:snippets.length})
+            .catch next
 
     c.set 'UserController',c.share (c)->
         profileIndex:(req,res,next)->

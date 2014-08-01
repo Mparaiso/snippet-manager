@@ -2,10 +2,12 @@
     coffee/model.coffee
     Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
 ###
-bcrypt = require "bcrypt-nodejs"
-Sequelize  = require "sequelize"
+bcrypt = require 'bcrypt-nodejs'
+Sequelize  = require 'sequelize'
 
 module.exports = (c)->
+    {_,q} = c
+
     c.set 'sequelize', c.share (c)->
         sequelize = new Sequelize(c.db.database,c.db.user,c.db.password,{
             host:c.db.host
@@ -25,7 +27,7 @@ module.exports = (c)->
             tags:Sequelize.STRING,
         },{
             underscored: true,
-            tableName:"snippets",
+            tableName:'snippets',
             instanceMethods:{
                 getResourceId:->
                     "snippet"
@@ -148,5 +150,13 @@ module.exports = (c)->
             }
         })
     c.set 'Search',c.share (c)->
-            indexSnippet:(snippet)->
-            search:(query)->
+
+            indexSnippet:(snippet)-> throw "not implemented yet"
+
+            search:(query,order=[['created_at',"DESC"]],limit= c.snippet_per_page,offset=0)->
+                request = {
+                    order,limit,offset,
+                    where:['snippets.title like ? or snippets.description like ? or snippets.content like ? or category.title LIKE ? ',"%#{query}%","%#{query}%","%#{query}%","%#{query}%"],
+                    include:[c.Category]
+                }
+                c.Snippet.findAll(request)

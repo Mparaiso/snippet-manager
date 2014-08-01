@@ -75,7 +75,7 @@
       /* public routes */
       app.get('/*', function(req, res, next) {
         return c.CategoryWithSnippetCount.findAll({
-          limit: 10
+          limit: 12
         }).then(function(categories) {
           res.locals.categoriesWithSnippetCount = categories;
           return next('route');
@@ -83,6 +83,7 @@
       });
       app.get('/snippet/:snippetId/:snippetTitle?', c.IndexController.readSnippet);
       app.get('/category/:categoryId/:categoryTitle?', c.IndexController.readCategory);
+      app.get('/search', c.IndexController.search);
       app.all('/join', c.UserController.register);
       app.get('/signin', c.UserController.signIn);
       app.post('/signin', c.middlewares.signIn());

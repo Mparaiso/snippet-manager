@@ -2,52 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
     <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/snipped-icon.png"/>
     {% block head %}{% endblock %}
 </head>
 <body>
-    <main class="container container-narrow">
-        <div class="header">
-            {%include 'nav.twig'%}
-            <h2 class="text-muted"><a href="/" class="brand">{{title}}</a> 
-            <small><small class="brand">{{slogan}}</small></small></h2>
-        </div>
-            <p class="lead">&nbsp;</p>
-            {% if flash %}
-                <ul class="list-unstyled">
-                {% for type,messages in flash %}
-                    {% for message in messages %}
-                        <li class="text-{{type}}">{{ message }}</li>
-                    {% endfor %}
-                {% endfor %}
-                </ul>
-            {%endif%}
-            {#category navbar #}
-            {% if categoriesWithSnippetCount.length > 0  %}
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <ul class="nav navbar-nav">
-                        {% for _category in categoriesWithSnippetCount %}
-                            <li class="{%if category && (_category.id == category.id)%}active{%endif%}"><a href='/category/{{_category.id}}/{{_category.title}}'>{{ _category.title }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </nav>
-            <p>&nbsp;</p>
-            {% endif %}
-            <div class="content">
-            {% block content %}{% endblock %}
+<main class="container container-narrow">
+    <nav class="navbar navbar-link">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand brand">{{ title }}
+                    <small>
+                        <small>{{ slogan }}</small>
+                    </small>
+                </a>
             </div>
-        <footer class="footer">
-            <p>&copy; mparaiso <mparaiso@online.fr> 2014</p>
-        </footer>
-    </main>
-   
-    {% block scripts %}{% endblock %}
+            {% include 'nav.twig' %}
+        </div>
+    </nav>
+
+    {% if flash %}
+        <ul class="list-unstyled">
+            {% for type,messages in flash %}
+                {% for message in messages %}
+                    <li class="text-{{ type }}">{{ message }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {#category navbar #}
+    {% if categoriesWithSnippetCount.length > 0 %}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                {% for _category in categoriesWithSnippetCount %}
+                <li class="{%if category && (_category.id == category.id)%}active{%endif%}"><a
+                            href='/category/{{ _category.id }}/{{ _category.title }}'>{{ _category.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+    <p>&nbsp;</p>
+    {% endif %}
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="footer">
+        <p>&copy; mparaiso
+            <mparaiso
+            @online.fr> 2014
+        </p>
+    </footer>
+</main>
+
+{% block scripts %}{% endblock %}
 </body>
 </html>
