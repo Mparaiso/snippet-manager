@@ -423,10 +423,6 @@
     return require("util");
   }));
 
-  container.set('mysql', container.share(function() {
-    return require("mysql");
-  }));
-
   container.set('slug', container.share(function() {
     return require("slug");
   }));

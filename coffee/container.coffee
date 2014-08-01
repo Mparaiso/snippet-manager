@@ -251,7 +251,6 @@ container.set 'path',container.share -> require 'path'
 container.set 'q',container.share -> require 'q'
 container.set '_', container.share -> require "lodash"
 container.set 'util',container.share -> require "util"
-container.set 'mysql',container.share -> require "mysql"
 container.set 'slug',container.share -> require "slug"
 container.set 'flash',container.share -> require "connect-flash"
 

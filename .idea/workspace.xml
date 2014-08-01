@@ -21,7 +21,17 @@
     <favorites_list name="snipped" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="category.twig" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/category.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="416">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -51,33 +61,34 @@
         <option value="$PROJECT_DIR$/views/500.twig" />
         <option value="$PROJECT_DIR$/makefile" />
         <option value="$PROJECT_DIR$/views/include/pager.twig" />
-        <option value="$PROJECT_DIR$/views/category.twig" />
-        <option value="$PROJECT_DIR$/views/include/snippet-list.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippet-list.twig" />
         <option value="$PROJECT_DIR$/views/profile/favorites.twig" />
         <option value="$PROJECT_DIR$/views/profile/snippets.twig" />
-        <option value="$PROJECT_DIR$/coffee/container.coffee" />
         <option value="$PROJECT_DIR$/views/profile.twig" />
         <option value="$PROJECT_DIR$/script" />
         <option value="$PROJECT_DIR$/public/css/styles.less" />
-        <option value="$PROJECT_DIR$/views/search.twig" />
         <option value="$PROJECT_DIR$/coffee/controller.coffee" />
         <option value="$PROJECT_DIR$/coffee/model.coffee" />
         <option value="$PROJECT_DIR$/views/nav.twig" />
         <option value="$PROJECT_DIR$/views/layout.twig" />
-        <option value="$PROJECT_DIR$/views/index.twig" />
         <option value="$PROJECT_DIR$/coffee/app.coffee" />
         <option value="$PROJECT_DIR$/coffee/event.coffee" />
         <option value="$PROJECT_DIR$/coffee/form.coffee" />
+        <option value="$PROJECT_DIR$/coffee/container.coffee" />
+        <option value="$PROJECT_DIR$/views/include/pager-search.twig" />
+        <option value="$PROJECT_DIR$/views/search.twig" />
+        <option value="$PROJECT_DIR$/views/index.twig" />
+        <option value="$PROJECT_DIR$/views/include/snippet-list.twig" />
+        <option value="$PROJECT_DIR$/views/category.twig" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-4" />
-    <option name="y" value="-4" />
-    <option name="width" value="1288" />
-    <option name="height" value="780" />
+    <option name="x" value="311" />
+    <option name="y" value="125" />
+    <option name="width" value="784" />
+    <option name="height" value="558" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -172,52 +183,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snipped" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snipped" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snipped" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snipped" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snipped" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snipped" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="coffee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -231,6 +196,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\development\categories\openshift\snipped\views\include" />
       <recent name="C:\development\categories\openshift\snipped\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -260,13 +226,13 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="780" extended-state="6" />
-    <editor active="false" />
+    <frame x="311" y="125" width="784" height="558" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2152502" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22478157" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37483445" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32683983" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -300,13 +266,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/nav.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="47" selection-start="341" selection-end="341" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="306">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/coffee/model.coffee">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="251" selection-start="2553" selection-end="2553" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2686" />
@@ -393,7 +352,9 @@
     <entry file="file://$PROJECT_DIR$/views/index.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="32" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="391">
-          <folding />
+          <folding>
+            <marker date="1406921705146" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -546,30 +507,10 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="664" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/include/snippet-list.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="12" selection-start="261" selection-end="261" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="238">
-          <folding>
-            <marker date="1406654109457" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1406654109457" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/styles.less">
       <provider selected="true" editor-type-id="text-editor">
         <state line="92" column="16" selection-start="1171" selection-end="1171" vertical-scroll-proportion="-15.384615" vertical-offset="1164" max-vertical-offset="1802">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/search.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="38" selection-start="295" selection-end="295" vertical-scroll-proportion="-4.576923" vertical-offset="0" max-vertical-offset="391">
-          <folding>
-            <marker date="1406912092600" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1406912092600" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -583,13 +524,6 @@
     <entry file="file://$PROJECT_DIR$/views/500.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="57" selection-start="105" selection-end="105" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="204">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/category.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="4" selection-start="271" selection-end="271" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="272">
           <folding />
         </state>
       </provider>
@@ -623,16 +557,117 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.twig">
+    <entry file="file://$PROJECT_DIR$/coffee/event.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="2" selection-start="120" selection-end="120" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="391">
+        <state line="3" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/form.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/model.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+          <folding>
+            <element signature="e#255#548#0" expanded="false" />
+            <element signature="e#319#547#0" expanded="false" />
+            <element signature="e#1865#2791#0" expanded="false" />
+            <element signature="e#1904#1992#0" expanded="false" />
+            <element signature="e#1993#2692#0" expanded="false" />
+            <element signature="e#2120#2190#0" expanded="false" />
+            <element signature="e#2217#2682#0" expanded="false" />
+            <element signature="e#2296#2668#0" expanded="false" />
+            <element signature="e#2796#2827#0" expanded="false" />
+            <element signature="e#2868#5618#0" expanded="false" />
+            <element signature="e#2901#3076#0" expanded="false" />
+            <element signature="e#3077#5338#0" expanded="false" />
+            <element signature="e#3199#3966#0" expanded="false" />
+            <element signature="e#3649#3952#0" expanded="false" />
+            <element signature="e#3687#3930#0" expanded="false" />
+            <element signature="e#3993#5328#0" expanded="false" />
+            <element signature="e#4854#5314#0" expanded="false" />
+            <element signature="e#4971#5226#0" expanded="false" />
+            <element signature="e#5016#5226#0" expanded="false" />
+            <element signature="e#5678#5943#0" expanded="false" />
+            <element signature="e#5724#5816#0" expanded="false" />
+            <element signature="e#5817#5942#0" expanded="false" />
+            <element signature="e#5948#5984#0" expanded="false" />
+            <element signature="e#6024#6304#0" expanded="false" />
+            <element signature="e#6057#6102#0" expanded="false" />
+            <element signature="e#6103#6303#0" expanded="false" />
+            <element signature="e#6224#6293#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/controller.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0" vertical-offset="12" max-vertical-offset="663">
+          <folding>
+            <element signature="e#258#596#0" expanded="false" />
+            <element signature="e#646#860#0" expanded="false" />
+            <element signature="e#911#1306#0" expanded="false" />
+            <element signature="e#1747#5850#0" expanded="false" />
+            <element signature="e#1789#2047#0" expanded="false" />
+            <element signature="e#2106#2304#0" expanded="false" />
+            <element signature="e#2363#3148#0" expanded="false" />
+            <element signature="e#2546#3124#0" expanded="false" />
+            <element signature="e#2753#3056#0" expanded="false" />
+            <element signature="e#3157#3201#0" expanded="false" />
+            <element signature="e#3260#3792#0" expanded="false" />
+            <element signature="e#3330#3768#0" expanded="false" />
+            <element signature="e#3564#3708#0" expanded="false" />
+            <element signature="e#3801#3850#0" expanded="false" />
+            <element signature="e#3903#4132#0" expanded="false" />
+            <element signature="e#3973#4095#0" expanded="false" />
+            <element signature="e#4186#4416#0" expanded="false" />
+            <element signature="e#4257#4379#0" expanded="false" />
+            <element signature="e#4483#4958#0" expanded="false" />
+            <element signature="e#4570#4837#0" expanded="false" />
+            <element signature="e#4999#5041#0" expanded="false" />
+            <element signature="e#5086#5172#0" expanded="false" />
+            <element signature="e#5219#5850#0" expanded="false" />
+            <element signature="e#5479#5782#0" expanded="false" />
+            <element signature="e#5672#5782#0" expanded="false" />
+            <element signature="e#5902#6242#0" expanded="false" />
+            <element signature="e#5941#6242#0" expanded="false" />
+            <element signature="e#6019#6071#0" expanded="false" />
+            <element signature="e#6113#6163#0" expanded="false" />
+            <element signature="e#6294#6335#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coffee/app.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="45" selection-start="3400" selection-end="3400" vertical-scroll-proportion="0.0" vertical-offset="850" max-vertical-offset="1598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/include/pager-search.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="11" selection-start="369" selection-end="369" vertical-scroll-proportion="0.29310346" vertical-offset="0" max-vertical-offset="638">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/search.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="502" selection-end="502" vertical-scroll-proportion="0.45297804" vertical-offset="0" max-vertical-offset="638">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/coffee/container.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="2" selection-start="0" selection-end="119" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1632">
+        <state line="237" column="0" selection-start="8347" selection-end="8347" vertical-scroll-proportion="0.0" vertical-offset="951" max-vertical-offset="1615">
           <folding>
             <element signature="e#468#650#0" expanded="false" />
             <element signature="e#662#899#0" expanded="false" />
@@ -688,97 +723,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/coffee/app.coffee">
+    <entry file="file://$PROJECT_DIR$/views/include/snippet-list.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1598">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coffee/controller.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="111" selection-end="111" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+        <state line="10" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="306">
           <folding>
-            <element signature="e#258#596#0" expanded="false" />
-            <element signature="e#646#860#0" expanded="false" />
-            <element signature="e#911#1306#0" expanded="false" />
-            <element signature="e#1747#5850#0" expanded="false" />
-            <element signature="e#1789#2047#0" expanded="false" />
-            <element signature="e#2106#2304#0" expanded="false" />
-            <element signature="e#2363#3148#0" expanded="false" />
-            <element signature="e#2546#3124#0" expanded="false" />
-            <element signature="e#2753#3056#0" expanded="false" />
-            <element signature="e#3157#3201#0" expanded="false" />
-            <element signature="e#3260#3792#0" expanded="false" />
-            <element signature="e#3330#3768#0" expanded="false" />
-            <element signature="e#3564#3708#0" expanded="false" />
-            <element signature="e#3801#3850#0" expanded="false" />
-            <element signature="e#3903#4132#0" expanded="false" />
-            <element signature="e#3973#4095#0" expanded="false" />
-            <element signature="e#4186#4416#0" expanded="false" />
-            <element signature="e#4257#4379#0" expanded="false" />
-            <element signature="e#4483#4958#0" expanded="false" />
-            <element signature="e#4570#4837#0" expanded="false" />
-            <element signature="e#4999#5041#0" expanded="false" />
-            <element signature="e#5086#5172#0" expanded="false" />
-            <element signature="e#5219#5850#0" expanded="false" />
-            <element signature="e#5479#5782#0" expanded="false" />
-            <element signature="e#5672#5782#0" expanded="false" />
-            <element signature="e#5902#6242#0" expanded="false" />
-            <element signature="e#5941#6242#0" expanded="false" />
-            <element signature="e#6019#6071#0" expanded="false" />
-            <element signature="e#6113#6163#0" expanded="false" />
-            <element signature="e#6294#6335#0" expanded="false" />
+            <marker date="1406921705118" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1406921705118" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/coffee/event.coffee">
+    <entry file="file://$PROJECT_DIR$/views/index.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coffee/form.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coffee/model.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+        <state line="8" column="8" selection-start="250" selection-end="250" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="391">
           <folding>
-            <element signature="e#255#548#0" expanded="false" />
-            <element signature="e#319#547#0" expanded="false" />
-            <element signature="e#1865#2791#0" expanded="false" />
-            <element signature="e#1904#1992#0" expanded="false" />
-            <element signature="e#1993#2692#0" expanded="false" />
-            <element signature="e#2120#2190#0" expanded="false" />
-            <element signature="e#2217#2682#0" expanded="false" />
-            <element signature="e#2296#2668#0" expanded="false" />
-            <element signature="e#2796#2827#0" expanded="false" />
-            <element signature="e#2868#5618#0" expanded="false" />
-            <element signature="e#2901#3076#0" expanded="false" />
-            <element signature="e#3077#5338#0" expanded="false" />
-            <element signature="e#3199#3966#0" expanded="false" />
-            <element signature="e#3649#3952#0" expanded="false" />
-            <element signature="e#3687#3930#0" expanded="false" />
-            <element signature="e#3993#5328#0" expanded="false" />
-            <element signature="e#4854#5314#0" expanded="false" />
-            <element signature="e#4971#5226#0" expanded="false" />
-            <element signature="e#5016#5226#0" expanded="false" />
-            <element signature="e#5678#5943#0" expanded="false" />
-            <element signature="e#5724#5816#0" expanded="false" />
-            <element signature="e#5817#5942#0" expanded="false" />
-            <element signature="e#5948#5984#0" expanded="false" />
-            <element signature="e#6024#6304#0" expanded="false" />
-            <element signature="e#6057#6102#0" expanded="false" />
-            <element signature="e#6103#6303#0" expanded="false" />
-            <element signature="e#6224#6293#0" expanded="false" />
+            <marker date="1406921705146" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/category.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="416">
+          <folding />
         </state>
       </provider>
     </entry>

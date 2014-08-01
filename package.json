@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "express": "~3.x",
-    "coffee-script": "~1.7.x",
     "q": "~1",
     "pimple": "~1.0.0",
     "source-map-support": "~0.2.7",
@@ -45,7 +44,9 @@
     "compression": "~1.0.9"
   },
   "devDependencies": {
-    "jasmine-node": "~2.0.0"
+    "jasmine-node": "~2.0.0",
+    "coffee-script": "~1.7.x"
+
   },
   "private": true,
   "main": "cluster.js",
