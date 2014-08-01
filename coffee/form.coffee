@@ -1,3 +1,7 @@
+###*
+# Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
+# Snipped , manage your snippets online
+###
 module.exports = (c)->
     c.set 'forms',c.share (c)->
         forms={}
