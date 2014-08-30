@@ -19,6 +19,7 @@
     port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
     google_analytics_id: "",
     db: {
+      dialect: process.env.SNIPPED_DB_DIALECT || "mysql",
       host: process.env.SNIPPED_DBHOST,
       user: process.env.SNIPPED_DBUSER,
       password: process.env.SNIPPED_DBPASSWORD,

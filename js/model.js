@@ -20,7 +20,7 @@
       return sequelize = new Sequelize(c.db.database, c.db.user, c.db.password, {
         host: c.db.host,
         logging: c.debug === true ? console.log : false,
-        dialect: "mysql",
+        dialect: c.db.dialect,
         syncOnAssociation: false,
         pool: {
           maxConnections: 2,

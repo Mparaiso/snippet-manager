@@ -100,8 +100,9 @@
           return c.Category.findAll().then(function(categories) {
             return [
               categories, req.user.getSnippets({
+                include: [c.Category],
                 where: {
-                  id: req.params.snippetId
+                  'snippets.id': req.params.snippetId
                 }
               })
             ];
@@ -110,7 +111,7 @@
             snippet = snippets[0];
             form = c.forms.createSnippetForm(categories).setModel(snippet);
             if (req.method === "POST" && form.bind(req.body) && form.validateSync()) {
-              return c.qevent.emit(c.events.SNIPPET_BEFORE_UPDATE, snippet, req, res, next).then(snippet.save.bind(snippet, null)).then(c.qevent.emit.bind(c.qevent, c.events.SNIPPET_AFTER_UPDATE, snippet, req, res, next)).then(function() {
+              return snippet.save().then(function() {
                 return res.redirect('/snippet/' + snippet.id);
               });
             }
@@ -120,10 +121,6 @@
             });
           })["catch"](next);
         },
-
-        /*
-            create a snippet
-         */
         profileSnippetCreate: function(req, res, next) {
           return c.Category.findAll().then(function(categories) {
             var form, snippet;
@@ -141,12 +138,11 @@
             });
           })["catch"](next);
         },
-
-        /*
-            snippet list for user
-         */
         profileSnippet: function(req, res, next) {
-          return req.user.getSnippets().then(function(snippets) {
+          return req.user.getSnippets({
+            order: [['created_at', 'DESC']],
+            include: [c.Category]
+          }).then(function(snippets) {
             snippets.forEach(function(s) {
               return s.user = req.user;
             });
@@ -159,9 +155,16 @@
           });
         },
         profileFavorite: function(req, res, next) {
-          return req.user.getFavorites().then(function(snippets) {
+          return c.q.all([
+            req.user.getFavorites({
+              order: [['favorites.created_at', 'DESC']]
+            }), c.Category.findAll()
+          ]).spread(function(snippets, categories) {
             snippets.forEach(function(s) {
-              return s.user = req.user;
+              s.user = req.user;
+              return s.category = categories.filter(function(c) {
+                return c.id === s.category_id;
+              })[0];
             });
             return res.render('profile/favorite', {
               pageTitle: 'Your favorites',
