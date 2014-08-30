@@ -8,3 +8,8 @@ Sprint1:
 - [x] a registered user can create a snippet
 - [x] a registered has a personal page where his snippets are listed
 - [x] a registered user can favorite and unfavorite a snippet
+
+Sprint2:
+
+- [ ] fix possible sprint injection when creating/updating a markdown snippet
+

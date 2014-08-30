@@ -12,7 +12,7 @@ module.exports = (c)->
         sequelize = new Sequelize(c.db.database,c.db.user,c.db.password,{
             host:c.db.host
             logging: if c.debug is true then console.log else false
-            dialect:"mysql"
+            dialect:c.db.dialect
             syncOnAssociation:false,
             pool: { maxConnections: 2, maxIdleTime: 30},
         })

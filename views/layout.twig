@@ -56,9 +56,8 @@
         {% block content %}{% endblock %}
     </div>
     <footer class="footer">
-        <p>&copy; mparaiso
-            <mparaiso
-            @online.fr> 2014
+        <p>&copy;{{Date.now()|date('Y')}} mparaiso
+            &lt;mparaiso_at_online.fr&gt; 
         </p>
     </footer>
 </main>

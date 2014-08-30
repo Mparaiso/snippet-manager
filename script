@@ -1,3 +1,0 @@
-c=require('./server')
-cb = function(){console.log(arguments)}
-c.Search.search('php').then(cb)

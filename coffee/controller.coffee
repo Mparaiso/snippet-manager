@@ -44,20 +44,18 @@ module.exports=(c)->
             .catch next
         profileSnippetUpdate:(req,res,next)->
             c.Category.findAll()
-            .then (categories)-> [categories,req.user.getSnippets({where:{id:req.params.snippetId}})]
+            .then (categories)-> 
+                [categories,req.user.getSnippets({include:[c.Category],where:{'snippets.id':req.params.snippetId}})]
             .spread (categories,snippets)->
                 snippet=snippets[0]
                 form = c.forms.createSnippetForm(categories).setModel(snippet)
                 if req.method is "POST" and form.bind(req.body) and form.validateSync()
-                    return c.qevent.emit(c.events.SNIPPET_BEFORE_UPDATE,snippet,req,res,next)
-                    .then snippet.save.bind(snippet,null)
-                    .then c.qevent.emit.bind(c.qevent,c.events.SNIPPET_AFTER_UPDATE,snippet,req,res,next)
+                    return snippet.save()
                     .then -> res.redirect('/snippet/'+snippet.id)
                 res.render('profile/snippet-update',{snippet,form})
             .catch next
-        ###
-            create a snippet
-        ###
+            
+        # GET /profile/snippet/create
         profileSnippetCreate:(req,res,next)->
             c.Category.findAll()
             .then (categories)->
@@ -70,21 +68,23 @@ module.exports=(c)->
                     .then (snippet)-> res.redirect('/snippet/'+snippet.id)
                 res.render('profile/snippet-create',{form})
             .catch next
-        ###
-            snippet list for user
-        ###
+        
+        # GET /profile/snippet
         profileSnippet:(req,res,next)->
-            req.user.getSnippets()
+            req.user.getSnippets({order:[['created_at','DESC']],include:[c.Category]})
             .then (snippets)->
                 snippets.forEach (s)-> s.user=req.user
                 res.render('profile/snippets',{pageTitle:'Your snippets',snippets})
             .catch (err)-> next(err)
+            
+        # GET /profile/favorite
         profileFavorite:(req,res,next)->
-            req.user.getFavorites()
-            .then (snippets)->
-                snippets.forEach (s)->s.user=req.user
+            c.q.all [req.user.getFavorites({order:[['favorites.created_at','DESC']]}),c.Category.findAll()]
+            .spread (snippets,categories)->
+                snippets.forEach (s)->s.user=req.user;s.category = categories.filter((c)->c.id == s.category_id)[0];
                 res.render('profile/favorite',{pageTitle:'Your favorites',snippets})
             .catch (err)-> next(err)
+            
         profileSnippetFavoriteToggle:(req,res,next)->
             c.Snippet.findById(req.params.snippetId)
             .then (snippet)->

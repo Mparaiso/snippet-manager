@@ -13,13 +13,14 @@ container = new Pimple
     ip:process.env.OPENSHIFT_NODEJS_IP||"127.0.0.1",
     port:process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000,
     google_analytics_id:"",
-    db:{
+    db:{ # Nay RDBMS used for persistance
+        dialect:process.env.SNIPPED_DB_DIALECT||"mysql"
         host:process.env.SNIPPED_DBHOST,
         user:process.env.SNIPPED_DBUSER,
         password:process.env.SNIPPED_DBPASSWORD,
         database:process.env.SNIPPED_DBNAME
     },
-    redis:{
+    redis:{ #redis used for session storage 
         port:process.env.SNIPPED_REDIS_PORT,
         host:process.env.SNIPPED_REDIS_HOST,
         debug_mode:false #if process.env.NODE_ENV is "production" then false else true,
