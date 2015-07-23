@@ -1,0 +1,28 @@
+<div class='Title'>Resource #{{ resource.id }}</div>
+<div>
+    <table class="span12">
+        <tbody>
+        {% for prop in properties %}
+            <tr>
+
+            <tr>
+                <td>
+                   {{ prop }} :
+                </td>
+                <td>
+<pre>
+<code>
+{{ attribute(resource,prop) }}
+</code>
+</pre>
+
+                </td>
+            </tr>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div>
+    <a href="{{ path(resourceName~"_index") }}">{{ resourceName }} index</a>
+</div>

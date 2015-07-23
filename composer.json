@@ -1,0 +1,13 @@
+{
+    "require":{
+        "monolog/monolog":"*",
+        "twig/twig":"*",
+        "doctrine/orm":"2.3.*",
+        "symfony/symfony":"2.2.*",
+        "silex/silex":"*@dev",
+        "mparaiso/simple-rss":"*@dev",
+        "mparaiso/silex-extensions":"*@dev",
+        "doctrine/migrations":"*@dev",
+        "silex/web-profiler":"*@dev"
+    }
+}

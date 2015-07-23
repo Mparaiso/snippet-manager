@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    {% if snippets|length <= 0 %}
+        <h3>No snippets yet , please create a new snippet </h3>
+    {% endif %}
+    <div class="row">
+        <span class="pull-right"><a href="{{ path("rss",{"title":app.request.get('category')|default("")}) }}">RSS</a></span>
+    </div>
+    {% include 'crud/includes/pagination.html.twig' %}
+    {% for snippet in snippets %}
+        <div class="span4 border"><h4><a title="{{ snippet.description }}"
+                                         href="{{ path("snippet",{title:snippet.title|url_encode()}) }}">
+            {{ snippet.title }}</a>
+        </h4>
+            <h6><a href="{{ path("home",{category:(snippet.category.title|url_encode())|default("none")}) }}">
+                {{ snippet.category.title|default("none") }}</a></h6>
+        </div>
+
+    {% endfor %}
+        <div class="row"></div>
+    {% include 'crud/includes/pagination.html.twig' %}
+{% endblock %}

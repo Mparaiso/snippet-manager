@@ -1,0 +1,47 @@
+# Entity.User.dcm.yml
+Entity\User:
+    type: entity
+    table: users
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 255
+            unique: true    
+        password:
+            type: string
+            length: 255
+        salt:
+            type: string
+            length: 255
+
+    oneToMany:
+        snippets:
+            mappedBy: user
+            targetEntity: Entity\Snippet
+    oneToOne:
+        account:
+            targetEntity: Entity\Account
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
+            cascade: [all]
+    manyToMany:
+        roles:
+          targetEntity: Entity\Role
+          joinTable:
+            name: users_roles
+            joinColumns:
+              role_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              user_id:
+                referencedColumnName: id
+                
+    lifecycleCallbacks:
+        prePersist: [ eraseCredentials ]
+

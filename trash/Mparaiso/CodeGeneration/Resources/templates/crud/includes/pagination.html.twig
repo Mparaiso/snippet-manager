@@ -1,0 +1,15 @@
+{% set offset = app.request.query.get("offset",0) %}
+<div class="pagination" style="text-align: center;">
+<ul class="" >
+        <li><a {% if offset <=0 %} class="disabled"{% else %} href="?&offset={{ 0 }}" {% endif %} >&laquo;</a></li>
+           {% if offset >= 1  %}
+              <li> <a class="" href="?&{{ offset }}">{{ offset }}</a></li>
+           {% endif %}
+       <li> <a class=" active" >{{ offset+1 }}</a></li>
+       {% set last_page =  resource_count < resource_limit %}
+       {% if last_page == false %}
+       <li> <a class="" href="?&offset={{ offset+1 }}">{{ offset+2 }}</a></li>
+       {% endif %}
+      <li> <a {% if last_page == true %} class="disabled" {% else %} href="?&offset={{ offset+2 }}" {% endif %} >&raquo;</a></li>
+</ul>
+</div>

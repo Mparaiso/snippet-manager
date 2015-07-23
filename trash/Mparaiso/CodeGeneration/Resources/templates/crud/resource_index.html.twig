@@ -1,0 +1,43 @@
+<h3>{{ resourceName }} index</h3>
+<div class="">
+{% if resources is defined and resources | length >0 %}
+    {% include 'crud/includes/pagination.html.twig' %}
+    <div>&nbsp;</div>
+    <table class="span12 table-hover table-striped table-condensed">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ resourceName|default("Resource") }}</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for resource in resources %}
+            <tr>
+                <td>{{ loop.index + resource_limit*resource_offset }}</td>
+                <td><a href="{{ path(resourceName~"_read",{id:resource.id}) }}">{{ attribute(resource,property)|default(resource.id) }}</a></td>
+                <td>
+                    <form action="{{ path(resourceName~"_update",{id:resource.id,format:"html"}) }}" method="GET">
+                        <input type="submit" value="Update" class='btn btn-small'>
+                    </form>
+                </td>
+                <td>
+                    <form action="{{ path(resourceName~"_delete",{id:resource.id,format:"html"}) }}" method="POST">
+                        <input type="submit" value="Delete" class='btn btn-small'>
+                    </form>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% include 'crud/includes/pagination.html.twig' %}
+{% else %}
+    No {{ resourceName|default('Resource') }} defined yet.
+{% endif %}
+</div>
+<div>
+    <form action="{{ path(resourceName~"_create") }}">
+        <input type="submit" value="Add new" class='btn'>
+    </form>
+</div>

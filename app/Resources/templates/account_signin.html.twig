@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <h3>Sign In</h3>
+    {% if error is defined %}
+    <div>{{ error.message }}</div>
+    {% endif %}
+    <form method="POST" action="{{  path("account_check")}}">
+        {{ form_widget(form) }}
+        <input type="submit" value="Sign in">
+        <input type="reset" value="Reset">
+    </form>
+{% endblock %}

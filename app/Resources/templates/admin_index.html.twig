@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+<h3>Site Configuration</h3>
+<table style="width:100%;" class="table-striped table-bordered">
+    <tbody>
+    <tr>
+        <td>debug mode</td>
+        <td>{% if app.debug == true %}ON{% else %}OFF{% endif %}</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
