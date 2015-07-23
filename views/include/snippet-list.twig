@@ -1,0 +1,12 @@
+<div class="col-md-12">
+    {% for  page in snippets|paginate(2) %}
+        <div class="row">
+            {% for snippet in page %}
+                <section class="col-md-6">
+                    {% include "snippet-row.twig" %}
+                </section>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+

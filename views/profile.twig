@@ -1,0 +1,43 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <div class="row">
+        <nav class="col-md-3">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/profile">Dashboard</a></li>
+                <li class="list-group-item"><a href="/profile/snippet">Snippets</a></li>
+                <li class="list-group-item"><a href="/profile/favorite">Favorites</a></li>
+                <li class="list-group-item"><a href="/profile/snippet/create">New snippet</a></li>
+            </ul>
+        </nav>
+        <section class="col-md-9">
+            {% block profile_content %}
+                <h3 class="no-top">Welcome back <strong>{{ user.username }}</strong></h3>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h1 class="text-info"><a href="/profile/snippet">{{ snippetCount||0 }}</a></h1>
+
+                        <div>Snippets</div>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-info"><a href="/profile/favorite">{{ favoriteCount||0 }}</a></h1>
+
+                        <div>Favorites</div>
+                    </div>
+                    <section class="col-md-12">
+                        <h3>Latest Snippets</h3>
+                        {% if snippetCount > 0 %}
+                            <div class="row">
+                                {% include 'profile/snippet-list.twig' with {snippets:latestSnippets,
+                                title:"Latest snippets"} %}
+                            </div>
+                        {% else %}
+                            <h4>No snippet yet</h4>
+                            <p><a href="/profile/snippet/create">Create a snippet</a></p>
+                        {% endif %}
+                    </section>
+                </div>
+            {% endblock %}
+        </section>
+    </div>
+{% endblock %}

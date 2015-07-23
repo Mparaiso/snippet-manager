@@ -1,7 +1,5 @@
-.idea/*
-.settings/*
-temp/*
-doctrine-migrations/*
-.buildpath
-.project
-vendor/*
+node_modules
+assets
+trash
+.settings
+/nbproject/private/

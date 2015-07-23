@@ -1,0 +1,17 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <div class="row">
+        <h3 class="col-md-12">Search results for "{{ q }}"</h3>
+        <hr class="col-md-12"/>
+        {% if snippets.length > 0 %}
+            {% include 'include/snippet-list.twig' %}
+            <section class="col-md-12">
+                {% include 'include/pager-search.twig' %}
+            </section>
+        {% else %}
+            <h3 class="col-md-12">No snippet found.</h3>
+        {% endif %}
+    </div>
+{% endblock %}
+
+

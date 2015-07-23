@@ -1,0 +1,18 @@
+{% for  page in snippets|paginate(2) %}
+    <div class="row col-md-12">
+        {% for snippet in page %}
+            <section class="col-md-6">
+                {% include "../include/snippet-row.twig" %}
+                {% if user and snippet.user_id == user.id %}
+                    <div>
+                        <a href="/profile/snippet/{{ snippet.id }}/update">edit</a> |
+                        <form class="inline" action="/profile/snippet/{{ snippet.id }}/delete" method="POST"
+                              role="form">
+                            <input class="btn btn-link primary inline" value="remove" type="submit"/>
+                        </form>
+                    </div>
+                {% endif %}
+            </section>
+        {% endfor %}
+    </div>
+{% endfor %}

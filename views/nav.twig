@@ -1,0 +1,26 @@
+<form class="navbar-form navbar-left" role="search" action="/search">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" value="{{q}}" required placeholder="search"/>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      </span>
+    </div>
+</form>
+
+<div class=" navbar navbar-right">
+    <ul class="nav navbar-nav">
+        <li class="{% if route == "home" %}active{% endif %}"><a href="/">Home</a></li>
+
+        {% if user and isAuthenticated %}
+            <li class="{% if route == "profile" %}active{% endif %}"><a href="/profile">Welcome back
+                    <strong>{{ user.username }}</strong></a></li>
+            <li><a href="/profile/snippet/create">New snippet</a></li>
+            <li class="">
+                <a href="/profile/signout">Sign out</a>
+            </li>
+        {% else %}
+            <li class="{% if route == "signin" %}active{% endif %}"><a href="/signin">Signin</a></li>
+            <li class="{% if route == "join" %}active{% endif %}"><a href="/join">Join</a></li>
+        {% endif %}
+    </ul>
+</div>

@@ -1,0 +1,17 @@
+{#
+    Copyright © 2014 mparaiso <mparaiso@online.fr>. All Rights Reserved.
+    Snipped , manage your snippets online
+#}
+{% extends 'layout.twig' %}
+{% block content %}
+    <div class="row">
+        <h3 class="col-md-12">Latest snippets</h3>
+        {% include 'include/snippet-list.twig' %}
+        <section class="col-md-12">
+            {% include 'include/pager.twig' %}
+        </section>
+    </div>
+
+{% endblock %}
+
+

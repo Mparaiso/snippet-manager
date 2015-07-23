@@ -1,0 +1,12 @@
+{#views/include/favorite.twig#}
+{% if isAuthenticated and user %}
+<form class="inline" method="POST" action="/profile/snippet/{{snippet.id}}/favorite">
+    <button title="toggle favorite" type="submit" class="btn btn-link inline">
+        {% if isAuthenticated and user and user.hasFavoriteSync(snippet)%}
+            <i class="glyphicon glyphicon-star"></i>
+        {%else%}
+            <i class="glyphicon glyphicon-star-empty"></i>
+        {%endif%}
+    </button>
+</form>
+        {%endif%}

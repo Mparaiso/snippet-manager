@@ -1,5 +1,0 @@
-{% extends 'layout.html.twig'%}
-{% block content %}
-    {% include 'crud/resource_read.html.twig'
-    with {resource:category,resourceName:'category',properties:["id","title","description"]} only %}
-{% endblock %}

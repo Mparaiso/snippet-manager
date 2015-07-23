@@ -1,0 +1,4 @@
+{% extends './../profile.twig' %}
+{% block profile_content %}
+    {%include './../include/form.twig' with {form:form, formTitle:'Update "'+snippet.title+'"' } %}
+{% endblock %}

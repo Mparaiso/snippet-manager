@@ -1,0 +1,11 @@
+ <h4 class="truncate">
+ <a href="/snippet/{{snippet.id}}/{{snippet.title|slug}}">{{snippet.title}}</a>
+ </h4>
+<div class="text-muted">
+<small>
+{{snippet.created_at|date('Y-m-d')}} &nbsp;
+ by <a href="/user/{{snippet.user.id}}">{{snippet.user.username}}</a> in <a href="/category/{{snippet.category.id}}/{{snippet.category.title|slug}}">{{snippet.category.title}}</a>
+
+</small>
+</div>
+<p>{{snippet.description}}</p>
