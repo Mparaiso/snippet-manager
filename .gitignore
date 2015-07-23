@@ -1,5 +1,6 @@
-node_modules
-assets
-trash
-.settings
-/nbproject/private/
+.idea
+vendor
+temp
+cache
+NUL
+snippetd.*

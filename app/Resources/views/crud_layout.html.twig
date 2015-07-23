@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <h3>SnippetD<small>by mparaiso</small></h3>
+    <div>
+        <ul class="inline">
+            <li><a href="{{ path('mp_crud_snippet_index') }}">Snippets</a></li>
+            <li><a href="{{ path("mp_crud_category_index") }}">Categories</a></li>
+        </ul>
+    </div>
+    {% block mp_crud_content %}
+    {% endblock %}
+{% endblock %}
