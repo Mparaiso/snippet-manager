@@ -1,0 +1,5 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+default_snippet:
+  title: Default Snippet Title
+  content: Default Snippet Content
