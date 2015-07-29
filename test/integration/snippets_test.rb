@@ -17,7 +17,6 @@ class SnippetsTest < ActionDispatch::IntegrationTest
   def test_create_snippets_failure
     post api_snippets_url,snippet:{title:'Snippet with no content'}
     assert_response 422
-    puts response.body
   end
 
   def test_show_snippet
