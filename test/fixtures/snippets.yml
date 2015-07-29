@@ -1,5 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-default_snippet:
-  title: Default Snippet Title
-  content: Default Snippet Content
+hello_php:
+  title: 'Hello PHP'
+  content: '<?php echo "hello PHP";'
+  category: :php
+
+hello_ruby:
+  title: 'Hello Ruby'
+  content: 'puts "hello ruby"'
+  category: :ruby

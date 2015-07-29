@@ -3,5 +3,8 @@
 php:
   title: Php
 
+ruby:
+  title: Ruby
+
 java:
   title: Java

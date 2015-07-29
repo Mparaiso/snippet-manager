@@ -20,21 +20,21 @@ class SnippetsTest < ActionDispatch::IntegrationTest
   end
 
   def test_show_snippet
-    snippet = snippets(:default_snippet)
+    snippet = snippets(:hello_ruby)
 
     get api_snippet_url(snippet)
     assert_response :success
   end
 
   def test_update_snippet
-    snippet = snippets(:default_snippet)
+    snippet = snippets(:hello_ruby)
 
     patch api_snippet_url(snippet),snippet:{title:'New Title For snippet'}
     assert_response :success
   end
 
   def test_delete_snippet
-    snippet = snippets(:default_snippet)
+    snippet = snippets(:hello_ruby)
 
     delete api_snippet_url(snippet)
     assert_response :success
