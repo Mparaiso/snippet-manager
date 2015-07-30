@@ -7,4 +7,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def api_authorization_header(token)
+    request.headers['Authorization'] =  token
+  end
 end

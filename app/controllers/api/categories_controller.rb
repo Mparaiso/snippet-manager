@@ -1,4 +1,4 @@
-class Api::CategoriesController < ApplicationController
+class Api::CategoriesController < Api::BaseController
 
   respond_to :json
 

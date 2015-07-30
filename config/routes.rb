@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api,defaults:{format: :json} do
     resources :snippets, except:[:edit,:new]
     resources :categories,only:[:index,:show]
+    resources :sessions,only:[:create,:destroy]
+    resources :users,only:[:show]
   end
 
   root 'staticpages#index'

@@ -7,6 +7,8 @@ class SnippetsTest < ActionDispatch::IntegrationTest
   def test_list_snippets
     get api_snippets_url
     assert_response :success
+    @snippets = JSON.parse(response.body)
+    assert_equal 'Hello PHP',@snippets[0]['title']
   end
 
   def test_create_snippets

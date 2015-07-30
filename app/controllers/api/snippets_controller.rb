@@ -1,6 +1,4 @@
-class Api::SnippetsController < ApplicationController
-
-  respond_to :json
+class Api::SnippetsController < Api::BaseController
 
   def index
     respond_with Snippet.all

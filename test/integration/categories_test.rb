@@ -11,7 +11,6 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     category = categories(:java)
     get api_category_url(category)
     assert_response 200
-    puts response.body
     json_category = JSON.parse(response.body)
     assert_equal json_category['title'],'Java'
   end

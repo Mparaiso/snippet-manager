@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+
+
+categories = JSON.load(File.open('./db/dump.json')).map do |category|
+  Category.create!(title:category['title'],description:category['description'],
+                  id:category['id'])
+end
+
+admin = User.create!(nickname:'administration',
+                     email:'admin@example.com',
+                     password:'password',password_confirmation:'password')
+
