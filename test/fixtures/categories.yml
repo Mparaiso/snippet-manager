@@ -2,9 +2,12 @@
 
 php:
   title: Php
+  description: Php lang
 
 ruby:
   title: Ruby
+  description: Ruby lang
 
 java:
   title: Java
+  description: Java lang

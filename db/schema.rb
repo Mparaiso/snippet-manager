@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730214343) do
+ActiveRecord::Schema.define(version: 20150731070837) do
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",       null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "description"
+    t.string   "description", null: false
   end
 
   add_index "categories", ["title"], name: "index_categories_on_title"
@@ -27,21 +27,20 @@ ActiveRecord::Schema.define(version: 20150730214343) do
     t.string   "content",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "category_id"
-    t.integer  "user_id"
+    t.integer  "category_id", null: false
+    t.integer  "user_id",     null: false
   end
 
   add_index "snippets", ["category_id"], name: "index_snippets_on_category_id"
   add_index "snippets", ["user_id"], name: "index_snippets_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email"
+    t.string   "email",           null: false
     t.string   "auth_token"
-    t.datetime "auth_token_expiration"
     t.string   "password_digest"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "nickname"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "nickname",        null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email"

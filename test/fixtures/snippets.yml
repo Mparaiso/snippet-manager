@@ -4,8 +4,10 @@ hello_php:
   title: 'Hello PHP'
   content: '<?php echo "hello PHP";'
   category: :php
+  user: :one
 
 hello_ruby:
   title: 'Hello Ruby'
   content: 'puts "hello ruby"'
   category: :ruby
+  user: :two

@@ -1,33 +1,47 @@
 class Api::SnippetsController < Api::BaseController
 
+  before_action :must_be_fully_authenticated, except:[:index,:show]
+
   def index
-    respond_with Snippet.all
+    if params[:user_id]
+      @snippets = User.find(params[:user_id]).snippets.all
+    elsif params[:category_id]
+      @snippets = category.find(params[:category_id]).snippets.all
+    else
+      @snippets = Snippet.all
+    end
+    respond_with @snippets
   end
 
   def create
-    snippet = Snippet.new(snippet_params)
+    snippet = current_user.snippets.build(snippet_params)
     snippet.save
     respond_with :api,snippet
   end
 
   def show
-    respond_with Snippet.find(params[:id])
+    if params[:user_id]
+      @snippet = User.find(params[:user_id]).snippets.find(params[:id])
+    else
+      @snippet = Snippet.find(params[:id])
+      respond_with @snippet
+    end
   end
 
   def update
-    snippet= Snippet.find(params[:id])
+    snippet= current_user.snippets.find(params[:id])
     snippet.update(snippet_params)
     respond_with status: 204
   end
 
   def destroy
-    Snippet.find(params[:id]).destroy
+    current_user.snippets.find(params[:id]).destroy
     respond_with status:204
   end
 
   private
   def snippet_params
-    params.require(:snippet).permit(:title,:content)
+    params.require(:snippet).permit(:title,:content,:category_id)
   end
 
 end
