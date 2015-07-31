@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   has_many :snippets
   has_secure_password
 
-  validates :email, presence: true, length:{minimum:6,maximum:255}
-  validates :nickname,presence: true,length:{minimum:6,maximum:255}
+  validates :email, presence: true, length:{minimum:7,maximum:255}
+  validates :nickname,presence: true,length:{minimum:5,maximum:255}
 
   # create_auth_token creates an auth_token and save the user model
   def create_auth_token!(expires_at=nil)

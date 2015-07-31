@@ -17,12 +17,14 @@ class Api::SnippetsController < Api::BaseController
 
   def create
     if params[:category_id]
-      @snippet = Category.snippets.build(snippet_params)
+      @snippet = Category.find(params[:category_id]).snippets.build(snippet_params)
       @snippet.user = current_user
     else
       @snippet = current_user.snippets.build(snippet_params)
     end
-    @snippet.save
+    if @snippet.save
+      HighlightSnippetContentJob.perform_later @snippet
+    end
     respond_with :api,@snippet
   end
 
@@ -38,8 +40,9 @@ class Api::SnippetsController < Api::BaseController
   end
 
   def update
-    snippet= current_user.snippets.find(params[:id])
-    snippet.update(snippet_params)
+    @snippet= current_user.snippets.find(params[:id])
+    @snippet.update(snippet_params)
+    HighlightSnippetContentJob.perform_later @snippet
     respond_with status: 204
   end
 

@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.2.1'
 
+gem 'foreman','~> 0.78.0'
+gem 'rack','~> 1.6.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
@@ -14,6 +16,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+# syntax highlighter
+gem 'coderay','~> 1.1.0'
 # auth tokens
 # https://github.com/fnando/tokens
 gem 'token','~> 1.2.3'
@@ -47,3 +51,8 @@ group :development, :test do
   gem 'spring'
 end
 
+group :production do
+  gem 'puma', '2.11.1'
+  gem 'pg', '~> 0.17'
+  gem 'rails_12factor', '~> 0.0'
+end
