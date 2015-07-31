@@ -1,5 +1,7 @@
 class Api::SnippetsController < Api::BaseController
 
+  respond_to :json
+
   before_action :must_be_fully_authenticated, except:[:index,:show]
 
   def index
@@ -14,18 +16,25 @@ class Api::SnippetsController < Api::BaseController
   end
 
   def create
-    snippet = current_user.snippets.build(snippet_params)
-    snippet.save
-    respond_with :api,snippet
+    if params[:category_id]
+      @snippet = Category.snippets.build(snippet_params)
+      @snippet.user = current_user
+    else
+      @snippet = current_user.snippets.build(snippet_params)
+    end
+    @snippet.save
+    respond_with :api,@snippet
   end
 
   def show
     if params[:user_id]
-      @snippet = User.find(params[:user_id]).snippets.find(params[:id])
+      @snippet =User.find(params[:user_id]).snippets.find(params[:id])
+    elsif params[:category_id]
+      @snippet = Category.find(params[:category_id]).snippets.find(params[:id])
     else
       @snippet = Snippet.find(params[:id])
-      respond_with @snippet
     end
+    respond_with @snippet
   end
 
   def update

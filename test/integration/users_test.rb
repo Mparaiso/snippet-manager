@@ -8,6 +8,16 @@ class UsersTest < ActionDispatch::IntegrationTest
     @user = users(:one)
   end
 
+  def test_create_user_successfully
+    assert_difference 'User.count' do
+      post api_users_url(format: :json),user:{email:'bobdoe@example.com',
+                      nickname:'bobdoe',
+                      password:'password',
+                      password_confirmation:'password'}
+      assert_response :success
+    end
+  end
+
   def test_unauthorized_user_cannot_access_user_resource
     get api_user_url(@user)
     assert_response 403

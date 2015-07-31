@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731070837) do
+ActiveRecord::Schema.define(version: 20150731122820) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "title",       null: false
@@ -23,12 +23,13 @@ ActiveRecord::Schema.define(version: 20150731070837) do
   add_index "categories", ["title"], name: "index_categories_on_title"
 
   create_table "snippets", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.string   "content",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "category_id", null: false
-    t.integer  "user_id",     null: false
+    t.string   "title",               null: false
+    t.text     "content",             null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "category_id",         null: false
+    t.integer  "user_id",             null: false
+    t.text     "highlighted_content"
   end
 
   add_index "snippets", ["category_id"], name: "index_snippets_on_category_id"

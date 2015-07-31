@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   namespace :api,defaults:{format: :json} do
     resources :snippets, except:[:edit,:new]
     resources :categories,only:[:index,:show] do
-      resources :snippets,only:[:index,:show]
+      resources :snippets,only:[:index,:show,:create]
     end
     resources :sessions,only:[:create,:destroy]
-    resources :users,only:[:show] do
+    resources :users,only:[:show,:create] do
       resources :snippets,only:[:index,:show]
     end
   end

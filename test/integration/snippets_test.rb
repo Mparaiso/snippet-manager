@@ -20,8 +20,8 @@ class SnippetsTest < ActionDispatch::IntegrationTest
   def test_authenticated_user_creates_snippets
     post(api_snippets_url,{snippet:{title:'First Snippet',
                                     category_id:@category.id,
-                                   content:'First Snippet Content'}},
-                                   {Authorization:@user.auth_token})
+                                    content:'First Snippet Content'}},
+                                    {Authorization:@user.auth_token})
     assert_response :success
   end
 
@@ -35,6 +35,21 @@ class SnippetsTest < ActionDispatch::IntegrationTest
     snippet = snippets(:hello_ruby)
 
     get api_snippet_url(snippet)
+    assert_response :success
+  end
+
+  def test_show_snippet_through_category
+    @snippet = snippets(:hello_ruby)
+    @category = categories(:ruby)
+    get api_category_snippet_url(@category,@snippet,format: :json)
+    assert_response :success
+  end
+
+  def test_show_snippet_through_user
+    @user = users(:one)
+    @category = categories(:ruby)
+    @snippet = @user.snippets.create!(title:'Hi Ruby',content:'puts "Hi Ruby"',category:@category)
+    get api_user_snippet_url(@user,@snippet,format: :json)
     assert_response :success
   end
 
