@@ -17,6 +17,13 @@ class SnippetsTest < ActionDispatch::IntegrationTest
     assert_equal 'Hello PHP',@snippets[0]['title']
   end
 
+  def test_list_snippets_through_categories
+    get api_category_snippets_url(@category)
+    assert_response :success
+    get api_category_snippets_url(@category.title)
+    assert_response :success
+  end
+
   def test_authenticated_user_creates_snippets
     post(api_snippets_url,{snippet:{title:'First Snippet',
                                     category_id:@category.id,

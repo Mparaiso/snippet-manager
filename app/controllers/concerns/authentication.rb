@@ -11,9 +11,13 @@ module Concerns
       end
     end
 
+    # returns true if current_user
+    def is_fully_authenticated?
+      not current_user.nil?
+    end
 
     def must_be_fully_authenticated
-      if current_user.nil?
+      if not is_fully_authenticated?
         respond_with({error:'Unauthorized'},status:403,location: request.url)
       end
     end
