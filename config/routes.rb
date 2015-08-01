@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :snippets,only:[:index,:show,:create]
     end
     resources :sessions,only:[:create,:destroy]
-    resources :users,only:[:show,:create] do
+    resources :users ,only:[:show,:create] do
       resources :snippets,only:[:index,:show]
     end
   end

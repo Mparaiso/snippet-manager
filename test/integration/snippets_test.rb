@@ -51,7 +51,6 @@ class SnippetsTest < ActionDispatch::IntegrationTest
     snippet = snippets(:hello_ruby)
 
     get api_snippet_url(snippet)
-    puts response.body
     assert_response :success
   end
 

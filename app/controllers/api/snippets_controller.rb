@@ -12,7 +12,8 @@ class Api::SnippetsController < Api::BaseController
     else
       @snippets = Snippet.all
     end
-    respond_with @snippets
+      @snippets = @snippets.page(params[:page])
+    respond_with @snippets,short_form:true,meta: {pagination:app_paginator(@snippets)}
   end
 
   def create

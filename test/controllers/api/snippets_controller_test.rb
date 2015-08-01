@@ -1,12 +1,13 @@
-=begin
 require 'test_helper'
 
 class Api::SnippetsControllerTest < ActionController::TestCase
+
   test "should get index" do
-    get :index
+    get :index,format: :json
     assert_response :success
   end
 
+=begin
   test "should get create" do
     get :create
     assert_response :success
@@ -27,5 +28,5 @@ class Api::SnippetsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-end
 =end
+end

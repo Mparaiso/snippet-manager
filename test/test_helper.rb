@@ -11,3 +11,13 @@ class ActiveSupport::TestCase
     request.headers['Authorization'] =  token
   end
 end
+
+class ActionDispatch::IntegrationTest
+
+  def deserialized_response
+    if request.format == :json
+      JSON.parse(response.body)
+    end 
+  end
+
+end

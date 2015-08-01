@@ -11,28 +11,30 @@ class UsersTest < ActionDispatch::IntegrationTest
   def test_create_user_successfully
     assert_difference 'User.count' do
       post api_users_url(format: :json),user:{email:'bobdoe@example.com',
-                      nickname:'bobdoe',
-                      password:'password',
-                      password_confirmation:'password'}
+                                              nickname:'bobdoe',
+                                              password:'password',
+                                              password_confirmation:'password'}
       assert_response :success
     end
   end
 
-  def test_unauthorized_user_cannot_access_user_resource
+  test "when user without token gets /api/users/id , it doesn't display credentials" do
     get api_user_url(@user)
-    assert_response 403
-  end
-
-  def test_authorized_user_can_access_user_resource
-    @user.create_auth_token!
-    get(api_user_url(@user),{},{Authorization: @user.auth_token})
     assert_response :success
   end
 
-  def test_user_with_expired_token_cannot_access_user_resource
+  test "when user with token gets /api/users/:id , it displays credentials" do 
+    @user.create_auth_token!
+    get(api_user_url(@user),{},{Authorization: @user.auth_token})
+    assert_response :success
+    assert_not_nil deserialized_response['user']['auth_token']
+  end
+
+  test "when user with expired token gets /api/users/:id , it doesn't display credentials" do
     @user.create_auth_token!(Time.now - 2.days)
     get(api_user_url(@user),{},{Authorization: @user.auth_token})
-    assert_response 403
+    assert_response :success
+    assert_nil deserialized_response['user']['auth_token']
   end
 
 end

@@ -6,5 +6,5 @@ class Api::BaseController < ApplicationController
   respond_to :json
 
   include Concerns::Authentication 
-
+  include Api::BaseHelper
 end
