@@ -13,7 +13,5 @@ categories = JSON.load(File.open('./db/dump.json')).map do |category|
                   id:category['id'])
 end
 
-admin = User.create!(nickname:'administration',
-                     email:'admin@example.com',
-                     password:'password',password_confirmation:'password')
+
 
