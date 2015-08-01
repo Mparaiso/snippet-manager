@@ -1,8 +1,7 @@
 module Concerns
   module Authentication
 
-    protected
-
+  protected
     # current_user gets the current user
     def current_user
       @current_user ||= User.find_by(auth_token: request.headers['Authorization'])

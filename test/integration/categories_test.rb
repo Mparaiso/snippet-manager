@@ -12,7 +12,7 @@ class CategoriesTest < ActionDispatch::IntegrationTest
     get api_category_url(category)
     assert_response 200
     json_category = JSON.parse(response.body)
-    assert_equal json_category['title'],'Java'
+    assert_equal 'Java',json_category['category']['title']
   end
 
   def test_get_category_by_title

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FirstTest < ActionDispatch::IntegrationTest
+class SessionsIntegrationTest < ActionDispatch::IntegrationTest
 
   fixtures :users
 
@@ -17,7 +17,10 @@ class FirstTest < ActionDispatch::IntegrationTest
     # assert_equal @user.auth_token,nil
     post api_sessions_url,{session:{email:@user.email,password:'secret'}}
     assert_response :success
-    assert_equal JSON.parse(response.body)['email'],@user.email
+    @user_from_response = JSON.parse(response.body)['user']
+    @user.reload
+    assert_equal @user.email,@user_from_response['email']
+    assert_equal @user.auth_token,@user_from_response['auth_token']
     # puts response.body
   end
 
