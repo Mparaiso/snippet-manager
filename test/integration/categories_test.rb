@@ -17,7 +17,7 @@ class CategoriesTest < ActionDispatch::IntegrationTest
 
   def test_get_category_by_title
     @category = categories(:php)
-    get api_category_url(@category.title)
+    get api_category_url(@category.slug)
     assert_response 200
   end
 

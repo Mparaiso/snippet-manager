@@ -8,7 +8,7 @@ class Api::CategoriesController < Api::BaseController
 
   # find category by id or title
   def show
-    @category = Category.find_by_id_or_by_title(params[:id])
+    @category = Category.find(params[:id])
     respond_with @category
   end
 end

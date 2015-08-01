@@ -20,7 +20,7 @@ class SnippetsTest < ActionDispatch::IntegrationTest
   def test_list_snippets_through_categories
     get api_category_snippets_url(@category)
     assert_response :success
-    get api_category_snippets_url(@category.title)
+    get api_category_snippets_url(@category.slug)
     assert_response :success
   end
 

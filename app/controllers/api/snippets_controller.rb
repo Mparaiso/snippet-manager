@@ -8,7 +8,7 @@ class Api::SnippetsController < Api::BaseController
     if params[:user_id]
       @snippets = User.find(params[:user_id]).snippets.all
     elsif params[:category_id]
-      @snippets = Category.find_by_id_or_by_title(params[:category_id]).snippets.all
+      @snippets = Category.find(params[:category_id]).snippets.all
     else
       @snippets = Snippet.all
     end
@@ -17,7 +17,7 @@ class Api::SnippetsController < Api::BaseController
 
   def create
     if params[:category_id]
-      @snippet = Category.find_by_id_or_by_title(params[:category_id]).snippets.build(snippet_params)
+      @snippet = Category.find(params[:category_id]).snippets.build(snippet_params)
       @snippet.user = current_user
     else
       @snippet = current_user.snippets.build(snippet_params)
@@ -32,7 +32,7 @@ class Api::SnippetsController < Api::BaseController
     if params[:user_id]
       @snippet =User.find(params[:user_id]).snippets.find(params[:id])
     elsif params[:category_id]
-      @snippet = Category.find_by_id_or_by_title(params[:category_id]).snippets.find(params[:id])
+      @snippet = Category.find(params[:category_id]).snippets.find(params[:id])
     else
       @snippet = Snippet.find(params[:id])
     end

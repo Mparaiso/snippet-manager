@@ -3,11 +3,13 @@
 php:
   title: Php
   description: Php lang
+  slug: php
 
 ruby:
   title: Ruby
   description: Ruby lang
-
+  slug: ruby
 java:
   title: Java
   description: Java lang
+  slug: java

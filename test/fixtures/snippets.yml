@@ -5,9 +5,11 @@ hello_php:
   content: '<?php echo "hello PHP";'
   category: :php
   user: :one
+  slug: 'hello-php'
 
 hello_ruby:
   title: 'Hello Ruby'
   content: 'puts "hello ruby"'
   category: :ruby
   user: :two
+  slug: 'hello-ruby'
