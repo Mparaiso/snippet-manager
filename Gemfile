@@ -6,8 +6,7 @@ gem 'foreman','~> 0.78.0'
 gem 'rack','~> 1.6.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
-# pagination
-gem 'kaminari'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -43,6 +42,12 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# pagination
+gem 'kaminari'
+
+# elastic search
+gem 'elasticsearch'
 
 group :development, :test do
   gem 'sqlite3'

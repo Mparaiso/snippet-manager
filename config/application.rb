@@ -25,3 +25,4 @@ module SnippetManager
     config.colorize_logging = false
   end
 end
+
