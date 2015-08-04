@@ -2,6 +2,7 @@
 
 hello_php:
   title: 'Hello PHP'
+  description: 'Hello php description'
   content: '<?php echo "hello PHP";'
   category: :php
   user: :one
@@ -9,6 +10,7 @@ hello_php:
 
 hello_ruby:
   title: 'Hello Ruby'
+  description: 'Hello ruby description'
   content: 'puts "hello ruby"'
   category: :ruby
   user: :two

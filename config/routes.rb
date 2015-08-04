@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
 
+
   namespace :api,defaults:{format: :json} do
+
+    # cors preflight
+    match '/(*all)',to: 'base#show' , via: [:options]
     resources :snippets, except:[:edit,:new]
     resources :categories,only:[:index,:show] do
       resources :snippets,only:[:index,:show,:create]

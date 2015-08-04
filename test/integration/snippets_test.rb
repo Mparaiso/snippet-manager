@@ -26,24 +26,28 @@ class SnippetsTest < ActionDispatch::IntegrationTest
 
   def test_authenticated_user_creates_snippets
     post(api_snippets_url,{snippet:{title:'First Snippet',
-                                    category_id:@category.id,
-                                    content:'First Snippet Content'}},
-                                    {Authorization:@user.auth_token})
+      category_id:@category.id,
+      description:'description',
+    content:'First Snippet Content'}},
+    {Authorization:@user.auth_token})
     assert_response :success
   end
 
   def test_create_snippet_through_categories
     assert_difference 'Snippet.count' do
-      post api_category_snippets_url(@category),{snippet:{title:'A snippet',
-                                                          content:'Content of the snippet'}},
-                                                          {Authorization:@user.auth_token}
+      post api_category_snippets_url(@category),{snippet:{
+        title:'A snippet',
+        description:'Description',
+      content:'Content of the snippet'}},
+      {Authorization:@user.auth_token}
+      puts response.body
       assert_response :success
     end
   end
 
   def test_create_snippets_failure
     post api_snippets_url,{snippet:{title:'Snippet with no content'}},
-      {Authorization:@user.auth_token}
+    {Authorization:@user.auth_token}
     assert_response 422
   end
 
@@ -64,7 +68,13 @@ class SnippetsTest < ActionDispatch::IntegrationTest
   def test_show_snippet_through_user
     @user = users(:one)
     @category = categories(:ruby)
-    @snippet = @user.snippets.create!(title:'Hi Ruby',content:'puts "Hi Ruby"',category:@category)
+    @snippet = @user.snippets.create!(
+    title:'Hi Ruby',
+    content:'puts "Hi Ruby"',
+    description:'description',
+    category:@category
+    )
+
     get api_user_snippet_url(@user,@snippet,format: :json)
     assert_response :success
   end
@@ -74,7 +84,7 @@ class SnippetsTest < ActionDispatch::IntegrationTest
     snippet.user= @user
     snippet.save
     patch api_snippet_url(snippet),{snippet:{title:'New Title For snippet'}},
-      {Authorization:@user.auth_token}
+    {Authorization:@user.auth_token}
 
     assert_response :success
   end
@@ -85,6 +95,10 @@ class SnippetsTest < ActionDispatch::IntegrationTest
     snippet.save
     delete api_snippet_url(snippet),{},{Authorization:@user.auth_token}
     assert_response :success
+  end
+
+  def teardown
+    Snippet.clean_up_elastic_search
   end
 
 end

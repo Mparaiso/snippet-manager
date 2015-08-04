@@ -54,7 +54,7 @@ class Api::SnippetsController < Api::BaseController
 
   private
   def snippet_params
-    params.require(:snippet).permit(:title,:content,:category_id)
+    params.require(:snippet).permit(:title,:content,:description,:category_id)
   end
 
 end
