@@ -1,4 +1,4 @@
-require 'resque_web'
+# require 'resque_web'
 
 SnippetManager::Application.routes.draw do
 
