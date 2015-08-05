@@ -1,5 +1,10 @@
 class Api::UsersController < Api::BaseController
-
+  # list all users
+  def index
+    @users = User.all
+    respond_with @users
+  end
+  
   def create
     @user = User.new(user_params)
     @user.save

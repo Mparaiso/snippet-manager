@@ -1,25 +1,29 @@
-Rails.application.routes.draw do
+require 'resque_web'
 
+SnippetManager::Application.routes.draw do
+
+  # display Resque dashboard at /resque
+  #@todo
+  # not working right now for some
+  # mount ResqueWeb::Engine => "/resque_web"
 
 
   namespace :api,defaults:{format: :json} do
 
-    scope :v1 do
 
-      # cors preflight
-      match '/(*all)',to: 'base#show' , via: [:options]
-      get '/',to:'base#show'
-      resources :snippets, except:[:edit,:new]
-      resources :categories,only:[:index,:show] do
-        resources :snippets,only:[:index,:show,:create]
-      end
-      resources :sessions,only:[:create,:destroy]
-      resources :users ,only:[:show,:create] do
-        resources :snippets,only:[:index,:show]
-      end
+    # cors preflight
+    match '/(*all)',to: 'base#show' , via: [:options]
+    get '/',to:'base#show'
+    resources :snippets, except:[:edit,:new]
+    resources :categories,only:[:index,:show] do
+      resources :snippets,only:[:index,:show,:create]
     end
-    
+    resources :sessions,only:[:create,:destroy]
+    resources :users ,only:[:index,:show,:create] do
+      resources :snippets,only:[:index,:show,:update,:destroy,:create]
+    end
   end
+
 
   root 'staticpages#index'
   # The priority is based upon order of creation: first created -> highest priority.

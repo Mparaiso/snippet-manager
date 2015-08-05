@@ -39,6 +39,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.x.elasticsearch.client_host =  ENV['SEARCHLY_ELASTICSEARCH_HOST']
+  config.x.elasticsearch.client_host =  ENV['ELASTIC_SEARCH_HOST_DEVELOPMENT']
 end
 

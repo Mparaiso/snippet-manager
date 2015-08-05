@@ -12,7 +12,7 @@ class Api::SnippetsController < Api::BaseController
     else
       @snippets = Snippet.all
     end
-      @snippets = @snippets.page(params[:page])
+    @snippets = @snippets.page(params[:page])
     respond_with @snippets,short_form:true,meta: {pagination:app_paginator(@snippets)}
   end
 
@@ -39,17 +39,21 @@ class Api::SnippetsController < Api::BaseController
     end
     respond_with @snippet
   end
-
+  
+  # update updates a snippet
   def update
     @snippet= current_user.snippets.find(params[:id])
-    @snippet.update(snippet_params)
-    HighlightSnippetContentJob.perform_later @snippet
-    respond_with status: 204
+    if @snippet.update(snippet_params)
+      HighlightSnippetContentJob.perform_later(@snippet)
+    end
+    respond_with @snippet
+
   end
 
+  # destroy deletes a snippet from the database
   def destroy
     current_user.snippets.find(params[:id]).destroy
-    respond_with status:204
+    respond_with status: 204
   end
 
   private

@@ -24,6 +24,8 @@ module SnippetManager
     config.active_record.raise_in_transactional_callbacks = true
     config.colorize_logging = false
     config.x.elasticsearch.client_host = ENV['ELASTIC_SEARCH_HOST']
+    config.active_job.queue_adapter = :resque
+    config.active_job.queue_name_prefix = Rails.env
   end
 end
 
