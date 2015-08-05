@@ -4,16 +4,21 @@ Rails.application.routes.draw do
 
   namespace :api,defaults:{format: :json} do
 
-    # cors preflight
-    match '/(*all)',to: 'base#show' , via: [:options]
-    resources :snippets, except:[:edit,:new]
-    resources :categories,only:[:index,:show] do
-      resources :snippets,only:[:index,:show,:create]
+    scope :v1 do
+
+      # cors preflight
+      match '/(*all)',to: 'base#show' , via: [:options]
+      get '/',to:'base#show'
+      resources :snippets, except:[:edit,:new]
+      resources :categories,only:[:index,:show] do
+        resources :snippets,only:[:index,:show,:create]
+      end
+      resources :sessions,only:[:create,:destroy]
+      resources :users ,only:[:show,:create] do
+        resources :snippets,only:[:index,:show]
+      end
     end
-    resources :sessions,only:[:create,:destroy]
-    resources :users ,only:[:show,:create] do
-      resources :snippets,only:[:index,:show]
-    end
+    
   end
 
   root 'staticpages#index'

@@ -6,7 +6,7 @@ class Api::BaseController < ApplicationController
   rescue_from StandardError,with: :rescue_from_standard_error 
 
   # content negocation for respond_with
-  respond_to :json
+  respond_to :json,:xml
 
   include Concerns::Authentication 
   include Concerns::CORS

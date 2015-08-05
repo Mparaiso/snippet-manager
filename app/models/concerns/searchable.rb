@@ -1,8 +1,10 @@
 
 # ElalistSearch management
 module ElasticSearch
-  def self.Client(host: Rails.configuration.x.elasticsearch.client_host ,
-    log: Rails.env == 'test' ? false : true )
+  def self.Client(
+    host: Rails.configuration.x.elasticsearch.client_host ,
+    log: Rails.env == 'test' ? false : true
+    )
     @@client ||=Elasticsearch::Client.new log: log,
     host: host
   end
@@ -33,7 +35,7 @@ module Searchable
         self
       end
     end
-   
+
     # returns the type of the document in elastic search index
     def self.elastic_search_type
       self.to_s.downcase.parameterize.underscore

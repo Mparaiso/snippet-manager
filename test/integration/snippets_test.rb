@@ -35,13 +35,15 @@ class SnippetsTest < ActionDispatch::IntegrationTest
 
   def test_create_snippet_through_categories
     assert_difference 'Snippet.count' do
+
       post api_category_snippets_url(@category),{snippet:{
         title:'A snippet',
         description:'Description',
       content:'Content of the snippet'}},
       {Authorization:@user.auth_token}
-      puts response.body
+
       assert_response :success
+      
     end
   end
 
