@@ -2,6 +2,8 @@ class Snippet < ActiveRecord::Base
 
   include Searchable
 
+  after_save { |snippet|  HighlightSnippetContentJob.perform_later snippet }
+
   extend FriendlyId
 
   friendly_id :title,use:[:slugged,:finders]

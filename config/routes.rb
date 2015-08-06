@@ -2,6 +2,14 @@
 
 SnippetManager::Application.routes.draw do
 
+  namespace :api do
+  get 'search/create'
+  end
+
+  namespace :api do
+  get 'search/show'
+  end
+
   # display Resque dashboard at /resque
   #@todo
   # not working right now for some
@@ -11,9 +19,10 @@ SnippetManager::Application.routes.draw do
   namespace :api,defaults:{format: :json} do
 
 
-    # cors preflight
-    match '/(*all)',to: 'base#show' , via: [:options]
-    get '/',to:'base#show'
+    root 'base#show'
+
+    resource :search
+
     resources :snippets, except:[:edit,:new]
     resources :categories,only:[:index,:show] do
       resources :snippets,only:[:index,:show,:create]

@@ -24,7 +24,6 @@ class Api::SnippetsController < Api::BaseController
       @snippet = current_user.snippets.build(snippet_params)
     end
     if @snippet.save
-      HighlightSnippetContentJob.perform_later @snippet
     end
     respond_with :api,@snippet
   end
@@ -43,9 +42,7 @@ class Api::SnippetsController < Api::BaseController
   # update updates a snippet
   def update
     @snippet= current_user.snippets.find(params[:id])
-    if @snippet.update(snippet_params)
-      HighlightSnippetContentJob.perform_later(@snippet)
-    end
+    @snippet.update(snippet_params)
     respond_with @snippet
 
   end

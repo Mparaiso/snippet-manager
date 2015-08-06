@@ -52,6 +52,7 @@ module Searchable
 
     # elastic_search_attributes sets the attributes to persist in the document
     def self.elastic_search_attributes(*attributes)
+
       @@elastic_search_attributes = *attributes
     end
 
@@ -62,8 +63,8 @@ module Searchable
       body:{query:{match_all:{}}}
     end
 
-    def self.search_by(type, query)
-      ElasticSearch.Client.search("#{type}:#{query}")
+    def self.search_by(query)
+      ElasticSearch.Client.search(index:elastic_search_index,type:elastic_search_type,q:query)
     end
   end
 end

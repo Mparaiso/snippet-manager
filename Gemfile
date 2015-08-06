@@ -51,7 +51,6 @@ gem 'elasticsearch'
 
 # background jobs
 gem 'resque'
-# gem 'resque-web'
 
 group :development, :test do
   gem 'sqlite3'
